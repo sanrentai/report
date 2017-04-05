@@ -1,0 +1,578 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <div class="Container100 Responsive100">
+            <div class="Card ui-fluid">
+                <!--标题-->
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('WYB', 'WYB0001')}"/>
+                </h1>
+                <div class="SeparatorFull"></div>
+
+<!--                <p:tabView id="tabview" activeIndex="#{ctrlWYB0001.vm.tabIndex}">
+    <p:tab title="各分公司收费明细表" >-->
+                <p:panelGrid columns="8"
+                             id="canShu"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank">
+                    <p:outputLabel for="yearNum" value="年度"/>
+                    <p:spinner id="yearNum" value="#{ctrlWYB0001.vm.yearNum}"
+                                 required="true"
+                                 requiredMessage="#{ctrlWYB0001.isRequiredMessage('年度')}"/>
+<!--                    <p:calendar id="txtStartDate" value="#{ctrlWYB0001.vm.payDate}"
+                               placeholder="日期"
+                               mask="true" styleClass="tct"
+                               pattern="#{bizConfig.dateFormat}"
+                               required="true"
+                               requiredMessage="#{ctrlWYB0001.isRequiredMessage('日期')}"
+                               size="12"
+                               converterMessage="#{ctrlWYB0001.dateUnvalidMessage('日期')}"
+                               locale="#{bizConfig.locale}">
+                   </p:calendar>-->
+                    <!--                    <p:outputLabel for="company" value="公司"/>
+                                        <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" value="#{ctrlWYB0001.vm.companyName}">
+                                            <f:selectItem itemLabel="全部" itemValue="全部"/>
+                                            <f:selectItems value="#{ctrlWYB0001.vm.companyList}"  var="items" 
+                                                           itemLabel="#{items.name}" itemValue="#{items.name}"/>
+                                        </p:selectOneMenu>-->
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <p:commandButton value="查询" process="@this canShu" actionListener="#{ctrlWYB0001.chaXun()}" 
+                                     resetValues="true"
+                                     oncomplete="showErrorMsg();PF('sfmxTable').clearFilters();"
+                                     update="sfmx,  frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                </p:panelGrid>
+                <p:outputPanel id="sfmx">
+                    <p:dataTable value="#{ctrlWYB0001.vm.shuJuList}"
+                                 widgetVar="sfmxTable"
+                                 sortBy="#{item.month}"
+                                 var="item"
+                                 style="word-break: keep-all!important"
+                                 id="sfmx_table"
+                                 rendered="#{not empty ctrlWYB0001.vm.shuJuList}"
+                                 emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                 styleClass="tct">
+                        <f:facet name="header">
+                            <h:outputText value="依云首府项目#{ctrlWYB0001.vm.yearNum}年续期物业费汇总表"  styleClass="Fs20"/>
+                            <h:commandLink  styleClass="fr">
+                                <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
+                                <p:dataExporter type="xls" target="sfmx_table" fileName="baobiao" />
+                            </h:commandLink>
+                        </f:facet>
+                        <p:columnGroup type="header">
+                            <p:row>
+                                <p:column rowspan="2" headerText="月份" />
+                                <p:column rowspan="2" headerText="区域" />
+                                <p:column colspan="8" headerText="物业费金额" />
+                                <p:column colspan="8" headerText="户数" />
+                            </p:row>
+                            <p:row>
+                                <p:column headerText="住宅" />
+                                <p:column headerText="1#回迁楼" />
+                                <p:column headerText="公寓" />
+                                <p:column headerText="网点" />
+                                <p:column headerText="车库" />
+                                <p:column headerText="车位" />
+                                <p:column headerText="仓房" />
+                                <p:column headerText="合计" />
+                                <p:column headerText="住宅" />
+                                <p:column headerText="1#回迁楼" />
+                                <p:column headerText="公寓" />
+                                <p:column headerText="网点" />
+                                <p:column headerText="车库" />
+                                <p:column headerText="车位" />
+                                <p:column headerText="仓房" />
+                                <p:column headerText="合计" />
+                            </p:row>
+                        </p:columnGroup>
+                        <p:column headerText="月份" styleClass="tct wd-p-10">
+                            <h:outputText value="#{item.month}"/>
+                        </p:column>
+                        <p:column headerText="区域" styleClass="tct">
+                            <h:outputText value="#{item.name}"/>
+                            <f:facet name="footer">
+                                <h:outputText value="总计:" styleClass="fr" />
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="住宅金额" styleClass="tct">
+                            <h:outputText value="#{item.jk_zz}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_jk_zz}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="回迁金额" styleClass="tct">
+                            <h:outputText value="#{item.jk_hq}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_jk_hq}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="公寓金额" styleClass="tct">
+                            <h:outputText value="#{item.jk_gy}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_jk_gy}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="网点金额" styleClass="tct">
+                            <h:outputText value="#{item.jk_wd}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_jk_wd}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="车库金额" styleClass="tct">
+                            <h:outputText value="#{item.jk_ck}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_jk_ck}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="车位金额" styleClass="tct">
+                            <h:outputText value="#{item.jk_cw}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_jk_cw}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="仓房金额" styleClass="tct">
+                            <h:outputText value="#{item.jk_cf}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_jk_cf}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="合计金额" styleClass="tct">
+                            <h:outputText value="#{item.jk_hj}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_jk_hj}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="住宅户数"  styleClass="tct">
+                            <h:outputText value="#{item.hs_zz}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_hs_zz}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="回迁户数"  styleClass="tct">
+                            <h:outputText value="#{item.hs_hq}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_hs_hq}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="公寓户数"  styleClass="tct">
+                            <h:outputText value="#{item.hs_gy}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_hs_gy}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="网点户数"  styleClass="tct">
+                            <h:outputText value="#{item.hs_wd}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_hs_wd}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="车库户数"  styleClass="tct">
+                            <h:outputText value="#{item.hs_ck}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_hs_ck}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="车位户数"  styleClass="tct">
+                            <h:outputText value="#{item.hs_cw}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_hs_cw}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="仓房户数"  styleClass="tct">
+                            <h:outputText value="#{item.hs_cf}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_hs_cf}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="合计户数"  styleClass="tct">
+                            <h:outputText value="#{item.hs_hj}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlWYB0001.vm.total_hs_hj}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:summaryRow>
+                            <p:column colspan="2" styleClass="trt">
+                                <h:outputText value="合计:" />
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.jk_zzMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.jk_hqMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.jk_gyMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.jk_wdMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.jk_ckMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.jk_cwMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.jk_cfMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.jk_hjMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.hs_zzMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.hs_hqMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.hs_gyMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.hs_wdMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.hs_ckMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.hs_cwMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.hs_cfMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{ctrlWYB0001.vm.hs_hjMap.get(item.month)}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </p:column>
+                        </p:summaryRow>
+                    </p:dataTable>
+                </p:outputPanel>
+
+                <!--</p:tab>-->
+                <!--                    <p:tab title="入库明细">
+                                        <p:outputPanel id="rukumingxi" styleClass="rukumingxi">
+                                            <p:dataTable value="#{ctrlWYB0001.vm.ruKuMingXiList}"
+                                                         widgetVar="chukuTable"
+                                                         var="item"
+                                                         id="ruku_table"
+                                                         emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                                         rows="15"
+                                                         paginatorAlwaysVisible="false"
+                                                         paginator="true"
+                                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                         rowsPerPageTemplate="15, 30, 50"
+                                                         styleClass="tct">
+                                                <p:columnGroup type="header">
+                                                    <p:row>
+                                                        <p:column headerText="入库单号" styleClass="wd-p-15" />
+                                                        <p:column headerText="#{msg.wu_zhi_miao_shu}" 
+                                                                  sortBy="#{item.shenqing.shiti.wuZiMiaoShu}"
+                                                                  filterMaxLength="50" 
+                                                                 filterBy="#{item.shenqing.shiti.wuZiMiaoShu}"
+                                                                  filterMatchMode="contains" 
+                                                                  styleClass="wd-p-20"/>
+                                                        <p:column headerText="入库数" styleClass="wd-p-15" sortBy="#{item.zhengPinShu}"/>
+                                                        <p:column headerText="单价" styleClass="wd-p-15" />
+                                                        <p:column headerText="入库人" styleClass="wd-p-15" />
+                                                        <p:column headerText="入库日期" styleClass="wd-p-15" />
+                
+                                                    </p:row>
+                                                </p:columnGroup>
+                
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.pk.ruKuBianHao}" />
+                
+                
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.shenqing.shiti.wuZiMiaoShu}"/>
+                                                </p:column>
+                                                正品数
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.zhengPinShu}">
+                                                        <f:convertNumber pattern="#{bizConfig.numberFormatPattern}" />
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.danJia}">
+                                                        <f:convertNumber currencySymbol="" type="currency"  maxFractionDigits="2"/>
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.insUserInfo.xing}#{item.insUserInfo.ming}"/>
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.insDate}">
+                                                        <f:convertDateTime pattern="#{bizConfig.dateFormat}" />
+                                                    </h:outputText>
+                                                </p:column>
+                                            </p:dataTable>
+                
+                
+                                        </p:outputPanel>
+                                    </p:tab>
+                
+                                    <p:tab title="出库明细">
+                                        <p:outputPanel id="chukumingxi" styleClass="chukumingxi">
+                                            <p:dataTable value="#{ctrlWYB0001.vm.chuKuMingXiList}"
+                                                         widgetVar="chukuTable"
+                                                         var="item"
+                                                         id="chuku_table"
+                                                         emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                                         rows="15"
+                                                         paginatorAlwaysVisible="false"
+                                                         paginator="true"
+                                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                         rowsPerPageTemplate="15, 30, 50"
+                                                         styleClass="tct">
+                                                <p:columnGroup type="header">
+                                                    <p:row>
+                                                        <p:column headerText="出库单号" styleClass="wd-p-15" />
+                                                        <p:column headerText="#{msg.wu_zhi_miao_shu}" 
+                                                                  sortBy="#{item.shenqing.shiti.wuZiMiaoShu}"
+                                                                  filterMaxLength="50" 
+                                                                  filterBy="#{item.shenqing.shiti.wuZiMiaoShu}"
+                                                                  filterMatchMode="contains" 
+                                                                  styleClass="wd-p-20"/>
+                                                        <p:column headerText="出库数" styleClass="wd-p-15" sortBy="#{item.chuKuShu}"/>
+                                                        <p:column headerText="单价" styleClass="wd-p-15" />
+                                                        <p:column headerText="领用人" styleClass="wd-p-15" />
+                                                        <p:column headerText="出库日期" styleClass="wd-p-15" />
+                
+                                                    </p:row>
+                                                </p:columnGroup>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.pk.chuKuBianHao}" />
+                
+                
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.shenqing.shiti.wuZiMiaoShu}"/>
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.chuKuShu}">
+                                                        <f:convertNumber pattern="#{bizConfig.numberFormatPattern}" />
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.danJia}">
+                                                        <f:convertNumber currencySymbol="" type="currency"  maxFractionDigits="2"/>
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.lingYongRen.xing}#{item.lingYongRen.ming}"/>
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.insDate}">
+                                                        <f:convertDateTime pattern="#{bizConfig.dateFormat}" />
+                                                    </h:outputText>
+                                                </p:column>
+                                            </p:dataTable>
+                
+                
+                                        </p:outputPanel>
+                                    </p:tab>
+                                    <p:tab title="供应商入库统计">
+                                        <h:panelGrid columns="9" cellpadding="5" id="gongyingshangcanShu">
+                                            <p:outputLabel value="时间范围 从"/>
+                                            <p:calendar id="gtxtStartDate" value="#{ctrlWYB0001.vm.startDate}"
+                                                        placeholder="开始日期"
+                                                        disabled="#{ctrlWYB0001.vm.riQiFanWei!='custom'}"
+                                                        mask="true" styleClass="tct"
+                                                        pattern="#{bizConfig.dateFormat}"
+                                                        required="true"
+                                                        requiredMessage="#{ctrlWYB0001.isRequiredMessage('开始日期')}"
+                                                        size="12"
+                                                        converterMessage="#{ctrlWYB0001.dateUnvalidMessage('开始日期')}"
+                                                        locale="#{bizConfig.locale}">
+                
+                                            </p:calendar>
+                                            <p:outputLabel value="到"/>
+                                            <p:calendar id="gtxtEndDate" value="#{ctrlWYB0001.vm.endDate}"
+                                                        placeholder="结束日期"
+                                                        disabled="#{ctrlWYB0001.vm.riQiFanWei!='custom'}"
+                                                        mask="true" styleClass="tct"
+                                                        pattern="#{bizConfig.dateFormat}"
+                                                        required="true"
+                                                        requiredMessage="#{ctrlWYB0001.isRequiredMessage('结束日期')}"
+                                                        size="12"
+                                                        converterMessage="#{ctrlWYB0001.dateUnvalidMessage('结束日期')}"
+                                                        locale="#{bizConfig.locale}">
+                                            </p:calendar>
+                                            <p:selectOneMenu id="griQiFanWei" 
+                                                             value="#{ctrlWYB0001.vm.riQiFanWei}" 
+                                                             style="width:125px">
+                                                <p:ajax listener="#{ctrlWYB0001.changeRiQi}" process="@this" update="@this gtxtStartDate gtxtEndDate"/>
+                                                <f:selectItem itemLabel="今天" itemValue="today" />
+                                                <f:selectItem itemLabel="本周" itemValue="thisWeek" />
+                                                <f:selectItem itemLabel="本月" itemValue="thisMonth" />
+                                                <f:selectItem itemLabel="本季度" itemValue="thisSeason" />
+                                                <f:selectItem itemLabel="自定义" itemValue="custom" />
+                                            </p:selectOneMenu>
+                                            <p:commandButton value="查询" process="@this gongyingshangcanShu" actionListener="#{ctrlWYB0001.showGongYingShangTongJi}" 
+                                                             resetValues="true"
+                                                             oncomplete="PAGE_COM.buttonShortCutKeyInvoke('frmMain:btnValidationPanel');"
+                                                             update="gongyingshangtongji,  frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                                        </h:panelGrid>
+                
+                                        <p:outputPanel id="gongyingshangtongji" styleClass="gongyingshangtongji">
+                                            <p:dataTable value="#{ctrlWYB0001.vm.gongYingShangRuKuTongJiList}"
+                                                         widgetVar="chukuTable"
+                                                         var="item"
+                                                         id="gongyingshangtongji_table"
+                                                         emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                                         rows="15"
+                                                         paginatorAlwaysVisible="false"
+                                                         paginator="true"
+                                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                         rowsPerPageTemplate="15, 30, 50"
+                                                         styleClass="tct">
+                                                <p:columnGroup type="header">
+                                                    <p:row>
+                                                        <p:column headerText="供应商名" 
+                                                                  sortBy="#{item.gongSiMing}"
+                                                                  filterMaxLength="50" 
+                                                                  filterBy="#{item.gongSiMing}"
+                                                                  filterMatchMode="contains" 
+                                                                  styleClass="wd-p-25" 
+                                                                  />
+                                                        <p:column headerText="#{msg.wu_zhi_miao_shu}" 
+                                                                  sortBy="#{item.wuZiMiaoShu}"
+                                                                  filterMaxLength="50" 
+                                                                  filterBy="#{item.wuZiMiaoShu}"
+                                                                  filterMatchMode="contains" 
+                                                                  styleClass="wd-p-25"/>
+                                                        <p:column headerText="入库数" styleClass="wd-p-25" sortBy="#{item.zhengPinShu}"/>
+                                                        <p:column headerText="总金额" styleClass="wd-p-25" />
+                                                    </p:row>
+                                                </p:columnGroup>
+                
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.gongSiMing}" />
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.wuZiMiaoShu}"/>
+                                                </p:column>
+                                                正品数
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.zhengPinShu}">
+                                                        <f:convertNumber pattern="#{bizConfig.numberFormatPattern}" />
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column styleClass="tct">
+                                                    <h:outputText value="#{item.zongJinE}">
+                                                        <f:convertNumber currencySymbol="" type="currency"  maxFractionDigits="2"/>
+                                                    </h:outputText>
+                                                </p:column>                             
+                                            </p:dataTable>
+                                        </p:outputPanel>
+                                    </p:tab>-->
+                <!--                </p:tabView>-->
+            </div>
+        </div>
+    </p:outputPanel>
+</ui:composition>
