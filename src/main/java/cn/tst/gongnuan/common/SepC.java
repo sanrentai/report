@@ -275,6 +275,21 @@ public final class SepC {
          * 测试项目1
          */
         public static final String TST0001 = "ctrlTST0001";
+        
+        /**
+         * 测试项目2
+         */
+        public static final String TST0002 = "ctrlTST0002";
+        
+        /**
+         * 测试项目3
+         */
+        public static final String TST0003 = "ctrlTST0003";
+        
+        /**
+         * 测试项目4
+         */
+        public static final String TST0004 = "ctrlTST0004";
 
         /**
          * 员工管理

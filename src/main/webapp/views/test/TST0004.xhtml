@@ -1,0 +1,173 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <div class="Container100 Responsive100">
+            <div class="Card ui-fluid">
+                <!--标题-->
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('TST', 'TST0004')}"/>
+                    <!--<h:outputText value="测试 > 稽查表(TST0004)" />-->
+                </h1>
+                <div class="SeparatorFull"></div>
+
+<!--                <p:tabView id="tabview" activeIndex="#{ctrlTST0004.vm.tabIndex}">
+    <p:tab title="各分公司收费明细表" >-->
+                <p:panelGrid columns="8"
+                             id="canShu"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank"
+                             columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
+                    <p:outputLabel for="company" value="公司"/>
+                    <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" 
+                                     value="#{ctrlTST0004.vm.companyName}" required="true"
+                                     requiredMessage="#{ctrlTST0004.isRequiredMessage('公司')}">
+                        <f:selectItem itemLabel="全部" itemValue="全部"/>
+                        <p:ajax process="@this, company" update="canShu" listener="#{ctrlTST0004.changeCompany()}"></p:ajax>
+                        <f:selectItems value="#{ctrlTST0004.vm.companyList}"  var="items" 
+                                       itemLabel="#{items.name}" itemValue="#{items.name}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="huanrezhan" value="换热站"/>
+                    <p:selectOneMenu id="huanrezhan" autoWidth="false" styleClass="wd-f-40" 
+                                     disabled="#{empty ctrlTST0004.vm.huanReZhanList}"
+                                     value="#{ctrlTST0004.vm.huanRenZhanId}">
+                        <f:selectItem itemLabel="全部" itemValue="全部"/>
+                        <p:ajax process="@this, huanrezhan" update="canShu" listener="#{ctrlTST0004.changeHuanReZhan()}"></p:ajax>
+                        <f:selectItems value="#{ctrlTST0004.vm.huanReZhanList}"  var="item" rendered="#{not empty ctrlTST0004.vm.huanReZhanList}"
+                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="xiaoqu" value="小区"/>
+                    <p:selectOneMenu id="xiaoqu" autoWidth="false" styleClass="wd-f-40"
+                                     disabled="#{empty ctrlTST0004.vm.xiaoQuList}"
+                                     value="#{ctrlTST0004.vm.xiaoQuId}">
+                        <f:selectItem itemLabel="全部" itemValue="全部"/>
+                        <p:ajax process="@this, xiaoqu" update="canShu" listener="#{ctrlTST0004.changeXiaoQu()}"></p:ajax>
+                        <f:selectItems value="#{ctrlTST0004.vm.xiaoQuList}"  var="item" rendered="#{not empty ctrlTST0004.vm.xiaoQuList}"
+                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="building" value="大楼"/>
+                    <p:selectOneMenu id="building" autoWidth="false" styleClass="wd-f-40" 
+                                     disabled="#{empty ctrlTST0004.vm.buildingList}"
+                                     value="#{ctrlTST0004.vm.buildingId}">
+                        <f:selectItem itemLabel="全部" itemValue="全部"/>
+                        <f:selectItems value="#{ctrlTST0004.vm.buildingList}"  var="itemb" rendered="#{not empty ctrlTST0004.vm.buildingList}"
+                                       itemLabel="#{itemb.buildingName}" itemValue="#{itemb.buildingId}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="yearnum" value="年度"/>
+                    <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" 
+                                     value="#{ctrlTST0004.vm.yearnum}">
+                        <f:selectItems value="#{ctrlTST0004.vm.yearnumList}"  var="itemy" 
+                                       itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlTST0004.chaXun()}" 
+                                     oncomplete="showErrorMsg();"
+                                     update="sfmx, canShu, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                </p:panelGrid>
+                <p:outputPanel id="sfmx">
+                    <p:dataTable value="#{ctrlTST0004.vm.shuJuList}"
+                                 widgetVar="sfmxTable"
+                                 var="item"
+                                 style="word-break: keep-all!important"
+                                 sortBy="#{item.unit}"
+                                 id="sfmx_table"
+                                 rendered="#{not empty ctrlTST0004.vm.shuJuList}"
+                                 emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                 styleClass="tct">
+                        <f:facet name="header">
+                            <h:outputText value="稽查表"  styleClass="Fs20"/>
+                            <h:commandLink  styleClass="fr">
+                                <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
+                                <p:dataExporter type="xls" target="sfmx_table" fileName="baobiao" />
+                            </h:commandLink>
+                        </f:facet>
+                        <!--                        <p:columnGroup type="header">
+                            <p:row>
+                                <p:column filterBy="#{item.buildingName}" headerText="大楼名" 
+                                          sortBy="#{item.buildingName}"
+                                          footerText="contains"  filterMatchMode="startsWith"
+                                          styleClass="wd-p-10 tct"/>
+                                <p:column headerText="年度" filterBy="#{item.yearNum}" filterMatchMode="startsWith"
+                                          sortBy="#{item.yearNum}" styleClass="wd-p-10 tct"/>
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('sfmxTable').filter()" 
+                                                     autoWidth="false"
+                                                     filter="true" filterMatchMode="contains">
+                                        <f:selectItem itemLabel="全部" itemValue="#{null}" noSelectionOption="true" />
+                                        <f:selectItems value="#{ctrlTST0004.vm.yearnumList}"  var="itemy" 
+                                                       itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                <p:column headerText="应收金额（元）" sortBy="#{item.yjk}" styleClass="wd-p-10 tct"/>
+                                <p:column headerText="已收金额（元）" sortBy="#{item.jk}" styleClass="wd-p-10 tct"/>
+                                <p:column headerText="欠款"  sortBy="#{item.owe}" styleClass="wd-p-10 tct"/>
+                                <p:column headerText="收费率" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct"/>
+                            </p:row>
+                        </p:columnGroup>
+
+                        <p:column filterBy="#{item.buildingName}" headerText="大楼名" 
+                                  sortBy="#{item.buildingName}"
+                                  footerText="contains"  filterMatchMode="startsWith"
+                                  styleClass="wd-p-10 tct">-->
+                        <p:column sortBy="#{item.unit}" headerText="分公司" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.unit}" />
+                        </p:column>
+                        <p:column sortBy="#{item.hrz}" headerText="换热站" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.hrz}" />
+                        </p:column>
+                        <p:column sortBy="#{item.xiaoqu}" headerText="小区" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.xiaoqu}" />
+                        </p:column>
+                        <p:column sortBy="#{item.louhao}" headerText="大楼" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.louhao}" />
+                        </p:column>
+                        <p:column sortBy="#{item.roomname}" headerText="房间" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.roomname}" />
+                        </p:column>
+                        <p:column sortBy="#{item.tzdate}" headerText="办理时间" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.tzdate}" />
+                        </p:column>
+                        <p:column headerText="稽查后面积" sortBy="#{item.area_n}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.area_n}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="稽查后房间类别" sortBy="#{item.roomtype_n}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.roomtype_n}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="稽查后停供情况" sortBy="#{item.tg_n}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.tg_n}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="稽查人"  sortBy="#{item.name}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.name}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="处理结果"  sortBy="#{item.cljg}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.cljg}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="备注"  sortBy="#{item.appendix}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.appendix}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>
+            </div>
+        </div>
+    </p:outputPanel>
+</ui:composition>

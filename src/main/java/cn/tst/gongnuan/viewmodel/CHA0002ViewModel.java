@@ -24,13 +24,13 @@ public class CHA0002ViewModel extends BaseViewModel {
     private Date payDate;
 
     private String companyName;
-    
+
     private String companyName1;
 
     private List<VCompany> companyList;
 
     private List<YearNumDTO> yearnumList;
-    
+
     private BarChartModel areaBarModel;
 
     public CHA0002ViewModel() {
@@ -44,13 +44,46 @@ public class CHA0002ViewModel extends BaseViewModel {
         this.payDate = payDate;
     }
 
+    public BigDecimal getTotalYjk() {
+        BigDecimal result = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return result;
+        }
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+            result = result.add(item.getYjk());
+        }
+        return result;
+    }
+
+    public BigDecimal getTotalJk() {
+        BigDecimal result = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return result;
+        }
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+            result = result.add(item.getJk());
+        }
+        return result;
+    }
+
+    public BigDecimal getTotalOwe() {
+        BigDecimal result = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return result;
+        }
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+            result = result.add(item.getOwe());
+        }
+        return result;
+    }
+
     public BigDecimal getTotalArea() {
         BigDecimal total = BigDecimal.ZERO;
-        if(shuJuList==null){
+        if (shuJuList == null) {
             return total;
         }
         for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
-            total=total.add(item.getArea());
+            total = total.add(item.getArea());
         }
         return total;
     }
@@ -102,7 +135,4 @@ public class CHA0002ViewModel extends BaseViewModel {
     public void setCompanyName1(String companyName1) {
         this.companyName1 = companyName1;
     }
-
-    
-    
 }

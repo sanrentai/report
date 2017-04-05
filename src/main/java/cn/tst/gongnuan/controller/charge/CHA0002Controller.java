@@ -1,5 +1,6 @@
 package cn.tst.gongnuan.controller.charge;
 
+import java.util.Calendar;
 import org.apache.log4j.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -10,9 +11,7 @@ import cn.tst.gongnuan.common.SepC;
 import cn.tst.gongnuan.controller.BusinessBaseController;
 import cn.tst.gongnuan.service.dto.SouFeiNianDuBiaoByGongSiDTO;
 import cn.tst.gongnuan.viewmodel.CHA0002ViewModel;
-import com.google.common.collect.HashBiMap;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -55,11 +54,13 @@ public class CHA0002Controller extends BusinessBaseController {
 
     public void chaXun() {
         bizLogic.chaXun(vm);
+        createBarModel();
     }
 
     public void createBarModel() {
-        String companyName = vm.getCompanyName1();
-        if (companyName != null && companyName != "") {
+        String companyName = vm.getCompanyName();
+//        if (companyName != null && companyName != "") {
+        if (!"全部".equals(companyName)) {
             BarChartModel model = new BarChartModel();
             model.setTitle("金额图");
             model.setLegendPosition("nw");
@@ -86,7 +87,7 @@ public class CHA0002Controller extends BusinessBaseController {
             model.addSeries(owe);
             vm.setAreaBarModel(model);
 //            return model;
-        } 
+        }
     }
 
     //*****************************************************************

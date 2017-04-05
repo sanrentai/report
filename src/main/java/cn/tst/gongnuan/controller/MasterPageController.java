@@ -148,11 +148,11 @@ public class MasterPageController extends BusinessBaseController {
      * @return 页面Title内容
      */
     public String createPageTitle(String menuId, String menuItemId) {
-        String mode="test";
-        
-        if("test".equals(mode)){
-            return "测试 > 各分公司收费明细表(TST0001)";
-        }
+//        String mode="test";
+//        
+//        if("test".equals(mode)){
+//            return "测试 > 各分公司收费明细表(TST0001)";
+//        }
         ///获取当前是使用的项目ID
         GroupMenuItem current = bizLogic.getCurrentGroupMenuItem(menuId, menuItemId);
 

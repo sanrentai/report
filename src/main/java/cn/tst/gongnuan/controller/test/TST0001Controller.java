@@ -30,6 +30,7 @@ public class TST0001Controller extends BusinessBaseController {
     /**
      * 物资信息查看视图模型
      */
+
     private TST0001ViewModel vm;
 
     @PostConstruct
@@ -95,7 +96,9 @@ public class TST0001Controller extends BusinessBaseController {
         vm.setBuildingId("全部");
         vm.setHuanRenZhanId("全部");
         vm.setHuanReZhanList(null);
-        bizLogic.changeCompany(vm);
+        if(!vm.getCompanyName().equals("全部")) {
+            bizLogic.changeCompany(vm);
+        }
     }
 
     public void changeXiaoQu() {
