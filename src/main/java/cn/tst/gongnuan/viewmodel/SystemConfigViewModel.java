@@ -1,8 +1,7 @@
 package cn.tst.gongnuan.viewmodel;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import cn.tst.gongnuan.common.CConst;
+import java.util.Date;
 //import cn.tst.gongnuan.entity.MstLeiBieGuanLi;
 //import cn.tst.gongnuan.entity.MstSystemConfig;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +17,36 @@ public class SystemConfigViewModel {
     private boolean silmMenu;
     private String color = "Blue";
     private String title = "报表系统";
+    
+    private String yearnum;
+    private Date starDate;
+    private Date endDate;
+
+    public String getYearnum() {
+        return yearnum;
+    }
+
+    public void setYearnum(String yearnum) {
+        this.yearnum = yearnum;
+    }
+
+    public Date getStarDate() {
+        return starDate;
+    }
+
+    public void setStarDate(Date starDate) {
+        this.starDate = starDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+    
+    
 
     public String getColor() {
         return color;
