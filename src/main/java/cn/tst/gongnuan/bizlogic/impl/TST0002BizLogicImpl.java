@@ -5,25 +5,14 @@
  */
 package cn.tst.gongnuan.bizlogic.impl;
 
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import cn.tst.gongnuan.viewmodel.TST0002ViewModel;
 import org.apache.log4j.Logger;
 import cn.tst.gongnuan.bizlogic.TST0002BizLogic;
-import cn.tst.gongnuan.entity.VCompany;
-import cn.tst.gongnuan.service.dto.BuildingDTO;
-import cn.tst.gongnuan.service.dto.HYR0001DTO;
-import cn.tst.gongnuan.service.dto.HuanReZhanDTO;
-import cn.tst.gongnuan.service.dto.SouFeiNianDuBiaoByGongSiDTO;
-import cn.tst.gongnuan.service.dto.XiaoQuDTO;
-import cn.tst.gongnuan.service.dto.YearNumDTO;
-import cn.tst.gongnuan.service.impl.BuildingProcFacade;
+import cn.tst.gongnuan.entity.TConfig;
 import cn.tst.gongnuan.service.impl.HYR0002Facade;
-import cn.tst.gongnuan.service.impl.HuanReZhanProcFacade;
-import cn.tst.gongnuan.service.impl.VCompanyFacade;
-import cn.tst.gongnuan.service.impl.XiaoQuProcFacade;
-import cn.tst.gongnuan.service.impl.YearNumProcFacade;
+import cn.tst.gongnuan.service.impl.TConfigFacade;
 
 /**
  * 出库入库统计实现类
@@ -37,9 +26,19 @@ public class TST0002BizLogicImpl extends BaseBizLogic implements TST0002BizLogic
 
     @EJB
     private HYR0002Facade facade;
+    
+    @EJB
+    private TConfigFacade configDao;
 
     @Override
     public void query(TST0002ViewModel vm) {
         vm.setQueryResultList(facade.query(vm.getPayDate(), vm.getStartDate(), vm.getEndDate()));
+    }
+    
+    @Override
+    public void loadTST0002ViewModel(TST0002ViewModel vm) {
+        TConfig c = configDao.findAll().get(0);
+        vm.setStartDate(c.getStartdate());
+        vm.setEndDate(c.getEnddate());
     }
 }

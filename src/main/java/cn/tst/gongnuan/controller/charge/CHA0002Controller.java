@@ -19,7 +19,13 @@ import java.util.Map;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.CategoryAxis;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * 物资信息查看
@@ -54,40 +60,181 @@ public class CHA0002Controller extends BusinessBaseController {
 
     public void chaXun() {
         bizLogic.chaXun(vm);
-        createBarModel();
+        // createBarModel();
+        createRatioModel();
+        createAreaModel();
+        createYsjeModel();
+        createYisjeModel();
+        createQkModel();
+    }
+    
+    public void createRatioModel() {
+        BarChartModel model = new BarChartModel();
+        model.setTitle("收费率");
+        model.setLegendPosition("ne");
+        //model.setShowPointLabels(true);
+        //model.getAxes().put(AxisType.X, new CategoryAxis("年度"));
+        model.getAxis(AxisType.X).setLabel("年度");
+        model.getAxis(AxisType.Y).setLabel("收费率");
+        Map<String, Map<String, BigDecimal>> data = new HashMap();
+        for(SouFeiNianDuBiaoByGongSiDTO item: vm.getShuJuList()) {
+            if(data.containsKey(item.getName())) {
+                data.get(item.getName()).put(item.getYearNum(), item.getSfl());
+            } else {
+                Map<String, BigDecimal> value = new HashMap();
+                value.put(item.getYearNum(), item.getSfl());
+                data.put(item.getName(), value);
+            }
+        }
+        for(String companyName: data.keySet()) {
+            ChartSeries series = new ChartSeries();
+            series.setLabel(companyName);
+            Map<String, BigDecimal> yearSpanAndRatio = data.get(companyName);
+            Object[] keyArray = yearSpanAndRatio.keySet().toArray();
+            Arrays.sort(keyArray);
+            List<Object> keyList = Arrays.asList(keyArray);
+            Collections.reverse(keyList);
+            for(Object yearSpan: keyList) {
+                series.set((String)yearSpan, yearSpanAndRatio.get(yearSpan));
+            }
+            model.addSeries(series);
+        }
+        vm.setRatioModel(model);
     }
 
-    public void createBarModel() {
-        String companyName = vm.getCompanyName();
-//        if (companyName != null && companyName != "") {
-        if (!"全部".equals(companyName)) {
-            BarChartModel model = new BarChartModel();
-            model.setTitle("金额图");
-            model.setLegendPosition("nw");
-            ChartSeries yjk = new ChartSeries();
-            yjk.setLabel("应交款");
-            ChartSeries jk = new ChartSeries();
-            jk.setLabel("交款");
-            ChartSeries owe = new ChartSeries();
-            owe.setLabel("欠款");
-
-            for (SouFeiNianDuBiaoByGongSiDTO item : vm.getShuJuList()) {
-                if (companyName.equals(item.getName())) {
-                    yjk.set(item.getYearNum(), item.getYjk());
-                    jk.set(item.getYearNum(), item.getJk());
-                    owe.set(item.getYearNum(), item.getOwe());
-                }
+    public void createAreaModel() {
+        BarChartModel model = new BarChartModel();
+        model.setTitle("面积");
+        model.setLegendPosition("ne");
+        //model.setShowPointLabels(true);
+        //model.getAxes().put(AxisType.X, new CategoryAxis("年度"));
+        model.getAxis(AxisType.X).setLabel("年度");
+        model.getAxis(AxisType.Y).setLabel("面积");
+        Map<String, Map<String, BigDecimal>> data = new HashMap();
+        for(SouFeiNianDuBiaoByGongSiDTO item: vm.getShuJuList()) {
+            if(data.containsKey(item.getName())) {
+                data.get(item.getName()).put(item.getYearNum(), item.getArea());
+            } else {
+                Map<String, BigDecimal> value = new HashMap();
+                value.put(item.getYearNum(), item.getArea());
+                data.put(item.getName(), value);
             }
-            Axis xAxis = model.getAxis(AxisType.X);
-            xAxis.setLabel("年度");
-            Axis yAxis = model.getAxis(AxisType.Y);
-            xAxis.setLabel("金额");
-            model.addSeries(yjk);
-            model.addSeries(jk);
-            model.addSeries(owe);
-            vm.setAreaBarModel(model);
-//            return model;
         }
+        for(String companyName: data.keySet()) {
+            ChartSeries series = new ChartSeries();
+            series.setLabel(companyName);
+            Map<String, BigDecimal> yearSpanAndArea = data.get(companyName);
+            Object[] keyArray = yearSpanAndArea.keySet().toArray();
+            Arrays.sort(keyArray);
+            List<Object> keyList = Arrays.asList(keyArray);
+            Collections.reverse(keyList);
+            for(Object yearSpan: keyList) {
+                series.set((String)yearSpan, yearSpanAndArea.get(yearSpan));
+            }
+            model.addSeries(series);
+        }
+        vm.setAreaModel(model);
+    }
+
+    public void createYsjeModel() {
+        BarChartModel model = new BarChartModel();
+        model.setTitle("应收金额");
+        model.setLegendPosition("ne");
+        //model.setShowPointLabels(true);
+        //model.getAxes().put(AxisType.X, new CategoryAxis("年度"));
+        model.getAxis(AxisType.X).setLabel("年度");
+        model.getAxis(AxisType.Y).setLabel("应收金额");
+        Map<String, Map<String, BigDecimal>> data = new HashMap();
+        for(SouFeiNianDuBiaoByGongSiDTO item: vm.getShuJuList()) {
+            if(data.containsKey(item.getName())) {
+                data.get(item.getName()).put(item.getYearNum(), item.getYjk());
+            } else {
+                Map<String, BigDecimal> value = new HashMap();
+                value.put(item.getYearNum(), item.getYjk());
+                data.put(item.getName(), value);
+            }
+        }
+        for(String companyName: data.keySet()) {
+            ChartSeries series = new ChartSeries();
+            series.setLabel(companyName);
+            Map<String, BigDecimal> yearSpanAndYjk = data.get(companyName);
+            Object[] keyArray = yearSpanAndYjk.keySet().toArray();
+            Arrays.sort(keyArray);
+            List<Object> keyList = Arrays.asList(keyArray);
+            Collections.reverse(keyList);
+            for(Object yearSpan: keyList) {
+                series.set((String)yearSpan, yearSpanAndYjk.get(yearSpan));
+            }
+            model.addSeries(series);
+        }
+        vm.setYsjeModel(model);
+    }
+    
+    public void createYisjeModel() {
+        BarChartModel model = new BarChartModel();
+        model.setTitle("已收金额");
+        model.setLegendPosition("ne");
+        //model.setShowPointLabels(true);
+        //model.getAxes().put(AxisType.X, new CategoryAxis("年度"));
+        model.getAxis(AxisType.X).setLabel("年度");
+        model.getAxis(AxisType.Y).setLabel("已收金额");
+        Map<String, Map<String, BigDecimal>> data = new HashMap();
+        for(SouFeiNianDuBiaoByGongSiDTO item: vm.getShuJuList()) {
+            if(data.containsKey(item.getName())) {
+                data.get(item.getName()).put(item.getYearNum(), item.getJk());
+            } else {
+                Map<String, BigDecimal> value = new HashMap();
+                value.put(item.getYearNum(), item.getJk());
+                data.put(item.getName(), value);
+            }
+        }
+        for(String companyName: data.keySet()) {
+            ChartSeries series = new ChartSeries();
+            series.setLabel(companyName);
+            Map<String, BigDecimal> yearSpanAndJk = data.get(companyName);
+            Object[] keyArray = yearSpanAndJk.keySet().toArray();
+            Arrays.sort(keyArray);
+            List<Object> keyList = Arrays.asList(keyArray);
+            Collections.reverse(keyList);
+            for(Object yearSpan: keyList) {
+                series.set((String)yearSpan, yearSpanAndJk.get(yearSpan));
+            }
+            model.addSeries(series);
+        }
+        vm.setYisjeModel(model);
+    }
+    public void createQkModel() {
+        BarChartModel model = new BarChartModel();
+        model.setTitle("欠款");
+        model.setLegendPosition("ne");
+        //model.setShowPointLabels(true);
+        //model.getAxes().put(AxisType.X, new CategoryAxis("年度"));
+        model.getAxis(AxisType.X).setLabel("年度");
+        model.getAxis(AxisType.Y).setLabel("欠款");
+        Map<String, Map<String, BigDecimal>> data = new HashMap();
+        for(SouFeiNianDuBiaoByGongSiDTO item: vm.getShuJuList()) {
+            if(data.containsKey(item.getName())) {
+                data.get(item.getName()).put(item.getYearNum(), item.getOwe());
+            } else {
+                Map<String, BigDecimal> value = new HashMap();
+                value.put(item.getYearNum(), item.getOwe());
+                data.put(item.getName(), value);
+            }
+        }
+        for(String companyName: data.keySet()) {
+            ChartSeries series = new ChartSeries();
+            series.setLabel(companyName);
+            Map<String, BigDecimal> yearSpanAndOwe = data.get(companyName);
+            Object[] keyArray = yearSpanAndOwe.keySet().toArray();
+            Arrays.sort(keyArray);
+            List<Object> keyList = Arrays.asList(keyArray);
+            Collections.reverse(keyList);
+            for(Object yearSpan: keyList) {
+                series.set((String)yearSpan, yearSpanAndOwe.get(yearSpan));
+            }
+            model.addSeries(series);
+        }
+        vm.setQkModel(model);
     }
 
     //*****************************************************************

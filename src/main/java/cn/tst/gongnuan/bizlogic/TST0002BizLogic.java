@@ -13,4 +13,6 @@ import cn.tst.gongnuan.viewmodel.TST0002ViewModel;
  */
 public interface TST0002BizLogic {
     void query(TST0002ViewModel vm);
+    void loadTST0002ViewModel(TST0002ViewModel vm) ;
 }
+

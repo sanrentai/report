@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import cn.tst.gongnuan.viewmodel.TST0003ViewModel;
 import org.apache.log4j.Logger;
 import cn.tst.gongnuan.bizlogic.TST0003BizLogic;
+import cn.tst.gongnuan.entity.TConfig;
 import cn.tst.gongnuan.entity.VCompany;
 import cn.tst.gongnuan.service.dto.BuildingDTO;
 import cn.tst.gongnuan.service.dto.HYR0003DTO;
@@ -21,6 +22,7 @@ import cn.tst.gongnuan.service.dto.YearNumDTO;
 import cn.tst.gongnuan.service.impl.BuildingProcFacade;
 import cn.tst.gongnuan.service.impl.HYR0003Facade;
 import cn.tst.gongnuan.service.impl.HuanReZhanProcFacade;
+import cn.tst.gongnuan.service.impl.TConfigFacade;
 import cn.tst.gongnuan.service.impl.VCompanyFacade;
 import cn.tst.gongnuan.service.impl.XiaoQuProcFacade;
 import cn.tst.gongnuan.service.impl.YearNumProcFacade;
@@ -52,6 +54,9 @@ public class TST0003BizLogicImpl extends BaseBizLogic implements TST0003BizLogic
 
     @EJB
     private BuildingProcFacade buildingDao;
+    
+    @EJB
+    private TConfigFacade configDao;
 
     @Override
     public void loadTST0003ViewModel(TST0003ViewModel vm) {
@@ -59,6 +64,9 @@ public class TST0003BizLogicImpl extends BaseBizLogic implements TST0003BizLogic
         vm.setCompanyList(findAll);
         List<YearNumDTO> yearnumList = vYearnumDao.getShuJu();
         vm.setYearnumList(yearnumList);
+        
+        TConfig c = configDao.findAll().get(0);
+        vm.setYearnum(c.getYearnum());
     }
 
     @Override
@@ -86,6 +94,7 @@ public class TST0003BizLogicImpl extends BaseBizLogic implements TST0003BizLogic
                         vm.setHeaderText("建筑名");
                     } else {
                         //大楼明细
+                        vm.setHeaderText("户名");
                         shuJuList = suJuDao.getShuJuListByBuilding(vm.getYearnum(), vm.getCompanyName(), vm.getBuildingId());
                     }
                 }

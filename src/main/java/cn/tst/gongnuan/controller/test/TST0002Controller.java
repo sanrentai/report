@@ -13,6 +13,7 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import java.math.BigDecimal;
 /**
  *
  * @author Aaron
@@ -44,7 +45,7 @@ public class TST0002Controller extends BusinessBaseController {
     @PostConstruct
     public void init() {
         vm = new TST0002ViewModel();
-        //bizLogic.loadTST0002ViewModel(vm);
+        bizLogic.loadTST0002ViewModel(vm);
     }
     
     public void query() {

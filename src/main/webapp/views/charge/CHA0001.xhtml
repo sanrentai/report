@@ -5,8 +5,6 @@
                 xmlns:pe="http://primefaces.org/ui/extensions"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-
-
     <p:outputPanel styleClass="Container100 NoIndent">
         <div class="Container100 Responsive100">
             <div class="Card ui-fluid">
@@ -150,6 +148,23 @@
                             </f:facet>
                         </p:column>
                     </p:dataTable>
+                    <p:tabView rendered="#{not empty ctrlCHA0001.vm.shuJuList}">
+                        <p:tab title="面积">
+                            <p:outputPanel id="tubiao">
+                                <p:chart type="line" model="#{ctrlCHA0001.vm.areaModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title="应收金额/已收金额/尚欠金额">
+                            <p:outputPanel id="tubiao2">
+                                <p:chart type="bar" model="#{ctrlCHA0001.vm.moneyModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title="收费率">
+                            <p:outputPanel id="tubiao3">
+                                <p:chart type="line" model="#{ctrlCHA0001.vm.ratioModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
                 </p:outputPanel>
             </div>
         </div>

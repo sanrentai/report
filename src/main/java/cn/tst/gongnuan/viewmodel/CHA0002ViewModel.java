@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.LineChartModel;
 
 /**
  *
@@ -31,7 +32,55 @@ public class CHA0002ViewModel extends BaseViewModel {
 
     private List<YearNumDTO> yearnumList;
 
-    private BarChartModel areaBarModel;
+    private BarChartModel areaModel;
+    
+    private BarChartModel ysjeModel;
+    
+    private BarChartModel yisjeModel;
+    
+    private BarChartModel qkModel;
+
+    public BarChartModel getQkModel() {
+        return qkModel;
+    }
+
+    public void setQkModel(BarChartModel qkModel) {
+        this.qkModel = qkModel;
+    }
+
+    public BarChartModel getYisjeModel() {
+        return yisjeModel;
+    }
+
+    public void setYisjeModel(BarChartModel yisjeModel) {
+        this.yisjeModel = yisjeModel;
+    }
+
+    public BarChartModel getYsjeModel() {
+        return ysjeModel;
+    }
+
+    public void setYsjeModel(BarChartModel ysjeModel) {
+        this.ysjeModel = ysjeModel;
+    }
+    
+    private BarChartModel ratioModel;
+
+    public BarChartModel getAreaModel() {
+        return areaModel;
+    }
+
+    public void setAreaModel(BarChartModel areaModel) {
+        this.areaModel = areaModel;
+    }
+
+    public BarChartModel getRatioModel() {
+        return ratioModel;
+    }
+
+    public void setRatioModel(BarChartModel ratioModel) {
+        this.ratioModel = ratioModel;
+    }
 
     public CHA0002ViewModel() {
     }
@@ -118,14 +167,6 @@ public class CHA0002ViewModel extends BaseViewModel {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
-    }
-
-    public BarChartModel getAreaBarModel() {
-        return areaBarModel;
-    }
-
-    public void setAreaBarModel(BarChartModel areaBarModel) {
-        this.areaBarModel = areaBarModel;
     }
 
     public String getCompanyName1() {

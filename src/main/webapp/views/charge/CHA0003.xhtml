@@ -37,7 +37,7 @@
                     <p:outputLabel for="company" value="公司"/>
                     <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" 
                                      value="#{ctrlCHA0003.vm.companyName}" required="true"
-                                requiredMessage="#{ctrlCHA0003.isRequiredMessage('公司')}">
+                                     requiredMessage="#{ctrlCHA0003.isRequiredMessage('公司')}">
                         <f:selectItem itemLabel="请选择公司" itemValue=""/>
                         <p:ajax process="@this, company" update="building" listener="#{ctrlCHA0003.changeCompany()}"></p:ajax>
                         <f:selectItems value="#{ctrlCHA0003.vm.companyList}"  var="items" 
@@ -175,6 +175,17 @@
                             <h:outputText  value="#{item.sfy}" />
                         </p:column>
                     </p:dataTable>
+                    <p:tabView id="tabView" 
+                               value="#{ctrlCHA0003.vm.tabNameList}" var="tabName" 
+                               rendered="#{not empty ctrlCHA0003.vm.shuJuList}">
+                        <p:tab title="#{tabName}">
+                            <p:outputPanel>
+                                <p:chart type="pie" model="#{ctrlCHA0003.vm.modelMap.get(tabName)}" style="width:400px;height:300px">
+
+                                </p:chart>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
                 </p:outputPanel>
             </div>
         </div>

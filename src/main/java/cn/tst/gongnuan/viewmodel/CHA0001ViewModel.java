@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.BarChartModel;
 
 /**
  * 各分公司收费明细表
@@ -27,6 +29,36 @@ public class CHA0001ViewModel extends BaseViewModel {
     BigDecimal totalJk;
     BigDecimal totalOwe;
     BigDecimal totalSfl;
+    
+    private LineChartModel areaModel;
+    
+    private BarChartModel moneyModel;
+    
+    private LineChartModel ratioModel;
+
+    public LineChartModel getRatioModel() {
+        return ratioModel;
+    }
+
+    public void setRatioModel(LineChartModel ratioModel) {
+        this.ratioModel = ratioModel;
+    }
+
+    public BarChartModel getMoneyModel() {
+        return moneyModel;
+    }
+
+    public void setMoneyModel(BarChartModel moneyModel) {
+        this.moneyModel = moneyModel;
+    }
+
+    public LineChartModel getAreaModel() {
+        return areaModel;
+    }
+
+    public void setAreaModel(LineChartModel areaModel) {
+        this.areaModel = areaModel;
+    }
 
     public CHA0001ViewModel() {
         this.payDate = new Date();

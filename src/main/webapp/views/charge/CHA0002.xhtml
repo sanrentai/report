@@ -56,7 +56,7 @@
                                  emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
                                  styleClass="tct">
                         <f:facet name="header">
-                            <h:outputText value="各分公司收费明细表"  styleClass="Fs20"/>
+                            <h:outputText value="公司年度收费统计表"  styleClass="Fs20"/>
                             <h:commandLink  styleClass="fr">
                                 <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
                                 <p:dataExporter type="xls" target="sfmx_table" fileName="soufeimingxibiao" />
@@ -177,9 +177,33 @@
                             <f:selectItems value="#{ctrlCHA0002.vm.companyList}"  var="items" 
                                            itemLabel="#{items.name}" itemValue="#{items.name}"/>
                         </p:selectOneMenu>-->
-                        <p:outputPanel id="tubiao" rendered="#{not empty ctrlCHA0002.vm.areaBarModel}">
-                            <p:chart type="bar" model="#{ctrlCHA0002.vm.areaBarModel}" style="height:300px"/>
-                        </p:outputPanel>
+                    <p:tabView rendered="#{not empty ctrlCHA0002.vm.shuJuList}">
+                        <p:tab title='面积'>
+                            <p:outputPanel id="tubiao" rendered="#{not empty ctrlCHA0002.vm.areaModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.areaModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title='应收金额'>
+                            <p:outputPanel id="tubiao2" rendered="#{not empty ctrlCHA0002.vm.ysjeModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.ysjeModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title='已收金额'>
+                            <p:outputPanel id="tubiao3" rendered="#{not empty ctrlCHA0002.vm.yisjeModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.yisjeModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title='欠款'>
+                            <p:outputPanel id="tubiao4" rendered="#{not empty ctrlCHA0002.vm.qkModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.qkModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title='收费率'>
+                            <p:outputPanel id="tubiao5" rendered="#{not empty ctrlCHA0002.vm.ratioModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.ratioModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
                     <!--</p:outputPanel>-->
                 </p:outputPanel>
 

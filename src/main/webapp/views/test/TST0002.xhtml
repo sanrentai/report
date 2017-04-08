@@ -19,17 +19,17 @@
                                  layout="grid"
                                  styleClass="ui-panelgrid-blank"
                                  columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
-                    <p:outputLabel for="payDate" value="支付日期"/>
+                    <p:outputLabel for="payDate" value="交费截止日期"/>
                     <p:calendar id="payDate" value="#{ctrlTST0002.vm.payDate}" pattern="#{bizConfig.dateFormat}" required="true"
                                 requiredMessage="#{ctrlCHA0001.isRequiredMessage('日期')}"
                                 size="12"
                                 converterMessage="#{ctrlCHA0001.dateUnvalidMessage('日期')}"></p:calendar>
-                    <p:outputLabel for="startDate" value="开始日期"/>
+                    <p:outputLabel for="startDate" value="累计开始日期"/>
                     <p:calendar id="startDate" value="#{ctrlTST0002.vm.startDate}" pattern="#{bizConfig.dateFormat}" required="true"
                                 requiredMessage="#{ctrlCHA0001.isRequiredMessage('日期')}"
                                 size="12"
                                 converterMessage="#{ctrlCHA0001.dateUnvalidMessage('日期')}"></p:calendar>
-                    <p:outputLabel for="endDate" value="结束日期"/>
+                    <p:outputLabel for="endDate" value="累计结束日期"/>
                     <p:calendar id="endDate" value="#{ctrlTST0002.vm.endDate}" pattern="#{bizConfig.dateFormat}" required="true"
                                 requiredMessage="#{ctrlCHA0001.isRequiredMessage('日期')}"
                                 size="12"
@@ -70,51 +70,99 @@
                         </p:columnGroup>
                         <p:column sortBy="#{item.name}" headerText="分公司" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.name}" />
+                            <f:facet name="footer">
+                                <h:outputText value="合计:" styleClass="fr" />
+                            </f:facet>
                         </p:column>
                         <p:column sortBy="#{item.jk_dn_r}" headerText="本年度" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk_dn_r}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.totalJk_dn_r}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                         <p:column sortBy="#{item.jk_fdn_r}" headerText="陈欠/预收" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk_fdn_r}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.totalJk_fdn_r}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                         <p:column sortBy="#{item.thisDayTotal}" headerText="小计" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.thisDayTotal}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.thisDayTotal}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                         <p:column sortBy="#{item.jk_dn_y}" headerText="本年度" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk_dn_y}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.totalJk_dn_y}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                         <p:column sortBy="#{item.jk_fdn_y}" headerText="陈欠/预收" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk_fdn_y}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.totalJk_fdn_y}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                         <p:column sortBy="#{item.thisMonthTotal}" headerText="小计" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.thisMonthTotal}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.thisMonthTotal}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                         <p:column sortBy="#{item.jk_dn_lj}" headerText="本年度" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk_dn_lj}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.totalJk_dn_lj}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                         <p:column sortBy="#{item.jk_fdn_lj}" headerText="陈欠/预收" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk_fdn_lj}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.totalJk_fdn_lj}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                         <p:column sortBy="#{item.thisDayTotal}" headerText="小计" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.total}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.total}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                     </p:dataTable>
                 </p:outputPanel>
