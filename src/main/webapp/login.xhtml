@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <meta http-equiv="refresh" content="#{facesContext.externalContext.sessionMaxInactiveInterval};url=#{request.contextPath}/login.xhtml"/>
+        </f:facet>
+        <title>登录</title>
+        <ui:insert name="head" />
+    </h:head>
+
+    <h:body styleClass="AquaBack">
+
+        <h:form id="frmMain">
+
+            <div class="Wid70 MarAuto">
+                <div class="Wid70 MarAuto WidAutoOnMobile TexAlCenter">
+
+                    <div class="Wid70 MarAuto WidAutoOnMobile">
+                        <div class="EmptyBox30"></div>
+
+                        <div class="EmptyBox10 ShowOnMobile"></div>
+
+                        <div class="EmptyBox100 ShowOnDesktop"></div>
+                        <div class="EmptyBox20 ShowOnMobile"></div>
+
+
+                        <div class="Card ui-fluid ShadowEffect">
+                            <div class="Container100">
+                                <div class="Wid100 FontLatoRegular Navy Fs30">报表系统</div>
+                                <div class="EmptyBox30"></div>
+                                <p:panelGrid layout="grid" columns="1" styleClass="ui-panelgrid-blank">
+<!--                                    <p:selectOneMenu id="gong_si"
+                                                     value="#{ctrlLogin.selectedSysId}"
+                                                     required="true"
+                                                     requiredMessage="#{ctrlLogin.isRequiredMessage('公司')}">
+                                        <p:ajax listener="#{ctrlLogin.changeGongSiEvent}" process="@this" update="username"/>
+                                        <f:selectItem itemLabel="请选择" itemValue=""/>
+                                        <f:selectItems value="#{ctrlLogin.gongSiList}"
+                                                       var="gongsi"
+                                                       itemLabel="#{gongsi.companyName}"
+                                                       itemValue="#{gongsi.sysId}"/>
+                                    </p:selectOneMenu>-->
+<!--                                    <p:outputPanel id="username">
+                                        <p:selectOneMenu id="bu_men" style="width: 50%"
+                                                         value="#{ctrlLogin.selectedBuMenId}"
+                                                         required="true"
+                                                         requiredMessage="#{ctrlLogin.isRequiredMessage('部门')}">
+                                            <p:ajax listener="#{ctrlLogin.changeBuMenEvent}" process="@this" update="username"/>
+                                            <f:selectItem itemLabel="请选择" itemValue=""/>
+                                            <f:selectItems value="#{ctrlLogin.buMenList}"
+                                                           var="bumen"
+                                                           itemLabel="#{bumen.buMenMing}"
+                                                           itemValue="#{bumen.buMenId}"/>
+                                        </p:selectOneMenu>
+                                        <p:selectOneMenu id="login_id" style="width: 50%"
+                                                         value="#{ctrlLogin.loginId}"
+                                                         required="true"
+                                                         requiredMessage="#{ctrlLogin.isRequiredMessage(msg.login_id)}">
+                                            <f:selectItems value="#{ctrlLogin.loginInfoList}"
+                                                           var="user"
+                                                           itemLabel="#{user.yuanGong.nameZ}"
+                                                           itemValue="#{user.loginId}"/>
+                                        </p:selectOneMenu>
+                                    </p:outputPanel>-->
+                                    <!--用户ID-->
+                                    <p:selectOneMenu id="login_id" 
+                                                         value="#{ctrlLogin.loginId}"
+                                                         required="true"
+                                                         requiredMessage="#{ctrlLogin.isRequiredMessage(msg.login_id)}">
+                                        <f:selectItems value="#{ctrlLogin.employeeList}"
+                                                           var="user"
+                                                           itemLabel="#{user.empName}"
+                                                           itemValue="#{user.empId}"/>
+                                        </p:selectOneMenu>
+<!--                                    <p:inputText id="txtLoginId" placeholder="#{msg.login_id}" value="#{ctrlLogin.loginId}"
+                                                 required="true" requiredMessage="#{ctrlLogin.isRequiredMessage(msg.login_id)}" style="padding:15px !important;"/>-->
+                                    <!--密码-->
+                                    <p:password id="txtPassword" placeholder="密码" value="#{ctrlLogin.password}" 
+                                                required="true" requiredMessage="#{ctrlLogin.isRequiredMessage(msg.password)}" style="padding:15px !important;"/>
+                                </p:panelGrid>
+                            </div>
+                            <div class="Container100 TexAlLeft">
+                                <div class="EmptyBox10"></div>
+                            </div>
+                            <div class="EmptyBox10"></div>
+                            <div class="Container100">
+                                <p:panelGrid layout="grid" columns="1" styleClass="ui-panelgrid-blank">
+                                    <p:commandButton id="btnLogin" value="登录" action="#{ctrlLogin.login}" update="@form" styleClass="Fs25 GreenButton"/>
+                                </p:panelGrid>
+                                <p:defaultCommand target="btnLogin" />
+                                <p:focus context="btnLogin"/>
+                            </div>
+                            <div class="EmptyBox10"></div>
+                            <div class="Separator"></div>
+                            <div class="Container100">
+                                <p:messages showSummary="false" showDetail="true" showIcon="true"/>
+                            </div>
+                        </div>
+                        <div class="EmptyBox20"></div>
+                        <div class="Wid100 FontLatoRegular Fs12 TransparentWhite"> <i class="fa fa-copyright DispInlBlock"></i> 沈阳天舜通科技有限公司 <br/>版权所有</div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+        <style>.ui-button-text, .ui-button-text-only .ui-button-text{padding:15px !important; transition:none !important;}</style>
+
+        <h:outputStylesheet name="css/core-layout.css" library="olympos-layout" />
+        <h:outputStylesheet name="css/font-awesome.css" library="olympos-layout" />
+        <h:outputStylesheet name="css/animate.css" library="olympos-layout" />
+        <h:outputStylesheet name="css/olympos-layout.css" library="olympos-layout" />
+        <h:outputStylesheet name="css/olympos-font.css" library="olympos-layout" />
+    </h:body>
+
+</html>

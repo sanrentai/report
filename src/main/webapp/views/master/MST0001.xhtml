@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <p:outputPanel styleClass="Container100 Responsive100">
+            <div class="Card">
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('MST', 'MST0001')}"/>
+                </h1>
+                <div class="SeparatorFull"></div>
+                <p:tabView styleClass="Container100 Responsive100">
+                    <p:tab title="用户信息">
+                        <p:outputPanel id="toolbar" styleClass="Container100 Responsive100 NoIndent toolbar">
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <!--新建按钮-->
+                                    <p:commandButton value="新建" process="@this" actionListener="#{ctrlMST0001.onStartEditing}"
+                                                     resetValues="true"
+                                                     update="pnlInputArea,toolbar" disabled="#{not empty ctrlMST0001.vm.editingEmployee}"/>
+                                    <!--刷新按钮-->
+                                    <p:commandButton value="刷新" process="@this" actionListener="#{ctrlMST0001.onRefreshData}" 
+                                                     resetValues="true" oncomplete="PF('wvEmployeeList').clearFilters();"
+                                                     update="pngDetails"/>
+                                </f:facet>
+                            </p:toolbar>
+                        </p:outputPanel>
+                        <p:outputPanel id="pnlInputArea" styleClass="Container100 Responsive100 NoIndent pnlInputArea">
+                            <p:outputPanel styleClass="Container100 Responsive100 ui-fluid" rendered="#{not empty ctrlMST0001.vm.editingEmployee}">
+                                <!--员工编号-->
+                                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-4 ht-f-50" columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                                    <p:outputLabel for="txtDiDian" value="员工编号"/>
+                                    <p:inputText id="txtDiDian" value="#{ctrlMST0001.vm.editingEmployee.empId}" 
+                                                 required="true" requiredMessage="#{ctrlMST0001.isRequiredMessage('员工编号')}"
+                                                 maxlength="400" />
+                                </p:panelGrid>
+                                <!--员工姓名-->
+                                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-4 ht-f-50" columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                                    <p:outputLabel for="empName" value="员工姓名"/>
+                                    <p:inputText id="empName" value="#{ctrlMST0001.vm.editingEmployee.empName}" 
+                                                 required="true" requiredMessage="#{ctrlMST0001.isRequiredMessage('员工姓名')}"
+                                                 maxlength="400" />
+                                </p:panelGrid>
+                                <!--密码-->
+                                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-4 ht-f-50" columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                                    <p:outputLabel for="empLoginpw" value="密码"/>
+                                    <p:inputText id="empLoginpw" value="#{ctrlMST0001.vm.editingEmployee.empLoginpw}" 
+                                                 required="true" requiredMessage="#{ctrlMST0001.isRequiredMessage('密码')}"
+                                                 maxlength="400" />
+                                </p:panelGrid>
+
+                                <p:panelGrid columns="5" layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:commandButton value="保存" process="pnlInputArea"
+                                                     oncomplete="showErrorMsg();"
+                                                     update="pnlInputArea, pngDetails, toolbar, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"
+                                                     actionListener="#{ctrlMST0001.onSaveEmployee}"/>
+                                    <p:commandButton value="取消" process="@this" 
+                                                     update="pnlInputArea, toolbar" actionListener="#{ctrlMST0001.onCancelEditing}"
+                                                     styleClass="RedButton"/>
+                                </p:panelGrid>
+
+
+                            </p:outputPanel>
+
+                            <p:outputPanel id="pngDetails" styleClass="Container100 Responsive100 pngDetails">
+                                <p:dataTable value="#{ctrlMST0001.vm.employeeList}" var="item" cellSeparator="5"
+                                             widgetVar="wvEmployeeList"
+                                             rows="10"
+                                             filterDelay="500"
+                                             style="word-break: keep-all!important"
+                                             paginator="true"
+                                             paginatorAlwaysVisible="false"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                             emptyMessage="没有数据">
+                                    <f:facet name="header">
+                                        <h:outputText value="用户一览"/>
+                                    </f:facet>
+                                    <p:columnGroup type="header">
+                                        <p:row>
+                                            <p:column headerText="编辑" styleClass="wd-p-5"/>
+                                            <p:column headerText="禁用" styleClass="wd-p-5"/>
+                                            <p:column headerText="员工编号" styleClass="tct wd-p-20"/>
+                                            <p:column headerText="员工姓名" styleClass="tct wd-p-20"/>
+                                            <p:column headerText="重置密码123456" styleClass="tct wd-p-5"/>
+                                        </p:row>
+                                    </p:columnGroup>
+                                    <p:column styleClass="tct">
+                                        <p:commandLink actionListener="#{ctrlMST0001.onEditEmployee(item)}"
+                                                       process="@this" update="@(.pnlInputArea), @(.toolbar)">
+                                            <i class="fa fa-pencil Fs18 Blue"></i>
+                                        </p:commandLink>
+                                    </p:column>
+                                    <p:column styleClass="tct">
+                                        <p:commandLink actionListener="#{ctrlMST0001.onDeleteEmployee(item)}"
+                                                       process="@this" 
+                                                       update="@(.pnlInputArea), @(.toolbar), @(.pngDetails), frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"
+                                                       oncomplete="showErrorMsg();">
+                                            <i class="fa fa-trash Fs18 Red"></i>
+                                            <p:confirm header="确认" message="确定要删除吗?" icon="ui-icon-alert" />
+                                        </p:commandLink>
+                                    </p:column>
+                                    <!--员工编号-->
+                                    <p:column styleClass="tct">
+                                        <h:outputText value="#{item.empId}"/>
+                                    </p:column>
+                                    <!--员工姓名-->
+                                    <p:column styleClass="tct">
+                                        <h:outputText value="#{item.empName}"/>
+                                    </p:column>
+                                    <!--重置密码-->
+                                    <p:column styleClass="tct">
+                                        <p:commandLink actionListener="#{ctrlMST0001.onResetPW(item)}"
+                                                       process="@this" 
+                                                       update="@(.pnlInputArea), @(.toolbar), @(.pngDetails), frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"
+                                                       oncomplete="showErrorMsg();">
+                                            <i class="fa fa-asterisk Fs18 Red"></i>
+                                        </p:commandLink>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:outputPanel>
+                        </p:outputPanel>
+                    </p:tab>
+                    
+                </p:tabView>
+            </div>
+        </p:outputPanel>
+    </p:outputPanel>
+
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="确定" type="button" styleClass="ui-confirmdialog-yes"/>
+        <p:commandButton value="取消" type="button" styleClass="ui-confirmdialog-no"/>
+    </p:confirmDialog>
+</ui:composition>
