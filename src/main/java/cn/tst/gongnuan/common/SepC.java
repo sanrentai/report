@@ -270,26 +270,41 @@ public final class SepC {
          * 依云首付物业费汇总表
          */
         public static final String WYB0001 = "ctrlWYB0001";
-        
+
         /**
-         * 测试项目1
+         * 收费情况统计表
          */
         public static final String TST0001 = "ctrlTST0001";
-        
+
         /**
-         * 测试项目2
+         * 收费统计报表
          */
         public static final String TST0002 = "ctrlTST0002";
-        
+
         /**
-         * 测试项目3
+         * 面积统计表
          */
         public static final String TST0003 = "ctrlTST0003";
-        
+
         /**
-         * 测试项目4
+         * 稽查表
          */
         public static final String TST0004 = "ctrlTST0004";
+
+        /**
+         * 采暖费年度报表
+         */
+        public static final String TST0005 = "ctrlTST0005";
+
+        /**
+         * 各公司年度报停汇总表
+         */
+        public static final String TST0006 = "ctrlTST0006";
+
+        /**
+         * 各公司年度供热费减免费用汇总表
+         */
+        public static final String TST0007 = "ctrlTST0007";
 
         /**
          * 员工管理

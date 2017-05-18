@@ -46,8 +46,8 @@ public class CHA0001Controller extends BusinessBaseController {
         vm = new CHA0001ViewModel();
         bizLogic.loadCHA0001ViewModel(vm);
     }
-    
-    public void chaXun(){
+
+    public void chaXun() {
         bizLogic.chaXun(vm);
         heJi();
         createAreaModel();
@@ -68,9 +68,9 @@ public class CHA0001Controller extends BusinessBaseController {
             totalArea = totalArea.add(item.getArea());
             totalYjk = totalYjk.add(item.getYjk());
             totalJk = totalJk.add(item.getJk());
-            totalOwe=totalOwe.add(item.getOwe());
+            totalOwe = totalOwe.add(item.getOwe());
         }
-        BigDecimal totalSfl=totalJk.multiply(new BigDecimal("100")).divide(totalYjk,2,BigDecimal.ROUND_HALF_UP);
+        BigDecimal totalSfl = totalJk.multiply(new BigDecimal("100")).divide(totalYjk, 2, BigDecimal.ROUND_HALF_UP);
 //        LOG.info(totalSfl);
         vm.setTotalArea(totalArea);
         vm.setTotalYjk(totalYjk);
@@ -78,72 +78,75 @@ public class CHA0001Controller extends BusinessBaseController {
         vm.setTotalSfl(totalSfl);
         vm.setTotalOwe(totalOwe);
     }
-    
-    public void createRatioModel() {
-            LineChartModel model = new LineChartModel();
-            model.setTitle("收费率图");
-            model.setLegendPosition("e");
-            model.setShowPointLabels(true);
-            ChartSeries sfl = new ChartSeries();
-            sfl.setLabel("收费率");
 
-            for(SouFeiMingXiDTO item : vm.getShuJuList()) {
-                sfl.set(item.getName(), item.getSfl());
-            }
-            model.getAxes().put(AxisType.X, new CategoryAxis("公司名"));
-            Axis yAxis = model.getAxis(AxisType.Y);
-            yAxis.setLabel("收费率");
-            model.addSeries(sfl);
-            vm.setRatioModel(model);
+    public void createRatioModel() {
+        LineChartModel model = new LineChartModel();
+        model.setTitle("收费率图");
+        model.setLegendPosition("e");
+        model.setShowPointLabels(true);
+        ChartSeries sfl = new ChartSeries();
+        sfl.setLabel("收费率");
+
+        for (SouFeiMingXiDTO item : vm.getShuJuList()) {
+            sfl.set(item.getName(), item.getSfl());
+        }
+        model.getAxes().put(AxisType.X, new CategoryAxis("公司名"));
+        model.getAxis(AxisType.X).setTickAngle(-30);
+        Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setLabel("收费率");
+        model.addSeries(sfl);
+        vm.setRatioModel(model);
     }
-    
+
     public void createMoneyModel() {
         BarChartModel model = new BarChartModel();
         model.setTitle("应收金额/已收金额/尚欠金额");
         model.setLegendPosition("ne");
         Axis xAxis = model.getAxis(AxisType.X);
         xAxis.setLabel("公司名");
+        xAxis.setTickAngle(-30);
         Axis yAxis = model.getAxis(AxisType.Y);
         yAxis.setLabel("应收金额/已收金额/尚欠金额");
-        
+
         ChartSeries ysje = new ChartSeries();
         ysje.setLabel("应收金额");
-        for(SouFeiMingXiDTO item : vm.getShuJuList()) {
+        for (SouFeiMingXiDTO item : vm.getShuJuList()) {
             ysje.set(item.getName(), item.getYjk());
         }
         ChartSeries yisje = new ChartSeries();
         yisje.setLabel("已收金额");
-        for(SouFeiMingXiDTO item : vm.getShuJuList()) {
+        for (SouFeiMingXiDTO item : vm.getShuJuList()) {
             yisje.set(item.getName(), item.getJk());
         }
         ChartSeries sqje = new ChartSeries();
         sqje.setLabel("尚欠金额");
-        for(SouFeiMingXiDTO item : vm.getShuJuList()) {
+        for (SouFeiMingXiDTO item : vm.getShuJuList()) {
             sqje.set(item.getName(), item.getOwe());
         }
-        
+
         model.addSeries(ysje);
         model.addSeries(yisje);
         model.addSeries(sqje);
         vm.setMoneyModel(model);
     }
-    
+
     public void createAreaModel() {
         LineChartModel model = new LineChartModel();
-            model.setTitle("面积图");
-            model.setLegendPosition("e");
-            model.setShowPointLabels(true);
-            ChartSeries mj = new ChartSeries();
-            mj.setLabel("面积");
+        model.setTitle("面积图");
+        model.setLegendPosition("e");
+        model.setShowPointLabels(true);
+        ChartSeries mj = new ChartSeries();
+        mj.setLabel("面积");
 
-            for(SouFeiMingXiDTO item : vm.getShuJuList()) {
-                mj.set(item.getName(), item.getArea());
-            }
-            model.getAxes().put(AxisType.X, new CategoryAxis("公司名"));
-            Axis yAxis = model.getAxis(AxisType.Y);
-            yAxis.setLabel("面积");
-            model.addSeries(mj);
-            vm.setAreaModel(model);
+        for (SouFeiMingXiDTO item : vm.getShuJuList()) {
+            mj.set(item.getName(), item.getArea());
+        }
+        model.getAxes().put(AxisType.X, new CategoryAxis("公司名"));
+        model.getAxis(AxisType.X).setTickAngle(-30);
+        Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setLabel("面积");
+        model.addSeries(mj);
+        vm.setAreaModel(model);
     }
 
     //*****************************************************************

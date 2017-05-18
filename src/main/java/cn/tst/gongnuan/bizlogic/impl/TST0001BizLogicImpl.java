@@ -66,6 +66,7 @@ public class TST0001BizLogicImpl extends BaseBizLogic implements TST0001BizLogic
         vm.setYearnumList(yearnumList);
         
         TConfig c = configDao.findAll().get(0);
+        LOG.info(c.getYearnum());
         vm.setYearnum(c.getYearnum());
     }
 

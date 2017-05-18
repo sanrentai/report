@@ -151,17 +151,17 @@
                     <p:tabView rendered="#{not empty ctrlCHA0001.vm.shuJuList}">
                         <p:tab title="面积">
                             <p:outputPanel id="tubiao">
-                                <p:chart type="line" model="#{ctrlCHA0001.vm.areaModel}" style="height:300px"/>
+                                <p:chart type="line" model="#{ctrlCHA0001.vm.areaModel}" style="height:500px"/>
                             </p:outputPanel>
                         </p:tab>
                         <p:tab title="应收金额/已收金额/尚欠金额">
                             <p:outputPanel id="tubiao2">
-                                <p:chart type="bar" model="#{ctrlCHA0001.vm.moneyModel}" style="height:300px"/>
+                                <p:chart type="bar" model="#{ctrlCHA0001.vm.moneyModel}" style="height:500px"/>
                             </p:outputPanel>
                         </p:tab>
                         <p:tab title="收费率">
                             <p:outputPanel id="tubiao3">
-                                <p:chart type="line" model="#{ctrlCHA0001.vm.ratioModel}" style="height:300px"/>
+                                <p:chart type="line" model="#{ctrlCHA0001.vm.ratioModel}" style="height:500px"/>
                             </p:outputPanel>
                         </p:tab>
                     </p:tabView>

@@ -1,0 +1,243 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <div class="Container100 Responsive100">
+            <div class="Card ui-fluid">
+                <!--标题-->
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('TST', 'TST0005')}"/>
+                    <!--<h:outputText value="测试 > 收费情况统计表(TST0005)" />-->
+                </h1>
+                <div class="SeparatorFull"></div>
+                <p:panelGrid columns="8"
+                             id="canShu"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank"
+                             columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
+                    <p:outputLabel for="yearnum" value="年度"/>
+                    <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" 
+                                     value="#{ctrlTST0005.vm.yearnum}">
+                        <f:selectItems value="#{ctrlTST0005.vm.yearnumList}"  var="itemy" 
+                                       itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlTST0005.chaXun()}" 
+                                     oncomplete="showErrorMsg();"
+                                     update="sfmx, canShu, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                </p:panelGrid>
+                <p:outputPanel id="sfmx">
+                    <p:dataTable value="#{ctrlTST0005.vm.shuJuList}"
+                                 widgetVar="sfmxTable"
+                                 var="item"
+                                 style="word-break: keep-all!important"
+                                 sortBy="#{item.no}"
+                                 id="sfmx_table"
+                                 rendered="#{not empty ctrlTST0005.vm.shuJuList}"
+                                 emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                 styleClass="tct">
+                        <f:facet name="header">
+                            <h:outputText value="采暖费年度报表"  styleClass="Fs20"/>
+                            <h:commandLink  styleClass="fr">
+                                <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
+                                <p:dataExporter type="xls" target="sfmx_table" fileName="baobiao" />
+                            </h:commandLink>
+                        </f:facet>
+                        <p:column sortBy="#{item.name}" headerText="公司名" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.name}" />
+                            <f:facet name="footer">
+                                <h:outputText value="合计:" styleClass="fr" />
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.roomtype}" headerText="房屋类别" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.roomtype}" />
+                        </p:column>
+                        <p:column headerText="总面积" sortBy="#{item.area}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.area}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalArea}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="供热面积" sortBy="#{item.area_gn}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.area_gn}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalArea_gn}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="停供面积" sortBy="#{item.area_tg}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.area_tg}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalArea_tg}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="应交款合计" sortBy="#{item.yjk}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.yjk}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalYjk}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="应交款供热" sortBy="#{item.yjk_gn}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.yjk_gn}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalYjk_gn}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="应交款停供" sortBy="#{item.yjk_tg}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.yjk_tg}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalYjk_tg}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="交款合计" sortBy="#{item.jk}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalJk}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="交款供热" sortBy="#{item.jk_gn}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_gn}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalJk_gn}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="交款停供" sortBy="#{item.jk_tg}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_tg}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalJk_tg}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="欠款合计"  sortBy="#{item.owe}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.owe}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalOwe}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="欠款供热"  sortBy="#{item.owe_gn}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.owe_gn}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalOwe_gn}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="欠款停供"  sortBy="#{item.owe_tg}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.owe_tg}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalOwe_tg}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="减免"  sortBy="#{item.gratis1}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.gratis1}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalGratis1}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="滞纳金"  sortBy="#{item.znjmoney}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znjmoney}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalZnjmoney}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="增收费用"  sortBy="#{item.zsfy}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.zsfy}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalZsfy}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="收费率" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct">
+                            <h:outputText  value="#{item.sfl}">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            %
+<!--                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalSfl}">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                                %
+                            </f:facet>-->
+                        </p:column>
+                        <p:column headerText="户数" sortBy="#{item.hs}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.hs}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.totalHs}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:outputPanel>
+            </div>
+        </div>
+    </p:outputPanel>
+</ui:composition>
