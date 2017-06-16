@@ -5,10 +5,17 @@
  */
 package cn.tst.gongnuan.viewmodel;
 
-import cn.tst.gongnuan.service.dto.HYR0005DTO;
+import cn.tst.gongnuan.service.dto.HYR0006DTO;
+import cn.tst.gongnuan.service.dto.XmShouFeiQingKuangBiaoDTO;
 import cn.tst.gongnuan.service.dto.YearNumDTO;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,8 +24,10 @@ import java.util.List;
 public class TST0005ViewModel extends BaseViewModel {
 
     private String yearnum;
+    private Date ksDate;
+    private Date jsDate;
     private List<YearNumDTO> yearnumList;
-    private List<HYR0005DTO> shuJuList;
+    private List<XmShouFeiQingKuangBiaoDTO> shuJuList;
 
     public TST0005ViewModel() {
     }
@@ -39,198 +48,61 @@ public class TST0005ViewModel extends BaseViewModel {
         this.yearnumList = yearnumList;
     }
 
-    public List<HYR0005DTO> getShuJuList() {
+    public List<XmShouFeiQingKuangBiaoDTO> getShuJuList() {
         return shuJuList;
     }
 
-    public void setShuJuList(List<HYR0005DTO> shuJuList) {
+    public void setShuJuList(List<XmShouFeiQingKuangBiaoDTO> shuJuList) {
         this.shuJuList = shuJuList;
     }
-
-    public BigDecimal getTotalArea() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getArea());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalArea_gn() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getArea_gn());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalArea_tg() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getArea_tg());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalYjk() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getYjk());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalYjk_gn() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getYjk_gn());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalYjk_tg() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getYjk_tg());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalJk() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getJk());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalJk_gn() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getJk_gn());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalJk_tg() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getJk_tg());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalOwe() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getOwe());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalOwe_gn() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getOwe_gn());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalOwe_tg() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getOwe_tg());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalGratis1() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getGratis1());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalZnjmoney() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getZnjmoney());
-        }
-        return total;
-    }
-
-    public BigDecimal getTotalZsfy() {
-        BigDecimal total = BigDecimal.ZERO;
-        if (shuJuList == null) {
-            return total;
-        }
-        for (HYR0005DTO item : shuJuList) {
-            total = total.add(item.getZsfy());
-        }
-        return total;
-    }
-
-//    public BigDecimal getTotalSfl() {
-//        BigDecimal total = BigDecimal.ZERO;
-//        if (shuJuList == null) {
-//            return total;
-//        }
-//        for (HYR0005DTO item : shuJuList) {
-//            total = total.add(item.getSfl());
-//        }
-//        return total;
-//    }
 
     public BigDecimal getTotalHs() {
         BigDecimal total = BigDecimal.ZERO;
         if (shuJuList == null) {
             return total;
         }
-        for (HYR0005DTO item : shuJuList) {
+        for (XmShouFeiQingKuangBiaoDTO item : shuJuList) {
             total = total.add(item.getHs());
         }
         return total;
+    }
+
+    public Date getKsDate() {
+        return ksDate;
+    }
+
+    public void setKsDate(Date ksDate) {
+        this.ksDate = ksDate;
+    }
+
+    public Date getJsDate() {
+        return jsDate;
+    }
+
+    public void setJsDate(Date jsDate) {
+        this.jsDate = jsDate;
+    }
+
+    public BigDecimal getTotal(String t)
+            throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
+        BigDecimal total = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return total;
+        }
+
+        for (XmShouFeiQingKuangBiaoDTO item : shuJuList) {
+            Method method = item.getClass().getMethod("get" + t.substring(0, 1).toUpperCase() + t.substring(1));
+            total = total.add((BigDecimal) method.invoke(item));
+//            Field field = item.getClass().getField(t);
+//            String type = field.getType().toString();
+//            if("BigDecimal".equals(type)){
+//                field.setAccessible(true);
+//                total = total.add((BigDecimal)field.get(item));
+//            }
+        }
+
+        return total;
+
     }
 }

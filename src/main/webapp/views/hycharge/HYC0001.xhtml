@@ -10,10 +10,10 @@
             <div class="Card ui-fluid">
                 <!--标题-->
                 <h1 class="CardBigTopic Purple">
-                    <h:outputText value="#{ctrlMaster.createPageTitle('CHA', 'CHA0001')}"/>
+                    <h:outputText value="#{ctrlMaster.createPageTitle('HYC', 'HYC0001')}"/>
                 </h1>
                 <div class="SeparatorFull"></div>
-<!--                <p:tabView id="tabview" activeIndex="#{ctrlCHA0001.vm.tabIndex}">
+<!--                <p:tabView id="tabview" activeIndex="#{ctrlHYC0001.vm.tabIndex}">
                     <p:tab title="各分公司收费明细表" >-->
                 <p:panelGrid columns="8"
                              id="canShu"
@@ -21,40 +21,42 @@
                              styleClass="ui-panelgrid-blank"
                              columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-30,wd-p-30,wd-p-30,wd-p-10">
                     <p:outputLabel for="txtStartDate" value="日期"/>
-                    <p:calendar id="txtStartDate" value="#{ctrlCHA0001.vm.payDate}"
+                    <p:calendar id="txtStartDate" value="#{ctrlHYC0001.vm.payDate}"
                                 placeholder="日期"
                                 mask="true" styleClass="tct"
                                 pattern="#{bizConfig.dateFormat}"
                                 required="true"
-                                requiredMessage="#{ctrlCHA0001.isRequiredMessage('日期')}"
+                                requiredMessage="#{ctrlHYC0001.isRequiredMessage('日期')}"
                                 size="12"
-                                converterMessage="#{ctrlCHA0001.dateUnvalidMessage('日期')}"
+                                converterMessage="#{ctrlHYC0001.dateUnvalidMessage('日期')}"
                                 locale="#{bizConfig.locale}">
                     </p:calendar>
-                    <p:outputLabel for="yearnum" value="年度"/>
-                    <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" 
-                                     value="#{ctrlCHA0001.vm.yearnum}">
-                        <f:selectItems value="#{ctrlCHA0001.vm.yearnumList}"  var="itemy" 
-                                       itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel  value=" "/>
-                    <p:outputLabel  value=" "/>
-                    <p:outputLabel  value=" "/>
-                    <p:commandButton value="查询" process="@this canShu" actionListener="#{ctrlCHA0001.chaXun()}" 
+                    <!--                    <p:outputLabel for="company" value="公司"/>
+                                        <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" value="#{ctrlHYC0002.vm.companyName}">
+                                            <f:selectItem itemLabel="全部" itemValue="全部"/>
+                                            <f:selectItems value="#{ctrlHYC0002.vm.companyList}"  var="items" 
+                                                           itemLabel="#{items.name}" itemValue="#{items.name}"/>
+                                        </p:selectOneMenu>-->
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <p:commandButton value="查询" process="@this canShu" actionListener="#{ctrlHYC0001.chaXun()}" 
                                      resetValues="true"
                                      oncomplete="showErrorMsg();PF('sfmxTable').clearFilters();"
                                      update="sfmx,  frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
                 </p:panelGrid>
 
                 <p:outputPanel id="sfmx">
-                    <p:dataTable value="#{ctrlCHA0001.vm.shuJuList}"
+                    <p:dataTable value="#{ctrlHYC0001.vm.shuJuList}"
                                  widgetVar="sfmxTable"
                                  var="item"
                                  id="sfmx_table"
                                  emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
                                  styleClass="tct">
                         <f:facet name="header">
-                            <h:outputText value="各分公司收费明细表"  styleClass="Fs20"/>
+                            <h:outputText value="各分公司当日收费明细表"  styleClass="Fs20"/>
                             <h:commandLink  styleClass="fr">
                                 <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
                                 <p:dataExporter type="xls" target="sfmx_table" fileName="soufeimingxibiao" />
@@ -87,7 +89,7 @@
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                             </h:outputText>
                             <f:facet name="footer">
-                                <h:outputText value="#{ctrlCHA0001.vm.totalArea}" styleClass="fr">
+                                <h:outputText value="#{ctrlHYC0001.vm.totalArea}" styleClass="fr">
                                     <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                                 </h:outputText>
                             </f:facet>
@@ -100,7 +102,7 @@
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
                             <f:facet name="footer">
-                                <h:outputText value="#{ctrlCHA0001.vm.totalYjk}" styleClass="fr">
+                                <h:outputText value="#{ctrlHYC0001.vm.totalYjk}" styleClass="fr">
                                     <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                                 </h:outputText>
                             </f:facet>
@@ -113,7 +115,7 @@
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
                             <f:facet name="footer">
-                                <h:outputText value="#{ctrlCHA0001.vm.totalJk}" styleClass="fr">
+                                <h:outputText value="#{ctrlHYC0001.vm.totalJk}" styleClass="fr">
                                     <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                                 </h:outputText>
                             </f:facet>
@@ -126,7 +128,7 @@
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
                             <f:facet name="footer">
-                                <h:outputText value="#{ctrlCHA0001.vm.totalOwe}" styleClass="fr">
+                                <h:outputText value="#{ctrlHYC0001.vm.totalOwe}" styleClass="fr">
                                     <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                                 </h:outputText>
                             </f:facet>
@@ -140,26 +142,26 @@
                             </h:outputText>
                             %
                             <f:facet name="footer">
-                                <h:outputText value="#{ctrlCHA0001.vm.totalSfl}%">
+                                <h:outputText value="#{ctrlHYC0001.vm.totalSfl}%">
                                     <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                                 </h:outputText>
                             </f:facet>
                         </p:column>
                     </p:dataTable>
-                    <p:tabView rendered="#{not empty ctrlCHA0001.vm.shuJuList}">
+                    <p:tabView rendered="#{not empty ctrlHYC0001.vm.shuJuList}">
                         <p:tab title="面积">
                             <p:outputPanel id="tubiao">
-                                <p:chart type="line" model="#{ctrlCHA0001.vm.areaModel}" style="height:500px"/>
+                                <p:chart type="line" model="#{ctrlHYC0001.vm.areaModel}" style="height:500px"/>
                             </p:outputPanel>
                         </p:tab>
                         <p:tab title="应收金额/已收金额/尚欠金额">
                             <p:outputPanel id="tubiao2">
-                                <p:chart type="bar" model="#{ctrlCHA0001.vm.moneyModel}" style="height:500px"/>
+                                <p:chart type="bar" model="#{ctrlHYC0001.vm.moneyModel}" style="height:500px"/>
                             </p:outputPanel>
                         </p:tab>
                         <p:tab title="收费率">
                             <p:outputPanel id="tubiao3">
-                                <p:chart type="line" model="#{ctrlCHA0001.vm.ratioModel}" style="height:500px"/>
+                                <p:chart type="line" model="#{ctrlHYC0001.vm.ratioModel}" style="height:500px"/>
                             </p:outputPanel>
                         </p:tab>
                     </p:tabView>

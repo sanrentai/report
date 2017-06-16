@@ -5,17 +5,16 @@
  */
 package cn.tst.gongnuan.bizlogic.impl;
 
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import cn.tst.gongnuan.viewmodel.CHA0001ViewModel;
+import cn.tst.gongnuan.viewmodel.HYR0005ViewModel;
 import org.apache.log4j.Logger;
-import cn.tst.gongnuan.bizlogic.CHA0001BizLogic;
+import cn.tst.gongnuan.bizlogic.HYR0005BizLogic;
 import cn.tst.gongnuan.entity.TConfig;
-import cn.tst.gongnuan.service.dto.SouFeiMingXiDTO;
+import cn.tst.gongnuan.service.dto.HYR0005DTO;
 import cn.tst.gongnuan.service.dto.YearNumDTO;
-import cn.tst.gongnuan.service.impl.SouFeiMingXiFacade;
+import cn.tst.gongnuan.service.impl.HYR0005Facade;
 import cn.tst.gongnuan.service.impl.TConfigFacade;
 import cn.tst.gongnuan.service.impl.YearNumProcFacade;
 
@@ -25,12 +24,12 @@ import cn.tst.gongnuan.service.impl.YearNumProcFacade;
  * @author CaoChun
  */
 @Stateless
-public class CHA0001BizLogicImpl extends BaseBizLogic implements CHA0001BizLogic {
+public class HYR0005BizLogicImpl extends BaseBizLogic implements HYR0005BizLogic {
 
-    private static final Logger LOG = Logger.getLogger(CHA0001BizLogicImpl.class.getName());
+    private static final Logger LOG = Logger.getLogger(HYR0005BizLogicImpl.class.getName());
 
     @EJB
-    private SouFeiMingXiFacade shuJuDao;
+    private HYR0005Facade suJuDao;
 
     @EJB
     private YearNumProcFacade vYearnumDao;
@@ -39,18 +38,20 @@ public class CHA0001BizLogicImpl extends BaseBizLogic implements CHA0001BizLogic
     private TConfigFacade configDao;
 
     @Override
-    public void loadCHA0001ViewModel(CHA0001ViewModel vm) {
-        vm.setPayDate(new Date());
+    public void loadHYR0005ViewModel(HYR0005ViewModel vm) {
         List<YearNumDTO> yearnumList = vYearnumDao.getShuJu();
         vm.setYearnumList(yearnumList);
-
+        ///设置当前年度
         TConfig c = configDao.findAll().get(0);
         vm.setYearnum(c.getYearnum());
     }
 
     @Override
-    public void chaXun(CHA0001ViewModel vm) {
-        List<SouFeiMingXiDTO> shuJuList = shuJuDao.getShuJuByNianDu(vm.getPayDate(),vm.getYearnum());
+    public void chaXun(HYR0005ViewModel vm) {
+        List<HYR0005DTO> shuJuList;
+
+        shuJuList = suJuDao.getShuJuList(vm.getYearnum());
+
         vm.setShuJuList(shuJuList);
     }
 

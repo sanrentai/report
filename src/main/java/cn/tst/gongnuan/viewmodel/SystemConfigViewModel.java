@@ -2,8 +2,6 @@ package cn.tst.gongnuan.viewmodel;
 
 import cn.tst.gongnuan.common.CConst;
 import java.util.Date;
-//import cn.tst.gongnuan.entity.MstLeiBieGuanLi;
-//import cn.tst.gongnuan.entity.MstSystemConfig;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -17,7 +15,7 @@ public class SystemConfigViewModel {
     private boolean silmMenu;
     private String color = "Blue";
     private String title = "报表系统";
-    
+
     private String yearnum;
     private Date starDate;
     private Date endDate;
@@ -104,6 +102,6 @@ public class SystemConfigViewModel {
             this.getMenuType()
         }, CConst.SPACE);
     }
-    
+
     
 }

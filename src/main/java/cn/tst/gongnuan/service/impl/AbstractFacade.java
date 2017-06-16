@@ -3,21 +3,15 @@ package cn.tst.gongnuan.service.impl;
 import java.util.List;
 import javax.inject.Inject;
 import javax.interceptor.ExcludeClassInterceptors;
-import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.FlushModeType;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import cn.tst.gongnuan.common.CConst;
 import cn.tst.gongnuan.common.SepC;
 import cn.tst.gongnuan.common.SepE;
 import cn.tst.gongnuan.controller.login.AccountManager;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * 持久化访问抽象类

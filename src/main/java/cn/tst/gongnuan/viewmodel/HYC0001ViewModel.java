@@ -5,8 +5,7 @@
  */
 package cn.tst.gongnuan.viewmodel;
 
-import cn.tst.gongnuan.service.dto.SouFeiMingXiDTO;
-import cn.tst.gongnuan.service.dto.YearNumDTO;
+import cn.tst.gongnuan.service.dto.HySouFeiMingXiDTO;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,9 +18,9 @@ import org.primefaces.model.chart.BarChartModel;
  *
  * @author CaoChun
  */
-public class CHA0001ViewModel extends BaseViewModel {
+public class HYC0001ViewModel extends BaseViewModel {
 
-    private List<SouFeiMingXiDTO> shuJuList;
+    private List<HySouFeiMingXiDTO> shuJuList;
 
     private Date payDate;
 
@@ -30,14 +29,11 @@ public class CHA0001ViewModel extends BaseViewModel {
     BigDecimal totalJk;
     BigDecimal totalOwe;
     BigDecimal totalSfl;
-
-    private String yearnum;
-    private List<YearNumDTO> yearnumList;
-
+    
     private LineChartModel areaModel;
-
+    
     private BarChartModel moneyModel;
-
+    
     private LineChartModel ratioModel;
 
     public LineChartModel getRatioModel() {
@@ -64,15 +60,15 @@ public class CHA0001ViewModel extends BaseViewModel {
         this.areaModel = areaModel;
     }
 
-    public CHA0001ViewModel() {
+    public HYC0001ViewModel() {
         this.payDate = new Date();
     }
 
-    public List<SouFeiMingXiDTO> getShuJuList() {
+    public List<HySouFeiMingXiDTO> getShuJuList() {
         return shuJuList;
     }
 
-    public void setShuJuList(List<SouFeiMingXiDTO> shuJuList) {
+    public void setShuJuList(List<HySouFeiMingXiDTO> shuJuList) {
         this.shuJuList = shuJuList;
     }
 
@@ -124,19 +120,4 @@ public class CHA0001ViewModel extends BaseViewModel {
         this.totalOwe = totalOwe;
     }
 
-    public String getYearnum() {
-        return yearnum;
-    }
-
-    public void setYearnum(String yearnum) {
-        this.yearnum = yearnum;
-    }
-
-    public List<YearNumDTO> getYearnumList() {
-        return yearnumList;
-    }
-
-    public void setYearnumList(List<YearNumDTO> yearnumList) {
-        this.yearnumList = yearnumList;
-    }
 }

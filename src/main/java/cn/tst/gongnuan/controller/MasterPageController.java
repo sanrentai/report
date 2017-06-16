@@ -2,27 +2,18 @@ package cn.tst.gongnuan.controller;
 
 import cn.tst.gongnuan.bizlogic.MasterPageBizLogic;
 import java.text.MessageFormat;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import cn.tst.gongnuan.common.SepC;
-import cn.tst.gongnuan.entity.GroupMenu;
 import cn.tst.gongnuan.entity.GroupMenuItem;
-import cn.tst.gongnuan.service.impl.GroupMenuFacade;
-import cn.tst.gongnuan.service.impl.GroupMenuItemFacade;
 import cn.tst.gongnuan.viewmodel.MasterPageViewModel;
-import java.util.ArrayList;
 import java.util.HashMap;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
-import org.primefaces.model.menu.MenuElement;
 import org.primefaces.model.menu.MenuModel;
 
 /**
@@ -82,6 +73,12 @@ public class MasterPageController extends BusinessBaseController {
                     break;
                 case "TST":
                     pageFunctionPath = "test/";
+                    break;
+                case "HYR":
+                    pageFunctionPath = "hongyu/";
+                    break;
+                case "HYC":
+                    pageFunctionPath = "hycharge/";
                     break;
                 default:
                     return;

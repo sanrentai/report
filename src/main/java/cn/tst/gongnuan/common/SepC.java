@@ -267,6 +267,19 @@ public final class SepC {
         public static final String CHA0003 = "ctrlCHA0003";
 
         /**
+         * 宏宇各分公司收费明细表
+         */
+        public static final String HYC0001 = "ctrlHYC0001";
+        /**
+         * 宏宇公司年度统计表
+         */
+        public static final String HYC0002 = "ctrlHYC0002";
+        /**
+         * 宏宇楼年度统计表
+         */
+        public static final String HYC0003 = "ctrlHYC0003";
+
+        /**
          * 依云首付物业费汇总表
          */
         public static final String WYB0001 = "ctrlWYB0001";
@@ -311,6 +324,40 @@ public final class SepC {
          */
         public static final String MST0001 = "ctrlMST0001";
 
+        /**
+         * 收费情况统计表
+         */
+        public static final String HYR0001 = "ctrlHYR0001";
+
+        /**
+         * 收费统计报表
+         */
+        public static final String HYR0002 = "ctrlHYR0002";
+
+        /**
+         * 面积统计表
+         */
+        public static final String HYR0003 = "ctrlHYR0003";
+
+        /**
+         * 稽查表
+         */
+        public static final String HYR0004 = "ctrlHYR0004";
+
+        /**
+         * 采暖费年度报表
+         */
+        public static final String HYR0005 = "ctrlHYR0005";
+
+        /**
+         * 各公司年度报停汇总表
+         */
+        public static final String HYR0006 = "ctrlHYR0006";
+
+        /**
+         * 各公司年度供热费减免费用汇总表
+         */
+        public static final String HYR0007 = "ctrlHYR0007";
     }
 
     /**

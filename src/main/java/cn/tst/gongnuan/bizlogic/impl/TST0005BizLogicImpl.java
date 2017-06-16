@@ -12,9 +12,9 @@ import cn.tst.gongnuan.viewmodel.TST0005ViewModel;
 import org.apache.log4j.Logger;
 import cn.tst.gongnuan.bizlogic.TST0005BizLogic;
 import cn.tst.gongnuan.entity.TConfig;
-import cn.tst.gongnuan.service.dto.HYR0005DTO;
+import cn.tst.gongnuan.service.dto.XmShouFeiQingKuangBiaoDTO;
 import cn.tst.gongnuan.service.dto.YearNumDTO;
-import cn.tst.gongnuan.service.impl.HYR0005Facade;
+import cn.tst.gongnuan.service.impl.XmShouFeiQingKuangBiaoFacade;
 import cn.tst.gongnuan.service.impl.TConfigFacade;
 import cn.tst.gongnuan.service.impl.YearNumProcFacade;
 
@@ -29,7 +29,7 @@ public class TST0005BizLogicImpl extends BaseBizLogic implements TST0005BizLogic
     private static final Logger LOG = Logger.getLogger(TST0005BizLogicImpl.class.getName());
 
     @EJB
-    private HYR0005Facade suJuDao;
+    private XmShouFeiQingKuangBiaoFacade suJuDao;
 
     @EJB
     private YearNumProcFacade vYearnumDao;
@@ -48,9 +48,9 @@ public class TST0005BizLogicImpl extends BaseBizLogic implements TST0005BizLogic
 
     @Override
     public void chaXun(TST0005ViewModel vm) {
-        List<HYR0005DTO> shuJuList;
+        List<XmShouFeiQingKuangBiaoDTO> shuJuList;
 
-        shuJuList = suJuDao.getShuJuList(vm.getYearnum());
+        shuJuList = suJuDao.getShuJu(vm.getYearnum(),vm.getKsDate(),vm.getJsDate());
 
         vm.setShuJuList(shuJuList);
     }
