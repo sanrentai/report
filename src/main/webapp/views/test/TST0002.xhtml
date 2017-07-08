@@ -41,6 +41,7 @@
                 <p:outputPanel id="table">
                     <p:dataTable value="#{ctrlTST0002.vm.queryResultList}"
                                  var="item"
+                                 id="sfmx_table"
                                 rendered="#{not empty ctrlTST0002.vm.queryResultList}">
                         <f:facet name="header">
                             <h:outputText value="收费统计报表"  styleClass="Fs20"/>
