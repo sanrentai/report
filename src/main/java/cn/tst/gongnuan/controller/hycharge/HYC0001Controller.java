@@ -60,6 +60,9 @@ public class HYC0001Controller extends BusinessBaseController {
         BigDecimal totalArea = BigDecimal.ZERO;
         BigDecimal totalYjk = BigDecimal.ZERO;
         BigDecimal totalJk = BigDecimal.ZERO;
+        if(vm.getShuJuList()==null||vm.getShuJuList().isEmpty()){
+            return;
+        }
         for (HySouFeiMingXiDTO item : vm.getShuJuList()) {
             totalArea = totalArea.add(item.getArea());
             totalYjk = totalYjk.add(item.getYjk());

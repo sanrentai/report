@@ -19,61 +19,77 @@
 
 <!--                <p:tabView id="tabview" activeIndex="#{ctrlHYR0001.vm.tabIndex}">
     <p:tab title="各分公司收费明细表" >-->
-                <p:panelGrid columns="8"
-                             id="canShu"
-                             layout="grid"
-                             styleClass="ui-panelgrid-blank"
-                             columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
-                    <p:outputLabel for="company" value="公司"/>
-                    <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" 
-                                     value="#{ctrlHYR0001.vm.companyName}" required="true"
-                                     requiredMessage="#{ctrlHYR0001.isRequiredMessage('公司')}">
-                        <f:selectItem itemLabel="全部" itemValue="全部"/>
-                        <p:ajax process="@this, company" update="canShu" listener="#{ctrlHYR0001.changeCompany()}"></p:ajax>
-                        <f:selectItems value="#{ctrlHYR0001.vm.companyList}"  var="items" 
-                                       itemLabel="#{items.name}" itemValue="#{items.name}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel for="huanrezhan" value="换热站"/>
-                    <p:selectOneMenu id="huanrezhan" autoWidth="false" styleClass="wd-f-40" 
-                                     disabled="#{empty ctrlHYR0001.vm.huanReZhanList}"
-                                     value="#{ctrlHYR0001.vm.huanRenZhanId}">
-                        <f:selectItem itemLabel="全部" itemValue="全部"/>
-                        <p:ajax process="@this, huanrezhan" update="canShu" listener="#{ctrlHYR0001.changeHuanReZhan()}"></p:ajax>
-                        <f:selectItems value="#{ctrlHYR0001.vm.huanReZhanList}"  var="item" rendered="#{not empty ctrlHYR0001.vm.huanReZhanList}"
-                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel for="xiaoqu" value="小区"/>
-                    <p:selectOneMenu id="xiaoqu" autoWidth="false" styleClass="wd-f-40"
-                                     disabled="#{empty ctrlHYR0001.vm.xiaoQuList}"
-                                     value="#{ctrlHYR0001.vm.xiaoQuId}">
-                        <f:selectItem itemLabel="全部" itemValue="全部"/>
-                        <p:ajax process="@this, xiaoqu" update="canShu" listener="#{ctrlHYR0001.changeXiaoQu()}"></p:ajax>
-                        <f:selectItems value="#{ctrlHYR0001.vm.xiaoQuList}"  var="item" rendered="#{not empty ctrlHYR0001.vm.xiaoQuList}"
-                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel for="building" value="大楼"/>
-                    <p:selectOneMenu id="building" autoWidth="false" styleClass="wd-f-40" 
-                                     disabled="#{empty ctrlHYR0001.vm.buildingList}"
-                                     value="#{ctrlHYR0001.vm.buildingId}">
-                        <f:selectItem itemLabel="全部" itemValue="全部"/>
-                        <f:selectItems value="#{ctrlHYR0001.vm.buildingList}"  var="itemb" rendered="#{not empty ctrlHYR0001.vm.buildingList}"
-                                       itemLabel="#{itemb.buildingName}" itemValue="#{itemb.buildingId}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel for="yearnum" value="年度"/>
-                    <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" 
-                                     value="#{ctrlHYR0001.vm.yearnum}">
-                        <f:selectItems value="#{ctrlHYR0001.vm.yearnumList}"  var="itemy" 
-                                       itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel  value=" "/>
-                    <p:outputLabel  value=" "/>
-                    <p:outputLabel  value=" "/>
-                    <p:outputLabel  value=" "/>
-                    <p:outputLabel  value=" "/>
-                    <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlHYR0001.chaXun()}" 
-                                     oncomplete="showErrorMsg();"
-                                     update="sfmx, canShu, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
-                </p:panelGrid>
+                <p:outputPanel id="canShu" styleClass="Container100 Responsive100 ui-fluid">
+                    <p:panelGrid columns="2" layout="grid" 
+                                 styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-3 ht-f-50" 
+                                 columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                        <p:outputLabel for="company" value="公司"/>
+                        <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" 
+                                         value="#{ctrlHYR0001.vm.companyName}" required="true"
+                                         requiredMessage="#{ctrlHYR0001.isRequiredMessage('公司')}">
+                            <f:selectItem itemLabel="全部" itemValue="全部"/>
+                            <p:ajax process="@this, company" update="canShu" listener="#{ctrlHYR0001.changeCompany()}"></p:ajax>
+                            <f:selectItems value="#{ctrlHYR0001.vm.companyList}"  var="items" 
+                                           itemLabel="#{items.name}" itemValue="#{items.name}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" layout="grid" 
+                                 styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-3 ht-f-50" 
+                                 columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                        <p:outputLabel for="huanrezhan" value="换热站"/>
+                        <p:selectOneMenu id="huanrezhan" autoWidth="false" styleClass="wd-f-40" 
+                                         disabled="#{empty ctrlHYR0001.vm.huanReZhanList}"
+                                         value="#{ctrlHYR0001.vm.huanRenZhanId}">
+                            <f:selectItem itemLabel="全部" itemValue="全部"/>
+                            <p:ajax process="@this, huanrezhan" update="canShu" listener="#{ctrlHYR0001.changeHuanReZhan()}"></p:ajax>
+                            <f:selectItems value="#{ctrlHYR0001.vm.huanReZhanList}"  var="item" rendered="#{not empty ctrlHYR0001.vm.huanReZhanList}"
+                                           itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" layout="grid" 
+                                 styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-3 ht-f-50" 
+                                 columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                        <p:outputLabel for="xiaoqu" value="小区"/>
+                        <p:selectOneMenu id="xiaoqu" autoWidth="false" styleClass="wd-f-40"
+                                         disabled="#{empty ctrlHYR0001.vm.xiaoQuList}"
+                                         value="#{ctrlHYR0001.vm.xiaoQuId}">
+                            <f:selectItem itemLabel="全部" itemValue="全部"/>
+                            <p:ajax process="@this, xiaoqu" update="canShu" listener="#{ctrlHYR0001.changeXiaoQu()}"></p:ajax>
+                            <f:selectItems value="#{ctrlHYR0001.vm.xiaoQuList}"  var="item" rendered="#{not empty ctrlHYR0001.vm.xiaoQuList}"
+                                           itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" layout="grid" 
+                                 styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-3 ht-f-50" 
+                                 columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                        <p:outputLabel for="building" value="大楼"/>
+                        <p:selectOneMenu id="building" autoWidth="false" styleClass="wd-f-40" 
+                                         disabled="#{empty ctrlHYR0001.vm.buildingList}"
+                                         value="#{ctrlHYR0001.vm.buildingId}">
+                            <f:selectItem itemLabel="全部" itemValue="全部"/>
+                            <f:selectItems value="#{ctrlHYR0001.vm.buildingList}"  var="itemb" rendered="#{not empty ctrlHYR0001.vm.buildingList}"
+                                           itemLabel="#{itemb.buildingName}" itemValue="#{itemb.buildingId}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" layout="grid" 
+                                 styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-3 ht-f-50" 
+                                 columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                        <p:outputLabel for="yearnum" value="年度"/>
+                        <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" 
+                                         value="#{ctrlHYR0001.vm.yearnum}">
+                            <f:selectItems value="#{ctrlHYR0001.vm.yearnumList}"  var="itemy" 
+                                           itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" layout="grid" 
+                                 styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-3 ht-f-50" 
+                                 columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                        <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlHYR0001.chaXun()}" 
+                                         oncomplete="showErrorMsg();"
+                                         update="sfmx, canShu, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                    </p:panelGrid>
+                </p:outputPanel>
+                <div class="SeparatorFull"></div>
                 <p:outputPanel id="sfmx">
                     <p:dataTable value="#{ctrlHYR0001.vm.shuJuList}"
                                  widgetVar="sfmxTable"

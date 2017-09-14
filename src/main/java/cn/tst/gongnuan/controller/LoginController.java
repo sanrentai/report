@@ -1,8 +1,6 @@
 package cn.tst.gongnuan.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -11,13 +9,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import cn.tst.gongnuan.bizlogic.LoginBizLogic;
 import cn.tst.gongnuan.common.BizConfig;
-import cn.tst.gongnuan.common.SecurityUtils;
 import cn.tst.gongnuan.common.SepC;
-import cn.tst.gongnuan.common.SepE;
 import cn.tst.gongnuan.controller.login.GlobalLoginManager;
-import cn.tst.gongnuan.controller.login.LoginInfo;
 import cn.tst.gongnuan.entity.Employee;
 import cn.tst.gongnuan.exception.LoginException;
+import org.apache.log4j.Logger;
 
 /**
  * 登录页面控制器
@@ -95,6 +91,7 @@ public class LoginController extends BusinessBaseController {
         }
 
         // ユーザID,パスワードがミスの場合
+        LOG.info(this.accountManager.isLoginIsSuccess());
         if (!this.accountManager.isLoginIsSuccess()) {
             this.loginErrorMsg = bizConfig.getText("login_id_or_pass_miss");
             this.addMessage(new FacesMessage(FacesMessage.SEVERITY_ERROR, null, this.getLoginResultMessage()));
