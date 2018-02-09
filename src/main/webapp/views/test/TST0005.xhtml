@@ -83,6 +83,7 @@
                                 <p:column headerText="交款" colspan="2" />
                                 <p:column headerText="欠款" colspan="2" />
                                 <p:column headerText="收费率%" rowspan="2" />
+                                <p:column headerText="违约金" rowspan="2" />
                             </p:row>
                             <p:row>
                                 <p:column headerText="居民" />
@@ -240,7 +241,16 @@
                                                             %
                                                         </f:facet>-->
                         </p:column>
-
+                        <p:column headerText="违约金"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znj}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('znj')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
 
                     </p:dataTable>
                 </p:outputPanel>

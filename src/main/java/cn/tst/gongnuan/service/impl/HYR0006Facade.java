@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class HYR0006Facade extends AbstractFacade<Employee> {
+public class HYR0006Facade extends AbsFacade<Employee> {
 
     private static final Logger LOG = Logger.getLogger(Employee.class.getName());
 

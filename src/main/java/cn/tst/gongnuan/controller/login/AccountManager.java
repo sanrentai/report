@@ -20,7 +20,7 @@ public class AccountManager implements Serializable {
 
     /// 登录信息
     Employee employee = new Employee();
-
+    private boolean superMan;
     private boolean loginIsSuccess;
     private String multiLoginMsg;
 
@@ -60,6 +60,14 @@ public class AccountManager implements Serializable {
         em = getEntityManager(persistenceUnitName);
 
         return em;
+    }
+
+    public boolean isSuperMan() {
+        return superMan;
+    }
+
+    public void setSuperMan(boolean superMan) {
+        this.superMan = superMan;
     }
 
 }

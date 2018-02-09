@@ -34,12 +34,13 @@ public class SouFeiNianDuBiaoByBuildingDTO implements Serializable {
     private BigDecimal owe;
     private BigDecimal sfl;
     private String sfy;
+    private BigDecimal znj;
 //    @Temporal(javax.persistence.TemporalType.DATE)
 //    private Date payDate;
     public SouFeiNianDuBiaoByBuildingDTO() {
     }
 
-    public SouFeiNianDuBiaoByBuildingDTO(String id, String companyName, String buildingName, String yearNum, BigDecimal area, BigDecimal yjk, BigDecimal jk, BigDecimal owe, BigDecimal sfl, String sfy) {
+    public SouFeiNianDuBiaoByBuildingDTO(String id, String companyName, String buildingName, String yearNum, BigDecimal area, BigDecimal yjk, BigDecimal jk, BigDecimal owe, BigDecimal sfl, String sfy, BigDecimal znj) {
         this.id = id;
         this.companyName = companyName;
         this.buildingName = buildingName;
@@ -50,6 +51,15 @@ public class SouFeiNianDuBiaoByBuildingDTO implements Serializable {
         this.owe = owe;
         this.sfl = sfl;
         this.sfy = sfy;
+        this.znj = znj;
+    }
+
+    public BigDecimal getZnj() {
+        return znj;
+    }
+
+    public void setZnj(BigDecimal znj) {
+        this.znj = znj;
     }
 
     public BigDecimal getArea() {

@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class SouFeiMingXiFacade extends AbstractFacade<Employee> {
+public class SouFeiMingXiFacade extends AbsFacade<Employee> {
 
     private static final Logger LOG = Logger.getLogger(Employee.class.getName());
 
@@ -39,7 +39,7 @@ public class SouFeiMingXiFacade extends AbstractFacade<Employee> {
 
     public List<SouFeiMingXiDTO> getShuJuByNianDu(Date payDate, String yearnum) {
         StringBuilder sb = new StringBuilder();
-        sb.append("EXEC	 [dbo].[p_sfmxb_n]");
+        sb.append("EXEC	 [dbo].[p_sfmxb_n3]");
         sb.append(" @paydate = ?1 ,");
         sb.append(" @yearnum = ?2 ");
         Query query = getEntityManager().createNativeQuery(sb.toString(), SouFeiMingXiDTO.class);

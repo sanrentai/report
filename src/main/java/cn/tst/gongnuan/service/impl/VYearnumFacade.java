@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class VYearnumFacade extends AbstractFacade<VYearnum> {
+public class VYearnumFacade extends AbsFacade<VYearnum> {
 
     private static final Logger LOG = Logger.getLogger(VYearnum.class.getName());
 

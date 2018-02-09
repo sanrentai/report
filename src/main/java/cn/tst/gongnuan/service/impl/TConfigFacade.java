@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class TConfigFacade extends AbstractFacade<TConfig> {
+public class TConfigFacade extends AbsFacade<TConfig> {
 
     private static final Logger LOG = Logger.getLogger(TConfig.class.getName());
 

@@ -5,14 +5,13 @@
  */
 package cn.tst.gongnuan.viewmodel;
 
-import cn.tst.gongnuan.entity.VBuilding;
 import cn.tst.gongnuan.entity.VCompany;
-import cn.tst.gongnuan.entity.VYearnum;
 import cn.tst.gongnuan.service.dto.BuildingDTO;
 import cn.tst.gongnuan.service.dto.SouFeiNianDuBiaoByBuildingDTO;
 import cn.tst.gongnuan.service.dto.YearNumDTO;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -176,6 +175,23 @@ public class CHA0003ViewModel extends BaseViewModel {
 
     public void setYearnumList(List<YearNumDTO> yearnumList) {
         this.yearnumList = yearnumList;
+    }
+    
+    public BigDecimal getTotal(String t)
+            throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
+        BigDecimal total = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return total;
+        }
+
+        for (SouFeiNianDuBiaoByBuildingDTO item : shuJuList) {
+            Method method = item.getClass().getMethod("get" + t.substring(0, 1).toUpperCase() + t.substring(1));
+            total = total.add((BigDecimal) method.invoke(item));
+        }
+
+        return total;
+
     }
     
 }

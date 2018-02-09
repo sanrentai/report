@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class SouFeiMingXiDTO implements Serializable {
+
     @Id
     private String id;
     //公司名
@@ -29,6 +30,9 @@ public class SouFeiMingXiDTO implements Serializable {
     private BigDecimal jk;
     private BigDecimal owe;
     private BigDecimal sfl;
+    private BigDecimal znj;
+    private BigDecimal gratis1;
+    private BigDecimal gratismoney;
 
     public SouFeiMingXiDTO() {
     }
@@ -50,7 +54,6 @@ public class SouFeiMingXiDTO implements Serializable {
     public void setOwe(BigDecimal owe) {
         this.owe = owe;
     }
-
 
     public String getId() {
         return id;
@@ -99,5 +102,29 @@ public class SouFeiMingXiDTO implements Serializable {
     public void setSfl(BigDecimal sfl) {
         this.sfl = sfl;
     }
-    
+
+    public BigDecimal getZnj() {
+        return znj;
+    }
+
+    public void setZnj(BigDecimal znj) {
+        this.znj = znj;
+    }
+
+    public BigDecimal getGratis1() {
+        return gratis1;
+    }
+
+    public void setGratis1(BigDecimal gratis1) {
+        this.gratis1 = gratis1;
+    }
+
+    public BigDecimal getGratismoney() {
+        return gratismoney;
+    }
+
+    public void setGratismoney(BigDecimal gratismoney) {
+        this.gratismoney = gratismoney;
+    }
+
 }

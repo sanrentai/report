@@ -1,5 +1,6 @@
 package cn.tst.gongnuan.common;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
@@ -127,13 +128,22 @@ public class CStringUtils {
         }
 
         return target.replace(CConst.ASTERISK, CConst.BLANK)
-            .replace(CConst.D_QUOTATION, CConst.BLANK)
-            .replace(CConst.QUOTATION, CConst.BLANK)
-            .replace(CConst.QUS, CConst.BLANK)
-            .replace(CConst.PERCENT, CConst.BLANK)
-            .replace(CConst.GT, CConst.BLANK)
-            .replace(CConst.LT, CConst.BLANK)
-            .replace(CConst.UNDERBAR, CConst.BLANK);
+                .replace(CConst.D_QUOTATION, CConst.BLANK)
+                .replace(CConst.QUOTATION, CConst.BLANK)
+                .replace(CConst.QUS, CConst.BLANK)
+                .replace(CConst.PERCENT, CConst.BLANK)
+                .replace(CConst.GT, CConst.BLANK)
+                .replace(CConst.LT, CConst.BLANK)
+                .replace(CConst.UNDERBAR, CConst.BLANK);
 
+    }
+
+    public static boolean isBigDecimal(String str) {
+        try {
+            BigDecimal bigDecimal = new BigDecimal(str);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -508,7 +508,7 @@ public class SepE {
                     return null;
             }
         }
-        
+
         public String getMessage() {
             switch (this) {
                 case ZHONG_JIAN:
@@ -1589,7 +1589,7 @@ public class SepE {
                     return null;
             }
         }
-        
+
         public String getMessage() {
             switch (this) {
                 case WU:
@@ -1663,7 +1663,7 @@ public class SepE {
                     return null;
             }
         }
-        
+
         public String getMessage() {
             switch (this) {
                 case WU_ZI_SHEN_QING:
@@ -1760,7 +1760,7 @@ public class SepE {
                     return null;
             }
         }
-        
+
         public String getMessage() {
             switch (this) {
                 case ALL_MATCH:
@@ -2000,7 +2000,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 归集项区分
      */
@@ -2055,7 +2055,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 盘库历史状态
      */
@@ -2110,7 +2110,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 物资类型
      */
@@ -2157,7 +2157,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 采购合同状态
      */
@@ -2204,7 +2204,7 @@ public class SepE {
                     return null;
             }
         }
-        
+
         public String getMessage() {
             switch (this) {
                 case SHEN_QING:
@@ -2220,7 +2220,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 车辆类型
      */
@@ -2266,7 +2266,7 @@ public class SepE {
                     return null;
             }
         }
-        
+
         public String getCode() {
             switch (this) {
                 case PU_TONG:
@@ -2278,7 +2278,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 耗油报表库存类型
      */
@@ -2325,7 +2325,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 车辆类型
      */
@@ -2388,7 +2388,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 用车记录状态
      */
@@ -2443,7 +2443,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 油卡类型
      */
@@ -2489,12 +2489,12 @@ public class SepE {
                     return null;
             }
         }
-        
+
         public boolean isZhuKa() {
             return this == ZHU_KA;
         }
     }
-    
+
     /**
      * 车辆所属
      */
@@ -2541,7 +2541,7 @@ public class SepE {
             }
         }
     }
-    
+
     /**
      * 提供服务类型
      */
@@ -2615,6 +2615,109 @@ public class SepE {
                     return "维修";
                 case BAO_YANG:
                     return "保养";
+                default:
+                    return null;
+            }
+        }
+    }
+
+    /**
+     * 报表条件类型
+     */
+    public static enum BaoBiaoTiaoJianLeiXing {
+
+        /**
+         * 数字
+         */
+        SHU_ZI(0),
+        /**
+         * 日期
+         */
+        RI_QI(1),
+        /**
+         * 文本
+         */
+        WEN_BEN(2),
+        /**
+         * 枚举
+         */
+        MEI_JU(3);
+
+        private final int value;
+
+        BaoBiaoTiaoJianLeiXing(int value) {
+            this.value = value;
+        }
+
+        public final int getValue() {
+            return value;
+        }
+
+        public static BaoBiaoTiaoJianLeiXing parse(int v) {
+
+            switch (v) {
+                case 0:
+                    return SHU_ZI;
+                case 1:
+                    return RI_QI;
+                case 2:
+                    return WEN_BEN;
+                case 3:
+                    return MEI_JU;
+                default:
+                    return WEN_BEN;
+            }
+        }
+
+        public String getMessage() {
+            switch (this) {
+                case SHU_ZI:
+                    return "数字";
+                case RI_QI:
+                    return "日期";
+                case WEN_BEN:
+                    return "文本";
+                case MEI_JU:
+                    return "枚举";
+                default:
+                    return "文本";
+            }
+        }
+    }
+
+    public static enum YesOrNo {
+
+        YES(1),
+        NO(0);
+
+        private final int value;
+
+        YesOrNo(int value) {
+            this.value = value;
+        }
+
+        public final int getValue() {
+            return value;
+        }
+
+        public static YesOrNo parse(int v) {
+
+            switch (v) {
+                case 0:
+                    return NO;
+                case 1:
+                    return YES;
+                default:
+                    return null;
+            }
+        }
+
+        public String getMessage() {
+            switch (this) {
+                case YES:
+                    return "是";
+                case NO:
+                    return "否";
                 default:
                     return null;
             }

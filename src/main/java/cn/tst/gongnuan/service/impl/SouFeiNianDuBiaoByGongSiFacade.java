@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class SouFeiNianDuBiaoByGongSiFacade  extends AbstractFacade<Employee> {
+public class SouFeiNianDuBiaoByGongSiFacade  extends AbsFacade<Employee> {
 
     private static final Logger LOG = Logger.getLogger(Employee.class.getName());
 
@@ -27,14 +27,17 @@ public class SouFeiNianDuBiaoByGongSiFacade  extends AbstractFacade<Employee> {
         super(Employee.class);
     }
 
-    public List<SouFeiNianDuBiaoByGongSiDTO> getSouFeiNianDuBiaoByGongSiList(String companyName,Date payDate) {
+    public List<SouFeiNianDuBiaoByGongSiDTO> getSouFeiNianDuBiaoByGongSiList(
+            String companyName,Date payDate,String yearnum) {
         StringBuilder sb = new StringBuilder();
-        sb.append("EXEC	 [dbo].[p_sfndb_c] ");
+        sb.append("EXEC	 [dbo].[p_sfndb_c_n] ");
         sb.append(" @company = ?2 , ");
-        sb.append(" @paydate = ?1 ");
+        sb.append(" @paydate = ?1 , ");
+        sb.append(" @yearnum = ?3 ");
         Query query = getEntityManager().createNativeQuery(sb.toString(), SouFeiNianDuBiaoByGongSiDTO.class);
         query.setParameter(1, payDate, TemporalType.DATE);
         query.setParameter(2, companyName);
+        query.setParameter(3, yearnum);
         List<SouFeiNianDuBiaoByGongSiDTO> result = query.getResultList();
         return result;
     }

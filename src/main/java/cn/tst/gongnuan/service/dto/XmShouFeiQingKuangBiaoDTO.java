@@ -7,10 +7,8 @@ package cn.tst.gongnuan.service.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
 
 /**
  * 收费情况表
@@ -38,11 +36,12 @@ public class XmShouFeiQingKuangBiaoDTO implements Serializable {
     private BigDecimal owe;
     private BigDecimal owe_f;
     private BigDecimal sfl;
+    private BigDecimal znj;
 
     public XmShouFeiQingKuangBiaoDTO() {
     }
 
-    public XmShouFeiQingKuangBiaoDTO(int id, String name, BigDecimal ds, BigDecimal hs, BigDecimal hs_f, BigDecimal area, BigDecimal area_f, String count, String count_f, BigDecimal yjk, BigDecimal yjk_f, BigDecimal jk, BigDecimal jk_f, BigDecimal owe, BigDecimal owe_f, BigDecimal sfl) {
+    public XmShouFeiQingKuangBiaoDTO(int id, String name, BigDecimal ds, BigDecimal hs, BigDecimal hs_f, BigDecimal area, BigDecimal area_f, String count, String count_f, BigDecimal yjk, BigDecimal yjk_f, BigDecimal jk, BigDecimal jk_f, BigDecimal owe, BigDecimal owe_f, BigDecimal sfl, BigDecimal znj) {
         this.id = id;
         this.name = name;
         this.ds = ds;
@@ -59,9 +58,16 @@ public class XmShouFeiQingKuangBiaoDTO implements Serializable {
         this.owe = owe;
         this.owe_f = owe_f;
         this.sfl = sfl;
+        this.znj = znj;
     }
 
+    public BigDecimal getZnj() {
+        return znj;
+    }
 
+    public void setZnj(BigDecimal znj) {
+        this.znj = znj;
+    }
 
     public int getId() {
         return id;

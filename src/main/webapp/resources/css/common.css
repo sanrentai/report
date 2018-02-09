@@ -554,6 +554,11 @@ ul{
     border: solid 1px black!important;
 }
 
+#printDiv .printTable table tfoot tr td {
+    color: black!important;
+    border: solid 1px black!important;
+}
+
 #printDiv .ui-datatable .ui-datatable-header {
     border: solid 1px black!important;
     border-bottom: 0px none !important;

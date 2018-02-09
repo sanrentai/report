@@ -48,7 +48,7 @@ public class FreeMarkerUtils {
         //设置编码
         configuration.setDefaultEncoding("UTF-8");
         //模板文件统一放至 jp.co.pscp.material.materialmg.common.template 包下面
-        FileTemplateLoader ftl1 = new FileTemplateLoader(new File("C:\\tmp\\material\\upload\\word\\shenqingdan"));
+        FileTemplateLoader ftl1 = new FileTemplateLoader(new File("C:\\tmp\\callcenter\\upload\\ftl"));
         ClassTemplateLoader ctl1 = new ClassTemplateLoader(getClass(), "");
         ClassTemplateLoader ctl2 = new ClassTemplateLoader(getClass(), "/template");
         TemplateLoader[] loaders = new TemplateLoader[]{ftl1, ctl1, ctl2};

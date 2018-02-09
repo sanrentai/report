@@ -47,7 +47,9 @@ public class CHA0002BizLogicImpl extends BaseBizLogic implements CHA0002BizLogic
 
     @Override
     public void chaXun(CHA0002ViewModel vm) {
-        List<SouFeiNianDuBiaoByGongSiDTO> souFeiNianDuBiaoByGongSiList = suJuDao.getSouFeiNianDuBiaoByGongSiList(vm.getCompanyName(),vm.getPayDate());
+        List<SouFeiNianDuBiaoByGongSiDTO> souFeiNianDuBiaoByGongSiList 
+                = suJuDao.getSouFeiNianDuBiaoByGongSiList(vm.getCompanyName()
+                        ,vm.getPayDate(),vm.getYearnum());
         vm.setShuJuList(souFeiNianDuBiaoByGongSiList);
     }
 

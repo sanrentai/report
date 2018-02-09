@@ -104,7 +104,7 @@ public class CHA0003Controller extends BusinessBaseController {
         Arrays.sort(yearNumArray);
         List<String> yearNumList = Arrays.asList(yearNumArray);
         Collections.reverse(yearNumList);
-        LOG.info(yearNumList.size());
+//        LOG.info(yearNumList.size());
         vm.setTabNameList(yearNumList);
         
         Map<String, PieChartModel> modelMap = new HashMap();
@@ -114,7 +114,7 @@ public class CHA0003Controller extends BusinessBaseController {
             model.setTitle("收费员图");
             model.setLegendPosition("w");
             for(String sfy: sfyAndJkMap.keySet()) {
-                LOG.info(sfy);
+//                LOG.info(sfy);
                 model.set(sfy, sfyAndJkMap.get(sfy));
             }
             modelMap.put((String)yearNum, model);
@@ -135,9 +135,9 @@ public class CHA0003Controller extends BusinessBaseController {
         bizLogic.chaXun(vm);
         heJi();
         createModel();
-        for(String item: vm.getTabNameList()){
-            LOG.info(item);
-        }
+//        for(String item: vm.getTabNameList()){
+//            LOG.info(item);
+//        }
     }
 
     //*****************************************************************

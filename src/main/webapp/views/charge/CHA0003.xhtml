@@ -171,6 +171,16 @@
                                 %
                             </f:facet>
                         </p:column>
+                        <p:column headerText="违约金"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znj}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlCHA0003.vm.getTotal('znj')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
                         <p:column headerText="收费员" sortBy="#{item.sfy}"  styleClass="wd-p-10 tct">
                             <h:outputText  value="#{item.sfy}" />
                         </p:column>

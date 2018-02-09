@@ -174,21 +174,23 @@ public class BizConfig implements Serializable {
     public SepE.ShenQingLuLiZhuangTai[] getShenQingLuLiZhuangTai() {
         return SepE.ShenQingLuLiZhuangTai.values();
     }
-    
+
     public String getNumberFormatPattern() {
         return SepC.FORMAT_NUMBER;
     }
-    
+
     /**
      * 获取所有流程区分
+     *
      * @return 所有流程区分
      */
     public List<SepE.LiuChengQuFen> getLiuChengQuFen() {
         return Arrays.asList(SepE.LiuChengQuFen.values());
     }
-    
+
     /**
      * 获取可自定义流程区分
+     *
      * @return 可自定义流程区分
      */
     public List<SepE.LiuChengQuFen> getEditableLiuChengQuFen() {
@@ -200,88 +202,107 @@ public class BizConfig implements Serializable {
         list.add(SepE.LiuChengQuFen.YONG_CHE_SHEN_QING);
         return list;
     }
-    
+
     /**
      * 获取所有归集项区分
+     *
      * @return 所有归集项区分
      */
     public List<SepE.GuiJiXiangQuFen> getGuiJiXiangQuFen() {
         return Arrays.asList(SepE.GuiJiXiangQuFen.values());
     }
-    
+
     /**
      * 获取所有流程模式区分
+     *
      * @return 所有流程模式区分
      */
     public SepE.LiuChengMoShiQuFen[] getLiuChengMoShiQuFen() {
         return SepE.LiuChengMoShiQuFen.values();
     }
-    
+
     /**
      * 获取所有流程条件区分
+     *
      * @return 所有流程条件区分
      */
     public SepE.LiuChengTiaoJianQuFen[] getLiuChengTiaoJianQuFen() {
         return SepE.LiuChengTiaoJianQuFen.values();
     }
-    
+
     /**
      * 获取所有的物资类型
+     *
      * @return 物资类型
      */
     public SepE.WuZiLeiXing[] getWuZiLeiXing() {
         return SepE.WuZiLeiXing.values();
     }
-    
+
     /**
      * 获取所有的入库方式
+     *
      * @return 入库方式
      */
     public SepE.RuKuFangShi[] getRuKuFangShi() {
         return SepE.RuKuFangShi.values();
     }
-    
+
     /**
      * 获取所有的出库方式
+     *
      * @return 出库方式
      */
     public SepE.ChuKuFangShi[] getChuKuFangShi() {
         return SepE.ChuKuFangShi.values();
     }
-    
+
     /**
      * 获取所有车辆类型
+     *
      * @return 车辆类型
      */
     public SepE.CheLiangLeiXing[] getCheLiangLeiXing() {
         return SepE.CheLiangLeiXing.values();
     }
-    
+
     public SepE.CheLiangSuoShu[] getCheLiangSuoShu() {
-	return SepE.CheLiangSuoShu.values();
+        return SepE.CheLiangSuoShu.values();
     }
-    
+
     /**
      * 获取所有用车记录状态
+     *
      * @return 所有用车记录状态
      */
     public List<SepE.YongCheJiLuZhuangTai> getYongCheJiLuZhuangTai() {
         return Arrays.asList(SepE.YongCheJiLuZhuangTai.values());
     }
-    
+
     /**
      * 获取所有油卡类型
+     *
      * @return 油卡类型
      */
     public SepE.YouKaLeiXing[] getYouKaLeiXing() {
         return SepE.YouKaLeiXing.values();
     }
-    
+
     /**
      * 获取所有提供服务类型
+     *
      * @return 提供服务类型
      */
     public SepE.TiGongFuWuLeiXing[] getTiGongFuWuLeiXing() {
         return SepE.TiGongFuWuLeiXing.values();
+    }
+
+    /**
+     * 报表条件类型
+     *
+     * @return 报表条件类型
+     */
+    public SepE.BaoBiaoTiaoJianLeiXing[] getBaoBiaoTiaoJianLeiXing() {
+        return SepE.BaoBiaoTiaoJianLeiXing.values();
     }
 }

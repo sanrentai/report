@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class EmployeeFacade extends AbstractFacade<Employee> {
+public class EmployeeFacade extends AbsFacade<Employee> {
 
     private static final Logger LOG = Logger.getLogger(Employee.class.getName());
 
@@ -43,12 +43,19 @@ public class EmployeeFacade extends AbstractFacade<Employee> {
         List<PayDetailDTO> result = query.getResultList();
         return result;
     }
-    
+
     public Employee findLoginInfo(String loginId, String password) {
         // ログインＩＤとパスワードにて、ＤＢから認証情報を取得する。
         Query qe = this.getEntityManager().createNamedQuery("Employee.findByEmpIdAndEmpLoginpw");
         qe.setParameter("empId", loginId);
         qe.setParameter("empLoginpw", password);
+        List<Employee> result = qe.getResultList();
+        return result.isEmpty() ? null : result.get(0);
+    }
+
+    public Employee findByEmpId(String emdId) {
+        Query qe = this.getEntityManager().createNamedQuery("Employee.findByEmpId");
+        qe.setParameter("empId", emdId);
         List<Employee> result = qe.getResultList();
         return result.isEmpty() ? null : result.get(0);
     }

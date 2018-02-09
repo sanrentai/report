@@ -1,0 +1,259 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <p:outputPanel styleClass="Container100 Responsive100">
+            <div class="Card">
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('MST', 'MST0002')}"/>
+                </h1>
+                <div class="SeparatorFull"></div>
+
+                <p:outputPanel id="toolbar" styleClass="Container100 Responsive100 NoIndent toolbar">
+                    <p:toolbar>
+                        <f:facet name="left">
+                            <!--新建按钮-->
+                            <p:commandButton value="新建报表" process="@this" actionListener="#{ctrlBBGL.addBaoBiao()}"
+                                             resetValues="true"
+                                             update="pnlInputArea,toolbar" disabled="#{not empty ctrlBBGL.vm.editingRepBiao}"/>
+                            <!--刷新按钮-->
+                            <p:commandButton value="刷新" process="@this" actionListener="#{ctrlBBGL.onRefreshData}" 
+                                             resetValues="true" oncomplete="PF('wvBaoBiaoGuanLiList').clearFilters();"
+                                             update="pngDetails"/>
+                        </f:facet>
+                    </p:toolbar>
+                </p:outputPanel>
+                <p:outputPanel id="pnlInputArea" styleClass="Container100 Responsive100 NoIndent pnlInputArea">
+                    <p:outputPanel styleClass="Container100 Responsive100 ui-fluid" rendered="#{not empty ctrlBBGL.vm.editingRepBiao}">
+                        <!--表名-->
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-4 ht-f-50" 
+                                     columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                            <p:outputLabel for="biaoMing" value="表名(字母)"/>
+                            <p:inputText id="biaoMing" value="#{ctrlBBGL.vm.editingRepBiao.biaoMing}" 
+                                         required="true" requiredMessage="#{ctrlBBGL.isRequiredMessage('表名(字母)')}"
+                                         maxlength="10" />
+                        </p:panelGrid>
+                        <!--表名-->
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-4 ht-f-50" 
+                                     columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                            <p:outputLabel for="cnBiaoMing" value="表名(汉字)"/>
+                            <p:inputText id="cnBiaoMing" value="#{ctrlBBGL.vm.editingRepBiao.cnBiaoMing}" 
+                                         required="true" requiredMessage="#{ctrlBBGL.isRequiredMessage('表名(汉字)')}"
+                                         maxlength="20" />
+                        </p:panelGrid>
+                        <!--关联权限-->
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-4 ht-f-50" columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                            <p:outputLabel for="quanXianMing" value="关联权限"/>
+                            <p:inputText id="quanXianMing" value="#{ctrlBBGL.vm.editingRepBiao.quanXianMing}" 
+                                         required="true" requiredMessage="#{ctrlBBGL.isRequiredMessage('关联权限')}"
+                                         maxlength="20" />
+                        </p:panelGrid>
+                        <!--sql-->
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-12 ui-lg-12" columnClasses="wd-p-10 NoPadding,wd-p-90 NoPadding">
+                            <p:outputLabel for="BSql" value="SQL"/>
+                            <p:inputTextarea id="BSql" value="#{ctrlBBGL.vm.editingRepBiao.BSql}" />
+                        </p:panelGrid>
+
+                        <p:outputPanel styleClass="Container100 Responsive100 ui-fluid" rendered="#{not empty ctrlBBGL.vm.editingRepBiaoTiaoJian}">
+                            <div class="SeparatorFull"></div>
+                            <!--条件名-->
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-4 ht-f-50" 
+                                         columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                                <p:outputLabel for="cnTitle" value="条件名"/>
+                                <p:inputText id="cnTitle" value="#{ctrlBBGL.vm.editingRepBiaoTiaoJian.cnTitle}" 
+                                             required="true" requiredMessage="#{ctrlBBGL.isRequiredMessage('条件名')}"
+                                             maxlength="10" />
+                            </p:panelGrid>
+                            <!--条件英文-->
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-4 ht-f-50" 
+                                         columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                                <p:outputLabel for="title" value="条件英文"/>
+                                <p:inputText id="title" value="#{ctrlBBGL.vm.editingRepBiaoTiaoJian.title}" 
+                                             required="true" requiredMessage="#{ctrlBBGL.isRequiredMessage('条件英文')}"
+                                             maxlength="20" />
+                            </p:panelGrid>
+                            <!--类型-->
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-4 ht-f-50" columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                                <p:outputLabel for="tjType" value="类型"/>
+                                <p:selectOneMenu id="tjType" value="#{ctrlBBGL.vm.editingRepBiaoTiaoJian.tjType}" 
+                                                 required="true" requiredMessage="#{ctrlBBGL.isRequiredMessage('类型')}">
+                                    <f:selectItems value="#{bizConfig.baoBiaoTiaoJianLeiXing}" var="lx" itemLabel="#{lx.message}" itemValue="#{lx}" />
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+                                                        <!--关联条件-->
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-12 ui-lg-12 ht-f-50" 
+                                         columnClasses="wd-p-10 NoPadding,wd-p-90 NoPadding">
+                                <p:outputLabel for="gltj" value="关联条件"/>
+                                <p:inputText id="gltj" value="#{ctrlBBGL.vm.editingRepBiaoTiaoJian.gl}" 
+                                             maxlength="200" />
+                            </p:panelGrid>
+                            <!--连接语句-->
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-12 ui-lg-12" 
+                                         columnClasses="wd-p-10 NoPadding,wd-p-90 NoPadding">
+                                <p:outputLabel for="ljSql" value="条件语句"/>
+                                <p:inputTextarea id="ljSql" value="#{ctrlBBGL.vm.editingRepBiaoTiaoJian.ljSql}" />
+                            </p:panelGrid>
+                            <!--sql-->
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-g-12 ui-md-12 ui-lg-12" columnClasses="wd-p-10 NoPadding,wd-p-90 NoPadding">
+                                <p:outputLabel for="mjSql" value="SQL"/>
+                                <p:inputTextarea id="mjSql" value="#{ctrlBBGL.vm.editingRepBiaoTiaoJian.mjSql}" />
+                            </p:panelGrid>
+
+                        </p:outputPanel>
+
+                        <p:outputPanel styleClass="Container100 Responsive100 ui-fluid" >
+                            <div class="SeparatorFull"></div>
+                            <p:dataTable value="#{ctrlBBGL.vm.tiaoJianList}" var="item" cellSeparator="5"
+                                         widgetVar="wvTiaoJianList"
+                                         rows="10"
+                                         filterDelay="500"
+                                         style="word-break: keep-all!important"
+                                         paginator="true"
+                                         paginatorAlwaysVisible="false"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         emptyMessage="没有数据">
+                                <f:facet name="header">
+                                    <h:outputText value="条件列表"/>
+                                </f:facet>
+                                <p:columnGroup type="header">
+                                    <p:row>
+                                        <p:column headerText="编辑" styleClass="wd-p-5"/>
+                                        <p:column headerText="删除" styleClass="wd-p-5"/>
+                                        <p:column headerText="条件名" styleClass="tct wd-p-10"/>
+                                        <p:column headerText="条件英文" styleClass="tct wd-p-10"/>
+                                        <p:column headerText="类型" styleClass="tct wd-p-10"/>
+                                    </p:row>
+                                </p:columnGroup>
+                                <!--编辑-->
+                                <p:column styleClass="tct">
+                                    <p:commandLink actionListener="#{ctrlBBGL.onEditTiaoJian(item)}"
+                                                   process="@this" update="@(.pnlInputArea), @(.toolbar)">
+                                        <i class="fa fa-plus Fs18 Green"></i>
+                                    </p:commandLink>
+                                </p:column>
+                                <!--删除-->
+                                <p:column styleClass="tct">
+                                    <p:commandLink actionListener="#{ctrlBBGL.onRemoveTiaoJian(item)}"
+                                                   process="@this" 
+                                                   update="@(.pnlInputArea), @(.toolbar), @(.pngDetails), frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"
+                                                   oncomplete="showErrorMsg();">
+                                        <i class="fa fa-trash Fs18 Red"></i>
+                                        <p:confirm header="确认" message="确定要删除吗?" icon="ui-icon-alert" />
+                                    </p:commandLink>
+                                </p:column>
+                                <!--条件名-->
+                                <p:column styleClass="tct">
+                                    <h:outputText value="#{item.cnTitle}"/>
+                                </p:column>
+                                <!--条件英文-->
+                                <p:column styleClass="tct">
+                                    <h:outputText value="#{item.title}"/>
+                                </p:column>
+                                <!--类型-->
+                                <p:column styleClass="tct">
+                                    <h:outputText value="#{item.tjType.message}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <!--                        <p:panelGrid columns="5" layout="grid" styleClass="ui-panelgrid-blank">
+                                                        <p:commandButton value="保存" process="pnlInputArea"
+                                                                         oncomplete="showErrorMsg();"
+                                                                         update="pnlInputArea, pngDetails, toolbar, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"
+                                                                         actionListener="#{ctrlBBGL.onSave()}"/>
+                                                        <p:commandButton value="取消" process="@this" 
+                                                                         update="pnlInputArea, toolbar" actionListener="#{ctrlBBGL.onCancelEditing}"
+                                                                         styleClass="RedButton"/>
+                                                    </p:panelGrid>-->
+                        </p:outputPanel>
+                        <p:panelGrid columns="5" layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:commandButton value="添加条件" process="pnlInputArea"
+                                             oncomplete="showErrorMsg();"
+                                             update="pnlInputArea, pngDetails, toolbar, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"
+                                             actionListener="#{ctrlBBGL.addTiaoJian()}"/>
+                            <p:commandButton value="保存" process="pnlInputArea"
+                                             oncomplete="showErrorMsg();"
+                                             update="pnlInputArea, pngDetails, toolbar, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"
+                                             actionListener="#{ctrlBBGL.onSave()}"/>
+                            <p:commandButton value="取消" process="@this" 
+                                             update="pnlInputArea, toolbar" actionListener="#{ctrlBBGL.onCancelEditing}"
+                                             styleClass="RedButton"/>
+                        </p:panelGrid>
+                    </p:outputPanel>
+
+
+                    <p:outputPanel id="pngDetails" styleClass="Container100 Responsive100 pngDetails">
+                        <p:dataTable value="#{ctrlBBGL.vm.repBiaoList}" var="item" cellSeparator="5"
+                                     widgetVar="wvBaoBiaoGuanLiList"
+                                     rows="10"
+                                     filterDelay="500"
+                                     style="word-break: keep-all!important"
+                                     paginator="true"
+                                     paginatorAlwaysVisible="false"
+                                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                     emptyMessage="没有数据">
+                            <f:facet name="header">
+                                <h:outputText value="分组列表"/>
+                            </f:facet>
+                            <p:columnGroup type="header">
+                                <p:row>
+                                    <p:column headerText="编辑" styleClass="wd-p-5"/>
+                                    <!--<p:column headerText="添加条件" styleClass="wd-p-5"/>-->
+                                    <p:column headerText="删除" styleClass="wd-p-5"/>
+                                    <p:column headerText="表名" styleClass="tct wd-p-10"/>
+                                    <!--<p:column headerText="字段" styleClass="tct wd-p-15"/>-->
+                                    <p:column headerText="SQL" styleClass="tct wd-p-80"/>
+                                </p:row>
+                            </p:columnGroup>
+                            <!--编辑-->
+                            <p:column styleClass="tct">
+                                <p:commandLink actionListener="#{ctrlBBGL.onEditRepBiao(item)}"
+                                               process="@this" update="@(.pnlInputArea), @(.toolbar)">
+                                    <i class="fa fa-pencil Fs18 Blue"></i>
+                                </p:commandLink>
+                            </p:column>
+                            <!--选择-->
+                            <!--                            <p:column styleClass="tct">
+                                                            <p:commandLink actionListener="#{ctrlBBGL.setSelectedRepBiao(item)}"
+                                                                           process="@this" update="@(.pnlInputArea), @(.toolbar) ,@(.selectedFenZu)">
+                                                                <i class="fa fa-pencil Fs18 Blue"></i>
+                                                            </p:commandLink>
+                                                        </p:column>-->
+                            <!--删除-->
+                            <p:column styleClass="tct">
+                                <p:commandLink actionListener="#{ctrlBBGL.onDeleteRepBiao(item)}"
+                                               process="@this" 
+                                               update="@(.pnlInputArea), @(.toolbar), @(.pngDetails), frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"
+                                               oncomplete="showErrorMsg();">
+                                    <i class="fa fa-trash Fs18 Red"></i>
+                                    <p:confirm header="确认" message="确定要删除吗?" icon="ui-icon-alert" />
+                                </p:commandLink>
+                            </p:column>
+                            <!--表名-->
+                            <p:column styleClass="tct">
+                                <h:outputText value="#{item.cnBiaoMing}"/>
+                            </p:column>
+                            <!--字段-->
+                            <!--                            <p:column styleClass="tct">
+                                                            <h:outputText value="#{item.cnBiaoMing}"/>
+                                                        </p:column>-->
+                            <!--SQL-->
+                            <p:column styleClass="tct">
+                                <h:outputText value="#{item.BSql}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:outputPanel>
+
+                </p:outputPanel>
+
+            </div>
+        </p:outputPanel>
+    </p:outputPanel>
+
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="确定" type="button" styleClass="ui-confirmdialog-yes"/>
+        <p:commandButton value="取消" type="button" styleClass="ui-confirmdialog-no"/>
+    </p:confirmDialog>
+</ui:composition>

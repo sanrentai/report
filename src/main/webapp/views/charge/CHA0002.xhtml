@@ -34,6 +34,12 @@
                                 converterMessage="#{ctrlCHA0002.dateUnvalidMessage('日期')}"
                                 locale="#{bizConfig.locale}">
                     </p:calendar>
+                    <p:outputLabel for="yearnum" value="年度"/>
+                    <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" value="#{ctrlCHA0002.vm.yearnum}">
+                        <f:selectItem itemLabel="全部" itemValue="%"/>
+                        <f:selectItems value="#{ctrlCHA0002.vm.yearnumList}"  var="items" 
+                                       itemLabel="#{items.yearnum}" itemValue="#{items.yearnum}"/>
+                    </p:selectOneMenu>
                     <p:outputLabel for="company" value="公司"/>
                     <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" value="#{ctrlCHA0002.vm.companyName}">
                         <f:selectItem itemLabel="全部" itemValue="全部"/>
@@ -167,6 +173,16 @@
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                             </h:outputText>
                             %
+                        </p:column>
+                        <p:column headerText="违约金"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znj}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlCHA0002.vm.getTotal('znj')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
                         </p:column>
                     </p:dataTable>
 <!--                    <p:outputPanel id="bubiaoqu" rendered="#{not empty ctrlCHA0002.vm.shuJuList}">

@@ -6,8 +6,11 @@
 package cn.tst.gongnuan.viewmodel;
 
 import cn.tst.gongnuan.entity.VCompany;
+import cn.tst.gongnuan.service.dto.SouFeiNianDuBiaoByBuildingDTO;
 import cn.tst.gongnuan.service.dto.SouFeiNianDuBiaoByGongSiDTO;
 import cn.tst.gongnuan.service.dto.YearNumDTO;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -28,16 +31,18 @@ public class CHA0002ViewModel extends BaseViewModel {
 
     private String companyName1;
 
+    private String yearnum;
+
     private List<VCompany> companyList;
 
     private List<YearNumDTO> yearnumList;
 
     private BarChartModel areaModel;
-    
+
     private BarChartModel ysjeModel;
-    
+
     private BarChartModel yisjeModel;
-    
+
     private BarChartModel qkModel;
 
     public BarChartModel getQkModel() {
@@ -63,7 +68,7 @@ public class CHA0002ViewModel extends BaseViewModel {
     public void setYsjeModel(BarChartModel ysjeModel) {
         this.ysjeModel = ysjeModel;
     }
-    
+
     private BarChartModel ratioModel;
 
     public BarChartModel getAreaModel() {
@@ -175,5 +180,30 @@ public class CHA0002ViewModel extends BaseViewModel {
 
     public void setCompanyName1(String companyName1) {
         this.companyName1 = companyName1;
+    }
+
+    public BigDecimal getTotal(String t)
+            throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
+        BigDecimal total = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return total;
+        }
+
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+            Method method = item.getClass().getMethod("get" + t.substring(0, 1).toUpperCase() + t.substring(1));
+            total = total.add((BigDecimal) method.invoke(item));
+        }
+
+        return total;
+
+    }
+
+    public String getYearnum() {
+        return yearnum;
+    }
+
+    public void setYearnum(String yearnum) {
+        this.yearnum = yearnum;
     }
 }

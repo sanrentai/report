@@ -5,8 +5,10 @@
  */
 package cn.tst.gongnuan.service.impl;
 
+import cn.tst.gongnuan.common.SepE;
 import javax.ejb.Stateless;
 import cn.tst.gongnuan.entity.GroupMenu;
+import cn.tst.gongnuan.entity.RepBiao;
 import java.util.List;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
@@ -16,12 +18,18 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class GroupMenuFacade extends AbstractFacade<GroupMenu> {
+public class GroupMenuFacade extends AbsFacade<GroupMenu> {
 
     private static final Logger LOG = Logger.getLogger(GroupMenu.class.getName());
 
     public GroupMenuFacade() {
         super(GroupMenu.class);
+    }
+
+    public GroupMenu findById(String menuId) {
+        Query q = this.getEntityManager().createNamedQuery("GroupMenu.findByMenuId");
+        q.setParameter("menuId", menuId);
+        return (GroupMenu) q.getSingleResult();
     }
 
 }

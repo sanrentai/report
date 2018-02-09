@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class VSfmxbFacade extends AbstractFacade<VSfmxb> {
+public class VSfmxbFacade extends AbsFacade<VSfmxb> {
 
     private static final Logger LOG = Logger.getLogger(VSfmxb.class.getName());
 

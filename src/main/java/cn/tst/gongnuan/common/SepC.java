@@ -358,6 +358,16 @@ public final class SepC {
          * 各公司年度供热费减免费用汇总表
          */
         public static final String HYR0007 = "ctrlHYR0007";
+
+        /**
+         * 报表管理
+         */
+        public static final String BAO_BIAO_GUAN_LI = "ctrlBBGL";
+        
+        /**
+         * 报表
+         */
+        public static final String BAO_BIAO = "ctrlBaoBiao";
     }
 
     /**

@@ -26,7 +26,7 @@ public class LoginBizLogicImpl implements LoginBizLogic {
 
     @EJB
     private EmployeeFacade yuanGongService;      ///员工
-    
+
     @Inject
     protected AccountManager am;
 
@@ -34,7 +34,7 @@ public class LoginBizLogicImpl implements LoginBizLogic {
     public Employee searchEmployee(String loginId, String password) throws LoginException {
         ///获取LoginInfo
         Employee employee = null;
-        employee = yuanGongService.findLoginInfo( loginId, password);
+        employee = yuanGongService.findLoginInfo(loginId, password);
         ///不存在login信息
         if (employee == null) {
             return null;
@@ -46,9 +46,19 @@ public class LoginBizLogicImpl implements LoginBizLogic {
     }
 
     @Override
+    public Employee findSuperMan(String loginId) {
+        Employee employee = null;
+        employee = yuanGongService.findByEmpId(loginId);
+        ///不存在login信息
+        if (employee == null) {
+            return null;
+        }
+        return employee;
+    }
+
+    @Override
     public List<Employee> getEmployeeList() {
         return yuanGongService.findAll();
     }
-
 
 }

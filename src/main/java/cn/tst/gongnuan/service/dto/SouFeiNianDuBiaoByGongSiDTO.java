@@ -7,10 +7,8 @@ package cn.tst.gongnuan.service.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
 
 /**
  * 收费年度表按公司
@@ -30,12 +28,13 @@ public class SouFeiNianDuBiaoByGongSiDTO implements Serializable {
     private BigDecimal jk;
     private BigDecimal owe;
     private BigDecimal sfl;
+    private BigDecimal znj;
 //    @Temporal(javax.persistence.TemporalType.DATE)
 //    private Date payDate;
     public SouFeiNianDuBiaoByGongSiDTO() {
     }
 
-    public SouFeiNianDuBiaoByGongSiDTO(String id, String name, String yearNum, BigDecimal area, BigDecimal yjk, BigDecimal jk, BigDecimal owe, BigDecimal sfl) {
+    public SouFeiNianDuBiaoByGongSiDTO(String id, String name, String yearNum, BigDecimal area, BigDecimal yjk, BigDecimal jk, BigDecimal owe, BigDecimal sfl, BigDecimal znj) {
         this.id = id;
         this.name = name;
         this.yearNum = yearNum;
@@ -44,9 +43,16 @@ public class SouFeiNianDuBiaoByGongSiDTO implements Serializable {
         this.jk = jk;
         this.owe = owe;
         this.sfl = sfl;
+        this.znj = znj;
     }
 
+    public BigDecimal getZnj() {
+        return znj;
+    }
 
+    public void setZnj(BigDecimal znj) {
+        this.znj = znj;
+    }
 
     public String getId() {
         return id;

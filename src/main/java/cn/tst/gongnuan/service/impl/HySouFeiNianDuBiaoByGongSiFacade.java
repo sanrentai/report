@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class HySouFeiNianDuBiaoByGongSiFacade  extends AbstractFacade<Employee> {
+public class HySouFeiNianDuBiaoByGongSiFacade  extends AbsFacade<Employee> {
 
     private static final Logger LOG = Logger.getLogger(Employee.class.getName());
 

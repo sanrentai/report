@@ -15,10 +15,10 @@
                 </h1>
                 <div class="SeparatorFull"></div>
                 <p:panelGrid columns="8"
-                                 id="canShu"
-                                 layout="grid"
-                                 styleClass="ui-panelgrid-blank"
-                                 columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
+                             id="canShu"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank"
+                             columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
                     <p:outputLabel for="payDate" value="交费截止日期"/>
                     <p:calendar id="payDate" value="#{ctrlTST0002.vm.payDate}" pattern="#{bizConfig.dateFormat}" required="true"
                                 requiredMessage="#{ctrlCHA0001.isRequiredMessage('日期')}"
@@ -34,7 +34,8 @@
                                 requiredMessage="#{ctrlCHA0001.isRequiredMessage('日期')}"
                                 size="12"
                                 converterMessage="#{ctrlCHA0001.dateUnvalidMessage('日期')}"></p:calendar>
-                    <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlTST0002.query()}" 
+                    <p:commandButton value="查询" process="canShu" styleClass="fr" 
+                                     actionListener="#{ctrlTST0002.query()}" 
                                      oncomplete="showErrorMsg();"
                                      update="table, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
                 </p:panelGrid>
@@ -42,7 +43,8 @@
                     <p:dataTable value="#{ctrlTST0002.vm.queryResultList}"
                                  var="item"
                                  id="sfmx_table"
-                                rendered="#{not empty ctrlTST0002.vm.queryResultList}">
+                                 style="white-space:nowrap;"
+                                 rendered="#{not empty ctrlTST0002.vm.queryResultList}">
                         <f:facet name="header">
                             <h:outputText value="收费统计报表"  styleClass="Fs20"/>
                             <h:commandLink  styleClass="fr">
@@ -53,20 +55,26 @@
                         <p:columnGroup type="header">
                             <p:row>
                                 <p:column headerText="分公司" rowspan="2" />
-                                <p:column headerText="当日收费金额" colspan="3" />
-                                <p:column headerText="当月收费金额" colspan="3" />
-                                <p:column headerText="累计收费金额" colspan="3" />
+                                <p:column headerText="当日收费金额" colspan="5" />
+                                <p:column headerText="当月收费金额" colspan="5" />
+                                <p:column headerText="累计收费金额" colspan="5" />
                             </p:row>
                             <p:row>
                                 <p:column headerText="本年度" />
                                 <p:column headerText="陈欠/预收" />
                                 <p:column headerText="小计" />
+                                <p:column headerText="微信" />
+                                <p:column headerText="滞纳金" />
                                 <p:column headerText="本年度" />
                                 <p:column headerText="陈欠/预收" />
                                 <p:column headerText="小计" />
+                                <p:column headerText="微信" />
+                                <p:column headerText="滞纳金" />
                                 <p:column headerText="本年度" />
                                 <p:column headerText="陈欠/预收" />
                                 <p:column headerText="小计" />
+                                <p:column headerText="微信" />
+                                <p:column headerText="滞纳金" />
                             </p:row>
                         </p:columnGroup>
                         <p:column sortBy="#{item.name}" headerText="分公司" styleClass="wd-p-10 tct">
@@ -105,6 +113,26 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
+                        <p:column sortBy="#{item.wx_r}" headerText="微信" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.wx_r}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.getTotal('wx_r')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.znj_r}" headerText="违约金" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_fdn_r}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.getTotal('znj_r')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
                         <p:column sortBy="#{item.jk_dn_y}" headerText="本年度" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk_dn_y}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
@@ -135,6 +163,26 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
+                        <p:column sortBy="#{item.wx_y}" headerText="微信" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.wx_y}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.getTotal('wx_y')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.znj_y}" headerText="违约金" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znj_y}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.getTotal('znj_y')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
                         <p:column sortBy="#{item.jk_dn_lj}" headerText="本年度" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk_dn_lj}">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
@@ -161,6 +209,26 @@
                             </h:outputText>
                             <f:facet name="footer">
                                 <h:outputText value="#{ctrlTST0002.vm.total}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.wx_lj}" headerText="微信" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.wx_lj}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.getTotal('wx_lj')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.znj_lj}" headerText="违约金" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znj_lj}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0002.vm.getTotal('znj_lj')}" styleClass="fr">
                                     <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                                 </h:outputText>
                             </f:facet>
