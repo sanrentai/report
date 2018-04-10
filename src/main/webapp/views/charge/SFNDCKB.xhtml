@@ -1,0 +1,267 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <div class="Container100 Responsive100">
+            <div class="Card ui-fluid">
+                <!--标题-->
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('CHA', 'SFNDCKB')}"/>
+                </h1>
+                <div class="SeparatorFull"></div>
+
+<!--                <p:tabView id="tabview" activeIndex="#{ctrlSFNDCKB.vm.tabIndex}">
+    <p:tab title="各分公司收费明细表" >-->
+                <p:panelGrid columns="8"
+                             id="canShu"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank"
+                             columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
+                    <p:outputLabel for="company" value="公司"/>
+                    <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" 
+                                     value="#{ctrlSFNDCKB.vm.companyName}" required="true"
+                                     requiredMessage="#{ctrlSFNDCKB.isRequiredMessage('公司')}">
+                        <f:selectItem itemLabel="全部" itemValue="全部"/>
+                        <p:ajax process="@this, company" update="canShu" listener="#{ctrlSFNDCKB.changeCompany()}"></p:ajax>
+                        <f:selectItems value="#{ctrlSFNDCKB.vm.companyList}"  var="items" 
+                                       itemLabel="#{items.name}" itemValue="#{items.name}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="huanrezhan" value="换热站"/>
+                    <p:selectOneMenu id="huanrezhan" autoWidth="false" styleClass="wd-f-40" 
+                                     disabled="#{empty ctrlSFNDCKB.vm.huanReZhanList}"
+                                     value="#{ctrlSFNDCKB.vm.huanRenZhanId}">
+                        <f:selectItem itemLabel="全部" itemValue="全部"/>
+                        <p:ajax process="@this, huanrezhan" update="canShu" listener="#{ctrlSFNDCKB.changeHuanReZhan()}"></p:ajax>
+                        <f:selectItems value="#{ctrlSFNDCKB.vm.huanReZhanList}"  var="item" rendered="#{not empty ctrlSFNDCKB.vm.huanReZhanList}"
+                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="xiaoqu" value="小区"/>
+                    <p:selectOneMenu id="xiaoqu" autoWidth="false" styleClass="wd-f-40"
+                                     disabled="#{empty ctrlSFNDCKB.vm.xiaoQuList}"
+                                     value="#{ctrlSFNDCKB.vm.xiaoQuId}">
+                        <f:selectItem itemLabel="全部" itemValue="全部"/>
+<!--                        <p:ajax process="@this, xiaoqu" update="canShu" listener="#{ctrlSFNDCKB.changeXiaoQu()}"></p:ajax>-->
+                        <f:selectItems value="#{ctrlSFNDCKB.vm.xiaoQuList}"  var="item" rendered="#{not empty ctrlSFNDCKB.vm.xiaoQuList}"
+                                       itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                    </p:selectOneMenu>
+                    <!--                    <p:outputLabel for="building" value="大楼"/>
+                                        <p:selectOneMenu id="building" autoWidth="false" styleClass="wd-f-40" 
+                                                         disabled="#{empty ctrlSFNDCKB.vm.buildingList}"
+                                                         value="#{ctrlSFNDCKB.vm.buildingId}">
+                                            <f:selectItem itemLabel="全部" itemValue="全部"/>
+                                            <f:selectItems value="#{ctrlSFNDCKB.vm.buildingList}"  var="itemb" rendered="#{not empty ctrlSFNDCKB.vm.buildingList}"
+                                                           itemLabel="#{itemb.buildingName}" itemValue="#{itemb.buildingId}"/>
+                                        </p:selectOneMenu>-->
+                    <p:outputLabel for="yearnum" value="年度"/>
+                    <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" 
+                                     value="#{ctrlSFNDCKB.vm.yearnum}">
+                        <f:selectItem itemLabel="全部" itemValue="%"/>
+                        <f:selectItems value="#{ctrlSFNDCKB.vm.yearnumList}"  var="itemy" 
+                                       itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="txtStartDate" value="日期"/>
+                    <p:calendar id="txtStartDate" value="#{ctrlSFNDCKB.vm.payDate}"
+                                placeholder="日期"
+                                mask="true" styleClass="tct wd-f-40"
+                                pattern="#{bizConfig.dateFormat}"
+                                required="true"
+                                requiredMessage="#{ctrlSFNDCKB.isRequiredMessage('日期')}"
+                                size="12"
+                                converterMessage="#{ctrlSFNDCKB.dateUnvalidMessage('日期')}"
+                                locale="#{bizConfig.locale}">
+                    </p:calendar>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlSFNDCKB.chaXun()}" 
+                                     oncomplete="showErrorMsg();"
+                                     update="sfmx, canShu, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                </p:panelGrid>
+                <p:outputPanel id="sfmx">
+                    <p:dataTable value="#{ctrlSFNDCKB.vm.shuJuList}"
+                                 widgetVar="sfmxTable"
+                                 var="item"
+                                 style="word-break: keep-all!important"
+                                 sortBy="#{item.id}"
+                                 id="sfmx_table"
+                                 rendered="#{not empty ctrlSFNDCKB.vm.shuJuList}"
+                                 emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                 styleClass="tct">
+                        <f:facet name="header">
+                            <h:outputText value="公司年度收费统计表（按类别）"  styleClass="Fs20"/>
+                            <h:commandLink  styleClass="fr">
+                                <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
+                                <p:dataExporter type="xls" target="sfmx_table" fileName="baobiao" />
+                            </h:commandLink>
+                        </f:facet>
+                        <p:columnGroup type="header">
+                            <p:row>
+                                <p:column headerText="序号" />
+                                <p:column headerText="公司" />
+                                <p:column headerText="换热站" rendered="#{ctrlSFNDCKB.vm.companyName ne '全部'}" />
+                                <p:column headerText="小区"  rendered="#{ctrlSFNDCKB.vm.huanRenZhanId ne '全部'}" />
+                                <p:column headerText="楼名"  rendered="#{ctrlSFNDCKB.vm.xiaoQuId ne '全部'}" />
+                                <p:column headerText="年度" />
+                                <p:column headerText="类别" />
+                                <p:column headerText="面积" />
+                                <p:column headerText="当年应交" />
+                                <p:column headerText="交款" />
+                                <p:column headerText="减免" />
+                                <p:column headerText="优惠" />
+                                <p:column headerText="欠款" />
+                                <p:column headerText="收费率" />
+                                <p:column headerText="滞纳金" />
+                            </p:row>
+                        </p:columnGroup>
+                        <!--序号-->
+                        <p:column sortBy="#{item.id}" headerText="序号" styleClass="wd-p-5 tct">
+                            <h:outputText value="#{item.id}" />
+                            <f:facet name="footer">
+                                <h:outputText value="合计:" styleClass="fr" />
+                            </f:facet>
+                        </p:column>
+                        <!--公司-->
+                        <p:column sortBy="#{item.name}" headerText="公司" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.name}" />
+                        </p:column>
+                        <!--换热站-->
+                        <p:column sortBy="#{item.hrz}" 
+                                  headerText="换热站" 
+                                  rendered="#{ctrlSFNDCKB.vm.companyName ne '全部'}"
+                                  styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.hrz}" />
+                            <f:facet name="footer" rendered="#{ctrlSFNDCKB.vm.companyName ne '全部'}">
+                                <h:outputText value="换热站" styleClass="tct" />
+                            </f:facet>
+                        </p:column>
+                        <!--小区--> 
+                        <p:column sortBy="#{item.uptown}" headerText="小区" 
+                                  rendered="#{ctrlSFNDCKB.vm.huanRenZhanId ne '全部'}"
+                                  styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.uptown}" />
+                            <f:facet name="footer" rendered="#{ctrlSFNDCKB.vm.huanRenZhanId ne '全部'}">
+                                <h:outputText value="小区" styleClass="tct" />
+                            </f:facet>
+                        </p:column>
+                        <!--楼名-->
+                        <p:column sortBy="#{item.building}" headerText="楼名" 
+                                  rendered="#{ctrlSFNDCKB.vm.xiaoQuId ne '全部'}"
+                                  styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.building}" />
+                            <f:facet name="footer" rendered="#{ctrlSFNDCKB.vm.xiaoQuId ne '全部'}">
+                                <h:outputText value="楼名" styleClass="tct" />
+                            </f:facet>
+                        </p:column>
+                        <!--年度--> 
+                        <p:column sortBy="#{item.yearnum}" headerText="年度" 
+                                  styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.yearnum}" />
+                        </p:column>
+                        <!--类别-->
+                        <p:column sortBy="#{item.roomtype}" headerText="类别" 
+                                  styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.roomtype}" />
+                        </p:column>
+                        <!--面积-->  
+                        <p:column headerText="面积" sortBy="#{item.area}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.area}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlSFNDCKB.vm.getTotal('area')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <!--当年应交-->
+                        <p:column headerText="当年应交" sortBy="#{item.yjk}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.yjk}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlSFNDCKB.vm.getTotal('yjk')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <!--交款-->
+                        <p:column headerText="交款" sortBy="#{item.jk}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlSFNDCKB.vm.getTotal('jk')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <!--减免-->
+                        <p:column headerText="减免"  sortBy="#{item.jm}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jm}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlSFNDCKB.vm.getTotal('jm')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <!--优惠-->
+                        <p:column headerText="优惠"  sortBy="#{item.yh}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.yh}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlSFNDCKB.vm.getTotal('yh')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <!--欠款--> 
+                        <p:column headerText="欠款"  sortBy="#{item.owe}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.owe}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlSFNDCKB.vm.getTotal('owe')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <!--收费率--> 
+                        <p:column headerText="收费率" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct">
+                            <h:outputText  value="#{item.sfl}">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            %
+                            <!--                            <f:facet name="footer">
+                                                            <h:outputText value="#{ctrlSFNDCKB.vm.totalSfl}">
+                                                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                                            </h:outputText>
+                                                            %
+                                                        </f:facet>-->
+                        </p:column>
+                        <!--滞纳金-->
+                        <p:column headerText="滞纳金"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znj}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlSFNDCKB.vm.getTotal('znj')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:outputPanel>
+            </div>
+        </div>
+    </p:outputPanel>
+</ui:composition>

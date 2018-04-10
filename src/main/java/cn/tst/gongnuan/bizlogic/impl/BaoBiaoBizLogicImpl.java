@@ -16,7 +16,6 @@ import cn.tst.gongnuan.common.FreeMarkerUtils;
 import cn.tst.gongnuan.common.SepC;
 import cn.tst.gongnuan.entity.RepBiao;
 import cn.tst.gongnuan.service.impl.RepBiaoFacade;
-import com.google.common.base.Charsets;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -195,7 +194,7 @@ public class BaoBiaoBizLogicImpl extends BaseBizLogic implements BaoBiaoBizLogic
 //            new DefaultStreamedContent
             LOG.info(fileOnlyName);
 
-            StreamedContent wordfile = new DefaultStreamedContent(stream, "application/vnd.ms-excel", fileOnlyName, Charsets.UTF_8.name());
+            StreamedContent wordfile = new DefaultStreamedContent(stream, "application/vnd.ms-excel", fileOnlyName, "UTF_8");
             vm.setWordfile(wordfile);
         } catch (FileNotFoundException ex) {
             LOG.error(ex.getMessage(), ex);

@@ -120,6 +120,28 @@ public class CHA0002ViewModel extends BaseViewModel {
         return result;
     }
 
+    public BigDecimal getTotalJm() {
+        BigDecimal result = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return result;
+        }
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+            result = result.add(item.getJm());
+        }
+        return result;
+    }
+
+    public BigDecimal getTotalYh() {
+        BigDecimal result = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return result;
+        }
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+            result = result.add(item.getYh());
+        }
+        return result;
+    }
+
     public BigDecimal getTotalOwe() {
         BigDecimal result = BigDecimal.ZERO;
         if (shuJuList == null) {

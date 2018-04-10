@@ -290,6 +290,11 @@ public final class SepC {
         public static final String TST0001 = "ctrlTST0001";
 
         /**
+         * 收费年度查看表
+         */
+        public static final String SHOU_FEI_NIAN_DU_CHA_KAN_BIAO = "ctrlSFNDCKB";
+
+        /**
          * 收费统计报表
          */
         public static final String TST0002 = "ctrlTST0002";
@@ -363,7 +368,7 @@ public final class SepC {
          * 报表管理
          */
         public static final String BAO_BIAO_GUAN_LI = "ctrlBBGL";
-        
+
         /**
          * 报表
          */

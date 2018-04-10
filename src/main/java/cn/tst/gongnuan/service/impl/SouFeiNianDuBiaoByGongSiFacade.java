@@ -30,7 +30,7 @@ public class SouFeiNianDuBiaoByGongSiFacade  extends AbsFacade<Employee> {
     public List<SouFeiNianDuBiaoByGongSiDTO> getSouFeiNianDuBiaoByGongSiList(
             String companyName,Date payDate,String yearnum) {
         StringBuilder sb = new StringBuilder();
-        sb.append("EXEC	 [dbo].[p_sfndb_c_n] ");
+        sb.append("EXEC	 [dbo].[p_sfndb_c_n2] ");
         sb.append(" @company = ?2 , ");
         sb.append(" @paydate = ?1 , ");
         sb.append(" @yearnum = ?3 ");
