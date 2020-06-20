@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 
 /**
- * 收费年度表按楼
+ * 收费年度表按�?
  *
  * @author CaoChun
  */
@@ -21,7 +21,7 @@ import javax.persistence.Temporal;
 public class SouFeiNianDuBiaoByBuildingDTO implements Serializable {
     @Id
     private String id;
-    //公司名
+    //公司�?
     private String companyName;
     
     private String buildingName;

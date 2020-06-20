@@ -124,7 +124,7 @@ public abstract class AbstractFacade<T extends BaseEntity> {
     }
 
     /**
-     * 从db中删除记录（理论删除）
+     * 从db中删除记录（理论删除�?
      *
      * @param entity
      */
@@ -135,7 +135,7 @@ public abstract class AbstractFacade<T extends BaseEntity> {
             entity.setDelFlg(SepE.Flag.YES);
             edit(entity);
 //        } else {
-//            /// 删除flag为true时，将这条记录删除
+//            /// 删除flag为true时，将这条记录删�?
 //            em.remove(em.merge(entity));
         }
 //        em.flush();
@@ -143,7 +143,7 @@ public abstract class AbstractFacade<T extends BaseEntity> {
     }
 
     /**
-     * 批量从db中删除记录（理论删除）
+     * 批量从db中删除记录（理论删除�?
      *
      * @param entityList
      */
@@ -155,13 +155,13 @@ public abstract class AbstractFacade<T extends BaseEntity> {
     }
 
     /**
-     * 从db中删除记录（物理删除）
+     * 从db中删除记录（物理删除�?
      *
      * @param entity
      */
     public void forceRemove(T entity) {
         EntityManager em = getEntityManager();
-        /// 将这条记录删除
+        /// 将这条记录删�?
         if (!em.contains(entity)) {
             entity = em.merge(entity);
         }
@@ -171,7 +171,7 @@ public abstract class AbstractFacade<T extends BaseEntity> {
     }
 
     /**
-     * 批量从db中删除记录（物理删除）
+     * 批量从db中删除记录（物理删除�?
      *
      * @param entityList
      */
@@ -233,8 +233,8 @@ public abstract class AbstractFacade<T extends BaseEntity> {
     }
 
     /**
-     * 自動プライマリキーを生成するエンティティ―が永久化直後にこのメソッドを呼び出し、<br />
-     * DBに自動生成されたプロマリキ―をエンティティ―オブジェクトに設定する。
+     * 自動プライマリキーを生成するエンティティ―が永久化直後にこのメソッドを呼び出し�??<br />
+     * DBに自動生成されたプロマリキ�?�をエンティティ―オブジェクトに設定する�?
      *
      * @param em
      * @param entityObj
@@ -248,7 +248,7 @@ public abstract class AbstractFacade<T extends BaseEntity> {
             return null;
         }
 
-        // オリジナルエンティティ―に初期化する。
+        // オリジナルエンティティ�?�に初期化する�??
         Object resultObj = entityObj;
 
         // エンティティ―クラス名の取得

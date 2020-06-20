@@ -25,7 +25,7 @@ import java.util.List;
 public class TST0001ViewModel extends BaseViewModel {
 
     private Date payDate;
-    //公司名
+    //公司�?
     private String companyName;
     //换热站id
     private String huanRenZhanId;

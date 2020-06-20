@@ -40,7 +40,7 @@ public class MasterPageController extends BusinessBaseController {
     private MasterPageBizLogic bizLogic;
 
     /**
-     * 页面初始化
+     * 页面初始�?
      */
     @PostConstruct
     public void init() {
@@ -51,7 +51,7 @@ public class MasterPageController extends BusinessBaseController {
     }
 
     //***********************************************************************************************
-    //                                  私有方法全部放在类的最下方
+    //                                  私有方法全部放在类的�?下方
     //***********************************************************************************************
     private void createMenu() {
 
@@ -92,15 +92,15 @@ public class MasterPageController extends BusinessBaseController {
                         menuItem.setCommand(commandName);
                         ///不做任何验证
                         menuItem.setImmediate(true);
-                        ///重置所有值
+                        ///重置�?有�??
                         menuItem.setResetValues(true);
-                        ///直提交自己
+                        ///直提交自�?
                         menuItem.setProcess("@this");
                         ///PageLoad 动画效果
                         menuItem.setOnstart("restartPace();");
                         ///更新页面内容
                         menuItem.setUpdate("frmMain:sub_content");
-                        ///添加子菜单
+                        ///添加子菜�?
                         titleItem.addElement(menuItem);
                     }
                     break;
@@ -132,15 +132,15 @@ public class MasterPageController extends BusinessBaseController {
                 menuItem.setCommand(commandName);
                 ///不做任何验证
                 menuItem.setImmediate(true);
-                ///重置所有值
+                ///重置�?有�??
                 menuItem.setResetValues(true);
-                ///直提交自己
+                ///直提交自�?
                 menuItem.setProcess("@this");
                 ///PageLoad 动画效果
                 menuItem.setOnstart("restartPace();");
                 ///更新页面内容
                 menuItem.setUpdate("frmMain:sub_content");
-                ///添加子菜单
+                ///添加子菜�?
                 titleItem.addElement(menuItem);
             });
             titleItem.setLabel(gm.getMenuName());
@@ -165,7 +165,7 @@ public class MasterPageController extends BusinessBaseController {
     public void transfer2Page(String menuItemId, String pageFunctionPath) {
         ///设置嵌入页面的URL
         this.contentURL = "/views/" + pageFunctionPath + "/" + menuItemId + ".xhtml";
-        ///从视图种删除不相关的控制器
+        ///从视图种删除不相关的控制�?
         this.removeUnsedControllerFromViewMap("ctrl" + menuItemId);
     }
 
@@ -176,9 +176,9 @@ public class MasterPageController extends BusinessBaseController {
      */
     private void removeUnsedControllerFromViewMap(String currentControllerId) {
 
-        ///删除不需要加载的对象控制器
+        ///删除不需要加载的对象控制�?
         this.getViewMap().entrySet().removeIf(entry -> {
-            ///要规避的ID 这些控制器不能删除 !!!
+            ///要规避的ID 这些控制器不能删�? !!!
             //                    
             return !SepC.ControllerID.LOGIN.equals(entry.getKey())
                     && !SepC.ControllerID.MASTER.equals(entry.getKey())

@@ -45,7 +45,7 @@ public class EmployeeFacade extends AbsFacade<Employee> {
     }
 
     public Employee findLoginInfo(String loginId, String password) {
-        // ログインＩＤとパスワードにて、ＤＢから認証情報を取得する。
+        // ログインＩＤとパスワードにて、ＤＢから認証情報を取得する�?
         Query qe = this.getEntityManager().createNamedQuery("Employee.findByEmpIdAndEmpLoginpw");
         qe.setParameter("empId", loginId);
         qe.setParameter("empLoginpw", password);

@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class SystemConfigViewModel {
 
-    ///菜单展开状态控制
+    ///菜单展开状�?�控�?
     private boolean silmMenu;
     private String color = "Blue";
     private String title = "报表系统";
@@ -85,7 +85,7 @@ public class SystemConfigViewModel {
     /**
      * 菜单类型
      *
-     * @return 菜单类型字符串
+     * @return 菜单类型字符�?
      */
     private String getMenuType() {
         return this.silmMenu ? "SlimMenu" : "";

@@ -19,7 +19,7 @@ public class SepE {
          */
         INIT,
         /**
-         * 編集中
+         * 編集�?
          */
         EDITING,
         /**
@@ -34,7 +34,7 @@ public class SepE {
     public static enum EditMode {
 
         /**
-         * 未使用
+         * 未使�?
          */
         NONE,
         /**
@@ -56,7 +56,7 @@ public class SepE {
     }
 
     /**
-     * 检索内容类别
+     * �?索内容类�?
      */
     public static enum SearchContentTypeEnum {
 
@@ -65,7 +65,7 @@ public class SepE {
          */
         COUNT,
         /**
-         * 列
+         * �?
          */
         COLUMNS
     }
@@ -73,8 +73,8 @@ public class SepE {
     /**
      * Yes Or No 标志枚举类型
      * <p>
-     * 是:1 否:0,数据库中对应有效无效之类的标志位<br/>
-     * Entity中的标志位均使用此枚举
+     * �?:1 �?:0,数据库中对应有效无效之类的标志位<br/>
+     * Entity中的标志位均使用此枚�?
      * </p>
      */
     public static enum Flag {
@@ -106,7 +106,7 @@ public class SepE {
     }
 
     /**
-     * 物资申请状态
+     * 物资申请状�??
      */
     public static enum TiaoPeiZhuangTai {
         /**
@@ -114,7 +114,7 @@ public class SepE {
          */
         CAO_GAO(0),
         /**
-         * 物资申请中 (物资申请提出后)
+         * 物资申请�? (物资申请提出�?)
          */
         SHENQINGZHONG(1),
         /**
@@ -122,7 +122,7 @@ public class SepE {
          */
         SHENQING_BOHUI(2),
         /**
-         * 物资调配 (仓库分配前)
+         * 物资调配 (仓库分配�?)
          */
         SHENQING_TIAOPEI(3),
         /**
@@ -130,7 +130,7 @@ public class SepE {
          */
         GOUMAI_SHENQING(4),
         /**
-         * 购买申请驳回 (审批未通过，购买申请被驳回)
+         * 购买申请驳回 (审批未�?�过，购买申请被驳回)
          */
         GOUMAI_BOHUI(5),
         /**
@@ -138,11 +138,11 @@ public class SepE {
          */
         JIHUACAIGOU(6),
         /**
-         * 采购方案提出 (采购部门制定采购方案后)
+         * 采购方案提出 (采购部门制定采购方案�?)
          */
         CAIGOUFANGAN_TICHU(7),
         /**
-         * 采购方案驳回 (采购方案审批未通过)
+         * 采购方案驳回 (采购方案审批未�?�过)
          */
         CAIGOUFANGAN_BOHUI(8),
         /**
@@ -150,15 +150,15 @@ public class SepE {
          */
         ZIJINTIAOPEI(9),
         /**
-         * 采购中 (资金调配完毕)
+         * 采购�? (资金调配完毕)
          */
         CAIGOUZHONG(10),
         /**
-         * 入库 (购买完成，物品入库)
+         * 入库 (购买完成，物品入�?)
          */
         RUKU(11),
         /**
-         * 调配结束 (仓库将库存物品分配给申请人)
+         * 调配结束 (仓库将库存物品分配给申请�?)
          */
         TIAOPEIJIESHU(12),
         /**
@@ -166,7 +166,7 @@ public class SepE {
          */
         FEI_ZHI(13),
         /**
-         * 已撤销
+         * 已撤�?
          */
         CHE_XIAO(14);
 
@@ -223,35 +223,35 @@ public class SepE {
                 case CAO_GAO:
                     return "草稿";
                 case SHENQINGZHONG:
-                    return "物资申请中";
+                    return "物资申请�?";
                 case SHENQING_BOHUI:
-                    return "物资申请被驳回";
+                    return "物资申请被驳�?";
                 case CAIGOUFANGAN_BOHUI:
-                    return "采购计划被驳回";
+                    return "采购计划被驳�?";
                 case GOUMAI_BOHUI:
-                    return "购买申请被驳回";
+                    return "购买申请被驳�?";
                 case CAIGOUZHONG:
-                    return "采购中";
+                    return "采购�?";
                 case SHENQING_TIAOPEI:
-                    return "物资调配中";
+                    return "物资调配�?";
                 case GOUMAI_SHENQING:
-                    return "购买申请中";
+                    return "购买申请�?";
                 case JIHUACAIGOU:
-                    return "计划采购中";
+                    return "计划采购�?";
                 case CAIGOUFANGAN_TICHU:
                     return "采购方案提出";
                 case ZIJINTIAOPEI:
-                    return "资金调配中";
+                    return "资金调配�?";
                 case RUKU:
                     return "入库完成";
                 case TIAOPEIJIESHU:
                     return "调配结束";
                 case FEI_ZHI:
-                    return "已废止";
+                    return "已废�?";
                 case CHE_XIAO:
-                    return "已撤销";
+                    return "已撤�?";
                 default:
-                    return "错误状态";
+                    return "错误状�??";
             }
         }
     }
@@ -277,7 +277,7 @@ public class SepE {
          */
         ZUI_ZHONG_NG(4),
         /**
-         * 审批结果：废止
+         * 审批结果：废�?
          */
         FEI_ZHI(5);
 
@@ -316,9 +316,9 @@ public class SepE {
                 case ZHONG_JIAN_NG:
                     return "中间NG";
                 case ZUI_ZHONG_OK:
-                    return "最终OK";
+                    return "�?终OK";
                 case ZUI_ZHONG_NG:
-                    return "最终NG";
+                    return "�?终NG";
                 case FEI_ZHI:
                     return "废止";
                 default:
@@ -328,15 +328,15 @@ public class SepE {
     }
 
     /**
-     * 在职状态
+     * 在职状�??
      */
     public static enum ZaiZhiZhuangTai {
         /**
-         * 在职状态：在职
+         * 在职状�?�：在职
          */
         ZAI_ZHI("1"),
         /**
-         * 在职状态：卸任
+         * 在职状�?�：卸任
          */
         XIE_REN("0");
 
@@ -364,15 +364,15 @@ public class SepE {
     }
 
     /**
-     * 責任行使状态
+     * 責任行使状�??
      */
     public static enum ZeRenZhuangTai {
         /**
-         * 1:行使中
+         * 1:行使�?
          */
         XING_SHI_ZHONG("1"),
         /**
-         * 0:未行使
+         * 0:未行�?
          */
         WEI_XING_SHI("0");
 
@@ -401,9 +401,9 @@ public class SepE {
         public String getMessage() {
             switch (this) {
                 case WEI_XING_SHI:
-                    return "未行使";
+                    return "未行�?";
                 case XING_SHI_ZHONG:
-                    return "行使中";
+                    return "行使�?";
                 default:
                     return "";
             }
@@ -423,7 +423,7 @@ public class SepE {
          */
         LEIBIE("L"),
         /**
-         * 物品和类别标识
+         * 物品和类别标�?
          */
         WUPIN_AND_LEIBIE("J");
 
@@ -453,7 +453,7 @@ public class SepE {
                 case WUPIN:
                     return "物品";
                 case WUPIN_AND_LEIBIE:
-                    return "物品和类别";
+                    return "物品和类�?";
                 default:
                     return CConst.BLANK;
             }
@@ -483,7 +483,7 @@ public class SepE {
          */
         ZHONG_JIAN(0),
         /**
-         * 最终审批
+         * �?终审�?
          */
         ZUI_ZHONG(1);
 
@@ -514,7 +514,7 @@ public class SepE {
                 case ZHONG_JIAN:
                     return "中间审批";
                 case ZUI_ZHONG:
-                    return "最终审批";
+                    return "�?终审�?";
             }
             return null;
         }
@@ -529,7 +529,7 @@ public class SepE {
          */
         Ru_KU("0"),
         /**
-         * 最终审批
+         * �?终审�?
          */
         CHU_KU("1");
 
@@ -568,19 +568,19 @@ public class SepE {
     }
 
     /**
-     * 物资分配明细状态
+     * 物资分配明细状�??
      */
     public static enum WuZiFenPeiZhuangTai {
         /**
-         * 分配，等待库房备货
+         * 分配，等待库房备�?
          */
         FEN_PEI(0),
         /**
-         * 向调度中心发出请求 1：直接指定仓库发货
+         * 向调度中心发出请�? 1：直接指定仓库发�?
          */
         ZHI_JIE_CHU_KU(1),
         /**
-         * 向调度中心发出请求 2：制定仓库调出相应的数量
+         * 向调度中心发出请�? 2：制定仓库调出相应的数量
          */
         DIAO_BO(2),
         /**
@@ -640,11 +640,11 @@ public class SepE {
     }
 
     /**
-     * 购买申请明细状态
+     * 购买申请明细状�??
      */
     public static enum GouMaiShenQingZhuangTai {
         /**
-         * 已申请
+         * 已申�?
          */
         SHEN_QING(0),
         /**
@@ -664,7 +664,7 @@ public class SepE {
          */
         CAI_GOU_BU_YI_SHOU_LI(4),
         /**
-         * 采购中
+         * 采购�?
          */
         CAI_GOU_ZHONG(5),
         /**
@@ -707,7 +707,7 @@ public class SepE {
         public String getMessage() {
             switch (value) {
                 case 0:
-                    return "已申请";
+                    return "已申�?";
                 case 1:
                     return "审批通过";
                 case 2:
@@ -717,7 +717,7 @@ public class SepE {
                 case 4:
                     return "采购部已受理";
                 case 5:
-                    return "采购中";
+                    return "采购�?";
                 case 6:
                     return "废止";
                 default:
@@ -727,11 +727,11 @@ public class SepE {
     }
 
     /**
-     * 调拨申请明细状态
+     * 调拨申请明细状�??
      */
     public static enum DiaoBoShenQingZhuangTai {
         /**
-         * 已申请
+         * 已申�?
          */
         SHEN_QING(0),
         /**
@@ -788,7 +788,7 @@ public class SepE {
         public String getMessage() {
             switch (value) {
                 case 0:
-                    return "已申请";
+                    return "已申�?";
                 case 1:
                     return "申请通过";
                 case 2:
@@ -806,7 +806,7 @@ public class SepE {
     }
 
     /**
-     * 购买计划明细状态
+     * 购买计划明细状�??
      */
     public static enum GouMaiJiHuaZhuangTai {
         /**
@@ -822,7 +822,7 @@ public class SepE {
          */
         SHEN_QING_NG(2),
         /**
-         * 采购中
+         * 采购�?
          */
         CAI_GOU_ZHONG(3),
         /**
@@ -873,13 +873,13 @@ public class SepE {
         public String getMessage() {
             switch (this) {
                 case SHEN_QING:
-                    return "申请中";
+                    return "申请�?";
                 case SHEN_QING_OK:
                     return "申请审批OK";
                 case SHEN_QING_NG:
                     return "申请审批NG";
                 case CAI_GOU_ZHONG:
-                    return "采购中";
+                    return "采购�?";
                 case CAI_GOU_WAN_CHENG:
                     return "采购完成";
                 case RU_KU:
@@ -887,17 +887,17 @@ public class SepE {
                 case FEI_ZHI:
                     return "废止";
                 default:
-                    return "错误状态";
+                    return "错误状�??";
             }
         }
     }
 
     /**
-     * 物资提供计划状态
+     * 物资提供计划状�??
      */
     public static enum WuZiTiGongJiHuaZhuangTai {
         /**
-         * 申请中 (申请提出后)
+         * 申请�? (申请提出�?)
          */
         SHENQING_TICHU(1),
         /**
@@ -905,7 +905,7 @@ public class SepE {
          */
         SHENQING_BOHUI(2),
         /**
-         * 物资调配 (仓库分配前)(审批通过)
+         * 物资调配 (仓库分配�?)(审批通过)
          */
         SHENQING_TONGGUO(3),
         /**
@@ -913,7 +913,7 @@ public class SepE {
          */
         GOUMAI_TICHU(4),
         /**
-         * 购买申请驳回 (审批未通过，购买申请被驳回)
+         * 购买申请驳回 (审批未�?�过，购买申请被驳回)
          */
         GOUMAI_BOHUI(5),
         /**
@@ -921,11 +921,11 @@ public class SepE {
          */
         GOUMAI_TONGGUO(6),
         /**
-         * 采购方案提出 (采购部门制定采购方案后)
+         * 采购方案提出 (采购部门制定采购方案�?)
          */
         CAIGOUFANGAN_TICHU(7),
         /**
-         * 采购方案驳回 (采购方案审批未通过)
+         * 采购方案驳回 (采购方案审批未�?�过)
          */
         CAIGOUFANGAN_BOHUI(8),
         /**
@@ -933,23 +933,23 @@ public class SepE {
          */
         CAIGOUFANGAN_TONGGUO(9),
         /**
-         * 采购中 (资金调配完毕)
+         * 采购�? (资金调配完毕)
          */
         CAIGOUZHONG(10),
         /**
-         * 入库 (购买完成，物品入库)
+         * 入库 (购买完成，物品入�?)
          */
         RUKU(11),
         /**
-         * 调配结束 (仓库将库存物品分配给申请人)
+         * 调配结束 (仓库将库存物品分配给申请�?)
          */
         TIAOPEIJIESHU(12),
         /**
-         * 分配，等待出库
+         * 分配，等待出�?
          */
         FENPEI_DENGDAICHUKU(13),
         /**
-         * 调度中心确定该物资可以分配
+         * 调度中心确定该物资可以分�?
          */
         KEYIFENPEI(14),
         /**
@@ -957,11 +957,11 @@ public class SepE {
          */
         FEI_ZHI(15),
         /**
-         * 已撤销
+         * 已撤�?
          */
         CHE_XIAO(16),
         /**
-         * 已受理
+         * 已受�?
          */
         YI_SHOU_LI(17),
         /**
@@ -1038,25 +1038,25 @@ public class SepE {
         public String getMessage() {
             switch (this) {
                 case SHENQING_TICHU:
-                    return "申请中";
+                    return "申请�?";
                 case SHENQING_BOHUI:
-                    return "申请被驳回";
+                    return "申请被驳�?";
                 case CAIGOUFANGAN_BOHUI:
-                    return "申请被驳回";
+                    return "申请被驳�?";
                 case GOUMAI_BOHUI:
-                    return "申请被驳回";
+                    return "申请被驳�?";
                 case CAIGOUZHONG:
-                    return "采购中";
+                    return "采购�?";
                 case SHENQING_TONGGUO:
-                    return "物资调配中";
+                    return "物资调配�?";
                 case GOUMAI_TICHU:
-                    return "购买申请中";
+                    return "购买申请�?";
                 case GOUMAI_TONGGUO:
-                    return "计划采购中";
+                    return "计划采购�?";
                 case CAIGOUFANGAN_TICHU:
                     return "采购方案提出";
                 case CAIGOUFANGAN_TONGGUO:
-                    return "资金调配中";
+                    return "资金调配�?";
                 case RUKU:
                     return "入库完成";
                 case TIAOPEIJIESHU:
@@ -1066,11 +1066,11 @@ public class SepE {
                 case KEYIFENPEI:
                     return "可以分配";
                 case FEI_ZHI:
-                    return "已废止";
+                    return "已废�?";
                 case CHE_XIAO:
-                    return "已撤销";
+                    return "已撤�?";
                 case YI_SHOU_LI:
-                    return "已受理";
+                    return "已受�?";
                 case DIAO_BO_SHEN_QING:
                     return "调拨申请";
                 case DIAO_BO_BO_HUI:
@@ -1078,13 +1078,13 @@ public class SepE {
                 case SHEN_QING_CHU_KU:
                     return "申请出库";
                 default:
-                    return "错误状态";
+                    return "错误状�??";
             }
         }
     }
 
     /**
-     * 枚举:属性列举类型
+     * 枚举:属�?�列举类�?
      */
     public static enum ShuXingLieJuLeiXing {
         /**
@@ -1096,7 +1096,7 @@ public class SepE {
          */
         LIEJU(SepC.ShuXingLieJuLeiXing.LIEJU),
         /**
-         * 描述性
+         * 描述�?
          */
         MIAOSHU(SepC.ShuXingLieJuLeiXing.MIAOSHU);
 
@@ -1119,7 +1119,7 @@ public class SepE {
                 case SepC.ShuXingLieJuLeiXing.MIAOSHU:
                     return MIAOSHU;
                 default:
-                    throw new Exception("ShuXingLieJuLeiXing: 属性值不正确");
+                    throw new Exception("ShuXingLieJuLeiXing: 属�?��?�不正确");
             }
         }
 
@@ -1130,7 +1130,7 @@ public class SepE {
                 case LIEJU:
                     return "列举";
                 case MIAOSHU:
-                    return "描述性";
+                    return "描述�?";
                 default:
                     return "";
             }
@@ -1156,11 +1156,11 @@ public class SepE {
     }
 
     /**
-     * 入库申请状态
+     * 入库申请状�??
      */
     public static enum RuKuShenQingZhuangTai {
         /**
-         * 申请中
+         * 申请�?
          */
         SHEN_QING(0),
         /**
@@ -1211,19 +1211,19 @@ public class SepE {
                 case RU_KU:
                     return "入库完成";
                 case CHE_XIAO:
-                    return "已撤销";
+                    return "已撤�?";
                 default:
-                    return "错误状态";
+                    return "错误状�??";
             }
         }
     }
 
     /**
-     * 出库申请状态
+     * 出库申请状�??
      */
     public static enum ChuKuShenQingZhuangTai {
         /**
-         * 申请中
+         * 申请�?
          */
         SHEN_QING(0),
         /**
@@ -1239,7 +1239,7 @@ public class SepE {
          */
         CHE_XIAO(3),
         /**
-         * 被驳回
+         * 被驳�?
          */
         BEI_BO_HUI(4);
 
@@ -1280,11 +1280,11 @@ public class SepE {
                 case CHU_KU:
                     return "入库完成";
                 case CHE_XIAO:
-                    return "已撤销";
+                    return "已撤�?";
                 case BEI_BO_HUI:
-                    return "被驳回";
+                    return "被驳�?";
                 default:
-                    return "错误状态";
+                    return "错误状�??";
             }
         }
     }
@@ -1294,11 +1294,11 @@ public class SepE {
      */
     public static enum Sex {
         /**
-         * 男
+         * �?
          */
         MALE(SepC.Sex.MALE),
         /**
-         * 女
+         * �?
          */
         FEMALE(SepC.Sex.FEMALE);
 
@@ -1315,9 +1315,9 @@ public class SepE {
         public final String getName() {
             switch (this) {
                 case MALE:
-                    return "男";
+                    return "�?";
                 case FEMALE:
-                    return "女";
+                    return "�?";
             }
             return "";
         }
@@ -1338,11 +1338,11 @@ public class SepE {
      */
     public static enum QuanXian {
         /**
-         * 有权限
+         * 有权�?
          */
         YES(1),
         /**
-         * 无权限
+         * 无权�?
          */
         NO(0);
 
@@ -1425,7 +1425,7 @@ public class SepE {
     }
 
     /**
-     * 申请数量与在库数量比较
+     * 申请数量与在库数量比�?
      */
     public static enum ManZuFlag {
         /**
@@ -1433,7 +1433,7 @@ public class SepE {
          */
         MAN_ZU,
         /**
-         * 在库数量不能满足申请量
+         * 在库数量不能满足申请�?
          */
         BU_MAN_ZU;
 
@@ -1442,7 +1442,7 @@ public class SepE {
                 case MAN_ZU:
                     return "满足";
                 case BU_MAN_ZU:
-                    return "不满足";
+                    return "不满�?";
                 default:
                     return null;
             }
@@ -1450,7 +1450,7 @@ public class SepE {
     }
 
     /**
-     * 申请历史状态
+     * 申请历史状�??
      */
     public static enum ShenQingLuLiZhuangTai {
         /**
@@ -1478,11 +1478,11 @@ public class SepE {
          */
         JIE_SHU(5),
         /**
-         * 已受理
+         * 已受�?
          */
         YI_SHOU_LI(6),
         /**
-         * 审批驳回-已处理
+         * 审批驳回-已处�?
          */
         SHEN_PI_NG_YI_CHU_LI(7);
 
@@ -1523,7 +1523,7 @@ public class SepE {
         public String getMessage() {
             switch (this) {
                 case SHEN_QING:
-                    return "申请中";
+                    return "申请�?";
                 case CAO_GAO:
                     return "草稿";
                 case SHEN_PI_OK:
@@ -1535,9 +1535,9 @@ public class SepE {
                 case JIE_SHU:
                     return "结束";
                 case YI_SHOU_LI:
-                    return "已受理";
+                    return "已受�?";
                 case SHEN_PI_NG_YI_CHU_LI:
-                    return "审批驳回-已处理";
+                    return "审批驳回-已处�?";
             }
             return null;
         }
@@ -1548,7 +1548,7 @@ public class SepE {
      */
     public static enum LiuChengTiaoJianQuFen {
         /**
-         * 无
+         * �?
          */
         WU(0),
         /**
@@ -1785,7 +1785,7 @@ public class SepE {
          */
         QING_QIU_LING_HUO(1),
         /**
-         * 紧急出库（特批出库）
+         * 紧�?�出库（特批出库�?
          */
         JIN_JI_CHU_KU(2),
         /**
@@ -1793,7 +1793,7 @@ public class SepE {
          */
         HUAN_HUO_SHEN_QING(3),
         /**
-         * 退货申请
+         * �?货申�?
          */
         TUI_HUO_SHEN_QING(4),
         /**
@@ -1805,7 +1805,7 @@ public class SepE {
          */
         YOU_KA_GOU_YOU(6),
         /**
-         * 无计划出库
+         * 无计划出�?
          */
         WU_JI_HUA_CHU_KU(7);
 
@@ -1850,17 +1850,17 @@ public class SepE {
                 case QING_QIU_LING_HUO:
                     return "请求领货";
                 case JIN_JI_CHU_KU:
-                    return "紧急出库（特批出库）";
+                    return "紧�?�出库（特批出库�?";
                 case HUAN_HUO_SHEN_QING:
                     return "换货申请";
                 case TUI_HUO_SHEN_QING:
-                    return "退货申请";
+                    return "�?货申�?";
                 case FEI_ZHENG_CHANG_CHU_LI:
                     return "非正常品处理";
                 case YOU_KA_GOU_YOU:
                     return "油卡购油";
                 case WU_JI_HUA_CHU_KU:
-                    return "无计划出库";
+                    return "无计划出�?";
                 default:
                     return null;
             }
@@ -1888,7 +1888,7 @@ public class SepE {
          */
         HUAN_HUO_RU_KU(3),
         /**
-         * 无计划入库
+         * 无计划入�?
          */
         WU_JI_HUA_RU_KU(4),
         /**
@@ -1896,7 +1896,7 @@ public class SepE {
          */
         YOU_KA_GOU_YOU(5),
         /**
-         * 物资退库
+         * 物资�?�?
          */
         WU_ZI_TUI_KU(6);
 
@@ -1941,11 +1941,11 @@ public class SepE {
                 case GUI_HUAN_WU_ZI:
                     return "物资归还";
                 case WU_ZI_TUI_KU:
-                    return "物资退库";
+                    return "物资�?�?";
                 case HUAN_HUO_RU_KU:
                     return "换货入库";
                 case WU_JI_HUA_RU_KU:
-                    return "无计划入库";
+                    return "无计划入�?";
                 case YOU_KA_GOU_YOU:
                     return "油卡购油";
                 default:
@@ -1963,7 +1963,7 @@ public class SepE {
          */
         FEN_PI_LING_YONG(0),
         /**
-         * 一起领用
+         * �?起领�?
          */
         YI_QI_LING_YONG(1);
 
@@ -1994,7 +1994,7 @@ public class SepE {
                 case FEN_PI_LING_YONG:
                     return "分批领用";
                 case YI_QI_LING_YONG:
-                    return "一起领用";
+                    return "�?起领�?";
                 default:
                     return null;
             }
@@ -2002,7 +2002,7 @@ public class SepE {
     }
 
     /**
-     * 归集项区分
+     * 归集项区�?
      */
     public static enum GuiJiXiangQuFen {
         /**
@@ -2057,7 +2057,7 @@ public class SepE {
     }
 
     /**
-     * 盘库历史状态
+     * 盘库历史状�??
      */
     public static enum PanKuLuLiZhuangTai {
         /**
@@ -2069,7 +2069,7 @@ public class SepE {
          */
         TI_JIAO(2),
         /**
-         * 已审核
+         * 已审�?
          */
         SHEN_HE_WAN_CHENG(3);
 
@@ -2102,7 +2102,7 @@ public class SepE {
                 case CAO_GAO:
                     return "草稿";
                 case TI_JIAO:
-                    return "已提交";
+                    return "已提�?";
                 case SHEN_HE_WAN_CHENG:
                     return "审核完成";
                 default:
@@ -2159,7 +2159,7 @@ public class SepE {
     }
 
     /**
-     * 采购合同状态
+     * 采购合同状�??
      */
     public static enum CaiGouHeTongZhuangTai {
         /**
@@ -2214,7 +2214,7 @@ public class SepE {
                 case SHEN_PI_NG:
                     return "审批驳回";
                 case FEI_ZHI:
-                    return "已废止";
+                    return "已废�?";
                 default:
                     return "错误";
             }
@@ -2226,11 +2226,11 @@ public class SepE {
      */
     public static enum CheLiangLeiXing {
         /**
-         * 普通车
+         * 普�?�车
          */
         PU_TONG(0),
         /**
-         * 工程车
+         * 工程�?
          */
         GONG_CHENG(1);
 
@@ -2259,9 +2259,9 @@ public class SepE {
         public String getMessage() {
             switch (this) {
                 case PU_TONG:
-                    return "普通车";
+                    return "普�?�车";
                 case GONG_CHENG:
-                    return "工程车";
+                    return "工程�?";
                 default:
                     return null;
             }
@@ -2343,7 +2343,7 @@ public class SepE {
          */
         HUO_CHE(2),
         /**
-         * 工程车
+         * 工程�?
          */
         GONG_CHENG_CHE(3);
 
@@ -2382,7 +2382,7 @@ public class SepE {
                 case HUO_CHE:
                     return "货车";
                 case GONG_CHENG_CHE:
-                    return "工程车";
+                    return "工程�?";
                 default:
                     return null;
             }
@@ -2390,19 +2390,19 @@ public class SepE {
     }
 
     /**
-     * 用车记录状态
+     * 用车记录状�??
      */
     public static enum YongCheJiLuZhuangTai {
         /**
-         * 已备车
+         * 已备�?
          */
         YI_BEI_CHE(0),
         /**
-         * 已使用
+         * 已使�?
          */
         YI_SHI_YONG(1),
         /**
-         * 已结账
+         * 已结�?
          */
         YI_JIE_ZHANG(2);
 
@@ -2433,11 +2433,11 @@ public class SepE {
         public String getMessage() {
             switch (this) {
                 case YI_BEI_CHE:
-                    return "已备车";
+                    return "已备�?";
                 case YI_SHI_YONG:
-                    return "已使用";
+                    return "已使�?";
                 case YI_JIE_ZHANG:
-                    return "已结账";
+                    return "已结�?";
                 default:
                     return null;
             }
@@ -2496,15 +2496,15 @@ public class SepE {
     }
 
     /**
-     * 车辆所属
+     * 车辆�?�?
      */
     public static enum CheLiangSuoShu {
         /**
-         * 内部车
+         * 内部�?
          */
         NEI_BU_CHE(0),
         /**
-         * 外部车
+         * 外部�?
          */
         WAI_BU_CHE(1);
 
@@ -2533,9 +2533,9 @@ public class SepE {
         public String getMessage() {
             switch (this) {
                 case NEI_BU_CHE:
-                    return "内部车";
+                    return "内部�?";
                 case WAI_BU_CHE:
-                    return "外部车";
+                    return "外部�?";
                 default:
                     return null;
             }
@@ -2715,9 +2715,9 @@ public class SepE {
         public String getMessage() {
             switch (this) {
                 case YES:
-                    return "是";
+                    return "�?";
                 case NO:
-                    return "否";
+                    return "�?";
                 default:
                     return null;
             }

@@ -14,7 +14,7 @@
                 </h1>
                 <div class="SeparatorFull"></div>
 <!--                <p:tabView id="tabview" activeIndex="#{ctrlCHA0001.vm.tabIndex}">
-                    <p:tab title="各分公司收费明细表" >-->
+                    <p:tab title="各分公司收费明细�?" >-->
                 <p:panelGrid columns="8"
                              id="canShu"
                              layout="grid"
@@ -54,20 +54,20 @@
                                  emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
                                  styleClass="tct">
                         <f:facet name="header">
-                            <h:outputText value="各分公司收费明细表"  styleClass="Fs20"/>
+                            <h:outputText value="各分公司收费明细�?"  styleClass="Fs20"/>
                             <h:commandLink  styleClass="fr">
                                 <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
                                 <p:dataExporter type="xls" target="sfmx_table" fileName="soufeimingxibiao" />
                             </h:commandLink>
                         </f:facet>
-                        <!--下面写法导出会没有标题-->
+                        <!--下面写法导出会没有标�?-->
                         <!--                    <p:columnGroup type="header">
                                                 <p:row>
                                                     <p:column headerText="公司名称" styleClass="wd-p-10"/>
-                                                    <p:column headerText="面  积" styleClass="wd-p-10"/>
-                                                    <p:column headerText="应收金额（元）" styleClass="wd-p-10"/>
-                                                    <p:column headerText="已收金额（元）" styleClass="wd-p-10"/>
-                                                    <p:column headerText="收费率%" styleClass="wd-p-10"/>
+                                                    <p:column headerText="�?  �?" styleClass="wd-p-10"/>
+                                                    <p:column headerText="应收金额（元�?" styleClass="wd-p-10"/>
+                                                    <p:column headerText="已收金额（元�?" styleClass="wd-p-10"/>
+                                                    <p:column headerText="收费�?%" styleClass="wd-p-10"/>
                                                 </p:row>
                                             </p:columnGroup>-->
                         <p:column styleClass="tct">
@@ -81,7 +81,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="面  积"/>
+                                <h:outputText value="�?  �?"/>
                             </f:facet>
                             <h:outputText value="#{item.area}" styleClass="fr">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
@@ -94,7 +94,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="应收金额（元）"/>
+                                <h:outputText value="应收金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.yjk}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
@@ -107,7 +107,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="已收金额（元）"/>
+                                <h:outputText value="已收金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.jk}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
@@ -120,7 +120,7 @@
                         </p:column>
                                                 <p:column>
                             <f:facet name="header">
-                                <h:outputText value="减免金额（元）"/>
+                                <h:outputText value="减免金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.gratis1}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
@@ -133,7 +133,7 @@
                         </p:column>
                                                 <p:column>
                             <f:facet name="header">
-                                <h:outputText value="优惠金额（元）"/>
+                                <h:outputText value="优惠金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.gratismoney}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
@@ -146,7 +146,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="尚欠金额（元）"/>
+                                <h:outputText value="尚欠金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.owe}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
@@ -159,7 +159,7 @@
                         </p:column>
                         <p:column  styleClass="tct">
                             <f:facet name="header">
-                                <h:outputText value="收费率%"/>
+                                <h:outputText value="收费�?%"/>
                             </f:facet>
                             <h:outputText  value="#{item.sfl}">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
@@ -196,7 +196,7 @@
                                 <p:chart type="bar" model="#{ctrlCHA0001.vm.moneyModel}" style="height:500px"/>
                             </p:outputPanel>
                         </p:tab>
-                        <p:tab title="收费率">
+                        <p:tab title="收费�?">
                             <p:outputPanel id="tubiao3">
                                 <p:chart type="line" model="#{ctrlCHA0001.vm.ratioModel}" style="height:500px"/>
                             </p:outputPanel>

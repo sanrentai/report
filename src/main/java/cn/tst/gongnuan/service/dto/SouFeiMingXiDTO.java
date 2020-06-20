@@ -22,7 +22,7 @@ public class SouFeiMingXiDTO implements Serializable {
 
     @Id
     private String id;
-    //公司名
+    //公司�?
     private String name;
     //年度
     private BigDecimal area;

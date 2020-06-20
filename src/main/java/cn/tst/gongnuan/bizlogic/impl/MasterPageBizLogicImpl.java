@@ -33,7 +33,7 @@ public class MasterPageBizLogicImpl implements MasterPageBizLogic {
     public void loadMasterPageBizLogic(MasterPageViewModel vm) {
         String mode;
         mode = "test";
-//        ///获取用户可以使用的菜单
+//        ///获取用户可以使用的菜�?
 //        List<GroupMenuItem> caiDanXiangMuList = this.groupMenuItemDao.findAll();
         List<GroupMenu> groupMenuList = this.groupMenuDao.findAll();///设置数据模型
         vm.setGroupMenuList(groupMenuList);

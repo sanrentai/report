@@ -70,12 +70,12 @@ public class CHA0002Controller extends BusinessBaseController {
     
     public void createRatioModel() {
         BarChartModel model = new BarChartModel();
-        model.setTitle("收费率");
+        model.setTitle("收费�?");
         model.setLegendPosition("ne");
         //model.setShowPointLabels(true);
         //model.getAxes().put(AxisType.X, new CategoryAxis("年度"));
         model.getAxis(AxisType.X).setLabel("年度");
-        model.getAxis(AxisType.Y).setLabel("收费率");
+        model.getAxis(AxisType.Y).setLabel("收费�?");
         Map<String, Map<String, BigDecimal>> data = new HashMap();
         for(SouFeiNianDuBiaoByGongSiDTO item: vm.getShuJuList()) {
             if(data.containsKey(item.getName())) {

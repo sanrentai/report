@@ -16,7 +16,7 @@ import cn.tst.gongnuan.exception.LoginException;
 import org.apache.log4j.Logger;
 
 /**
- * 登录页面控制器
+ * 登录页面控制�?
  *
  * @author ps_xy@pscp.co.jp
  */
@@ -27,7 +27,7 @@ public class LoginController extends BusinessBaseController {
 
     private static final Logger LOG = Logger.getLogger(LoginController.class.getName());
 
-    ///用户名
+    ///用户�?
     private String loginId;
     ///密码
     private String password;
@@ -53,7 +53,7 @@ public class LoginController extends BusinessBaseController {
     private String selectedBuMenId;
 
     /**
-     * 页面初始化
+     * 页面初始�?
      */
     @PostConstruct
     public void init() {
@@ -85,7 +85,7 @@ public class LoginController extends BusinessBaseController {
             ///Login成功 or 失败
             this.accountManager.setLoginIsSuccess(employee != null);
 
-            ///Login者
+            ///Login�?
             this.accountManager.setEmployee(employee);
 
         } catch (LoginException ex) {
@@ -94,12 +94,12 @@ public class LoginController extends BusinessBaseController {
             return null;
         }
 
-        // ユーザID,パスワードがミスの場合
+        // ユーザID,パスワードがミスの場�?
         LOG.info(this.accountManager.isLoginIsSuccess());
         if (!this.accountManager.isLoginIsSuccess()) {
             this.loginErrorMsg = bizConfig.getText("login_id_or_pass_miss");
             this.addMessage(new FacesMessage(FacesMessage.SEVERITY_ERROR, null, this.getLoginResultMessage()));
-            LOG.info("--------------登录失败-------------用户名密码错误");
+            LOG.info("--------------登录失败-------------用户名密码错�?");
             return null;
         }
 
@@ -107,7 +107,7 @@ public class LoginController extends BusinessBaseController {
         if (this.accountManager.getEmployee().isIsLockUser()) {
             this.loginErrorMsg = bizConfig.getText("login_is_locked");
             this.addMessage(new FacesMessage(FacesMessage.SEVERITY_ERROR, null, this.getLoginResultMessage()));
-            LOG.info("--------------登录失败-------------用户被冻结,无法使用");
+            LOG.info("--------------登录失败-------------用户被冻�?,无法使用");
             return null;
         }
 
@@ -135,7 +135,7 @@ public class LoginController extends BusinessBaseController {
     }
 
     /**
-     * ログイン回数をカウントする
+     * ログイン回数をカウントす�?
      *
      * @param loginCounter
      */
@@ -144,7 +144,7 @@ public class LoginController extends BusinessBaseController {
     }
 
     /**
-     * ログイン結果の取得
+     * ログイン結果の取�?
      *
      * @return
      */
@@ -152,7 +152,7 @@ public class LoginController extends BusinessBaseController {
         String resultMsg = this.loginErrorMsg;
         if (this.loginCounter > 0 && !this.accountManager.isLoginIsSuccess()) {
 
-            // ログイン回数と残ログイン可能回数の設定
+            // ログイン回数と残ログイン可能回数の設�?
             resultMsg = "\n" + bizConfig.getText("loginResultMsg",
                     this.loginCounter,
                     "" + (SepC.MAX_ERROR_LOGIN_COUNT - this.loginCounter));

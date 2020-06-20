@@ -85,15 +85,15 @@ public class CHA0001Controller extends BusinessBaseController {
         model.setLegendPosition("e");
         model.setShowPointLabels(true);
         ChartSeries sfl = new ChartSeries();
-        sfl.setLabel("收费率");
+        sfl.setLabel("收费�?");
 
         for (SouFeiMingXiDTO item : vm.getShuJuList()) {
             sfl.set(item.getName(), item.getSfl());
         }
-        model.getAxes().put(AxisType.X, new CategoryAxis("公司名"));
+        model.getAxes().put(AxisType.X, new CategoryAxis("公司�?"));
         model.getAxis(AxisType.X).setTickAngle(-30);
         Axis yAxis = model.getAxis(AxisType.Y);
-        yAxis.setLabel("收费率");
+        yAxis.setLabel("收费�?");
         model.addSeries(sfl);
         vm.setRatioModel(model);
     }
@@ -103,7 +103,7 @@ public class CHA0001Controller extends BusinessBaseController {
         model.setTitle("应收金额/已收金额/尚欠金额");
         model.setLegendPosition("ne");
         Axis xAxis = model.getAxis(AxisType.X);
-        xAxis.setLabel("公司名");
+        xAxis.setLabel("公司�?");
         xAxis.setTickAngle(-30);
         Axis yAxis = model.getAxis(AxisType.Y);
         yAxis.setLabel("应收金额/已收金额/尚欠金额");
@@ -132,7 +132,7 @@ public class CHA0001Controller extends BusinessBaseController {
 
     public void createAreaModel() {
         LineChartModel model = new LineChartModel();
-        model.setTitle("面积图");
+        model.setTitle("面积�?");
         model.setLegendPosition("e");
         model.setShowPointLabels(true);
         ChartSeries mj = new ChartSeries();
@@ -141,7 +141,7 @@ public class CHA0001Controller extends BusinessBaseController {
         for (SouFeiMingXiDTO item : vm.getShuJuList()) {
             mj.set(item.getName(), item.getArea());
         }
-        model.getAxes().put(AxisType.X, new CategoryAxis("公司名"));
+        model.getAxes().put(AxisType.X, new CategoryAxis("公司�?"));
         model.getAxis(AxisType.X).setTickAngle(-30);
         Axis yAxis = model.getAxis(AxisType.Y);
         yAxis.setLabel("面积");

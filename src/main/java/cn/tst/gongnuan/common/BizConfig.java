@@ -17,7 +17,7 @@ import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 业务参数配置类
+ * 业务参数配置�?
  *
  * @author ps_xy@pscp.co.jp
  */
@@ -46,7 +46,7 @@ public class BizConfig implements Serializable {
     private final ResourceBundle _bundle;
 
     /**
-     * 构造函数
+     * 构�?�函�?
      */
     public BizConfig() {
 
@@ -56,10 +56,10 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * FaceMessageIdを取得
+     * FaceMessageIdを取�?
      *
-     * @param controlId　控件ID
-     * @return　表单ID:控件ID
+     * @param controlId�?控件ID
+     * @return�?表单ID:控件ID
      */
     public String getFaceMessageID(String controlId) {
         return this.CONTENT_FORM_ID + CConst.CORON + controlId;
@@ -88,8 +88,8 @@ public class BizConfig implements Serializable {
     /**
      * 取得资源文件种的内容
      *
-     * @param key 键
-     * @return 值
+     * @param key �?
+     * @return �?
      */
     public String getText(String key) {
 
@@ -106,9 +106,9 @@ public class BizConfig implements Serializable {
     /**
      * 取得资源文件种的内容
      *
-     * @param key 键
+     * @param key �?
      * @param messages 替换的字符串
-     * @return 值
+     * @return �?
      */
     public String getText(String key, Object... messages) {
         return MessageFormat.format(this.getText(key), messages);
@@ -119,7 +119,7 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 日期格式: 月-日
+     * 日期格式: �?-�?
      *
      * @return MM-dd
      */
@@ -128,7 +128,7 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 日期格式: 年/月/日
+     * 日期格式: �?/�?/�?
      *
      * @return yyyy-MM-dd
      */
@@ -137,7 +137,7 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 日期格式: 年/月/日 时:分(24时制)
+     * 日期格式: �?/�?/�? �?:�?(24时制)
      *
      * @return yyyy-MM-dd HH:mm
      */
@@ -146,7 +146,7 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 日期格式: 年/月/日 时:分:秒(24时制)
+     * 日期格式: �?/�?/�? �?:�?:�?(24时制)
      *
      * @return yyyy-MM-dd HH:mm:ss
      */
@@ -155,7 +155,7 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 日期格式: 时:分(24时制)
+     * 日期格式: �?:�?(24时制)
      *
      * @return HH:mm
      */
@@ -180,9 +180,9 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 获取所有流程区分
+     * 获取�?有流程区�?
      *
-     * @return 所有流程区分
+     * @return �?有流程区�?
      */
     public List<SepE.LiuChengQuFen> getLiuChengQuFen() {
         return Arrays.asList(SepE.LiuChengQuFen.values());
@@ -204,34 +204,34 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 获取所有归集项区分
+     * 获取�?有归集项区分
      *
-     * @return 所有归集项区分
+     * @return �?有归集项区分
      */
     public List<SepE.GuiJiXiangQuFen> getGuiJiXiangQuFen() {
         return Arrays.asList(SepE.GuiJiXiangQuFen.values());
     }
 
     /**
-     * 获取所有流程模式区分
+     * 获取�?有流程模式区�?
      *
-     * @return 所有流程模式区分
+     * @return �?有流程模式区�?
      */
     public SepE.LiuChengMoShiQuFen[] getLiuChengMoShiQuFen() {
         return SepE.LiuChengMoShiQuFen.values();
     }
 
     /**
-     * 获取所有流程条件区分
+     * 获取�?有流程条件区�?
      *
-     * @return 所有流程条件区分
+     * @return �?有流程条件区�?
      */
     public SepE.LiuChengTiaoJianQuFen[] getLiuChengTiaoJianQuFen() {
         return SepE.LiuChengTiaoJianQuFen.values();
     }
 
     /**
-     * 获取所有的物资类型
+     * 获取�?有的物资类型
      *
      * @return 物资类型
      */
@@ -240,7 +240,7 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 获取所有的入库方式
+     * 获取�?有的入库方式
      *
      * @return 入库方式
      */
@@ -249,7 +249,7 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 获取所有的出库方式
+     * 获取�?有的出库方式
      *
      * @return 出库方式
      */
@@ -258,7 +258,7 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 获取所有车辆类型
+     * 获取�?有车辆类�?
      *
      * @return 车辆类型
      */
@@ -271,16 +271,16 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 获取所有用车记录状态
+     * 获取�?有用车记录状�?
      *
-     * @return 所有用车记录状态
+     * @return �?有用车记录状�?
      */
     public List<SepE.YongCheJiLuZhuangTai> getYongCheJiLuZhuangTai() {
         return Arrays.asList(SepE.YongCheJiLuZhuangTai.values());
     }
 
     /**
-     * 获取所有油卡类型
+     * 获取�?有油卡类�?
      *
      * @return 油卡类型
      */
@@ -289,7 +289,7 @@ public class BizConfig implements Serializable {
     }
 
     /**
-     * 获取所有提供服务类型
+     * 获取�?有提供服务类�?
      *
      * @return 提供服务类型
      */

@@ -13,12 +13,12 @@
                 <!--标题-->
                 <h1 class="CardBigTopic Purple">
                     <h:outputText value="#{ctrlMaster.createPageTitle('TST', 'TST0001')}"/>
-                    <!--<h:outputText value="测试 > 收费情况统计表(TST0001)" />-->
+                    <!--<h:outputText value="测试 > 收费情况统计�?(TST0001)" />-->
                 </h1>
                 <div class="SeparatorFull"></div>
 
 <!--                <p:tabView id="tabview" activeIndex="#{ctrlTST0001.vm.tabIndex}">
-    <p:tab title="各分公司收费明细表" >-->
+    <p:tab title="各分公司收费明细�?" >-->
                 <p:panelGrid columns="8"
                              id="canShu"
                              layout="grid"
@@ -33,7 +33,7 @@
                         <f:selectItems value="#{ctrlTST0001.vm.companyList}"  var="items" 
                                        itemLabel="#{items.name}" itemValue="#{items.name}"/>
                     </p:selectOneMenu>
-                    <p:outputLabel for="huanrezhan" value="换热站"/>
+                    <p:outputLabel for="huanrezhan" value="换热�?"/>
                     <p:selectOneMenu id="huanrezhan" autoWidth="false" styleClass="wd-f-40" 
                                      disabled="#{empty ctrlTST0001.vm.huanReZhanList}"
                                      value="#{ctrlTST0001.vm.huanRenZhanId}">
@@ -85,7 +85,7 @@
                                  emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
                                  styleClass="tct">
                         <f:facet name="header">
-                            <h:outputText value="收费情况统计表"  styleClass="Fs20"/>
+                            <h:outputText value="收费情况统计�?"  styleClass="Fs20"/>
                             <h:commandLink  styleClass="fr">
                                 <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
                                 <p:dataExporter type="xls" target="sfmx_table" fileName="baobiao" />
@@ -93,7 +93,7 @@
                         </f:facet>
                         <!--                        <p:columnGroup type="header">
                             <p:row>
-                                <p:column filterBy="#{item.buildingName}" headerText="大楼名" 
+                                <p:column filterBy="#{item.buildingName}" headerText="大楼�?" 
                                           sortBy="#{item.buildingName}"
                                           footerText="contains"  filterMatchMode="startsWith"
                                           styleClass="wd-p-10 tct"/>
@@ -108,14 +108,14 @@
                                                        itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
                                     </p:selectOneMenu>
                                 </f:facet>
-                                <p:column headerText="应收金额（元）" sortBy="#{item.yjk}" styleClass="wd-p-10 tct"/>
-                                <p:column headerText="已收金额（元）" sortBy="#{item.jk}" styleClass="wd-p-10 tct"/>
+                                <p:column headerText="应收金额（元�?" sortBy="#{item.yjk}" styleClass="wd-p-10 tct"/>
+                                <p:column headerText="已收金额（元�?" sortBy="#{item.jk}" styleClass="wd-p-10 tct"/>
                                 <p:column headerText="欠款"  sortBy="#{item.owe}" styleClass="wd-p-10 tct"/>
-                                <p:column headerText="收费率" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct"/>
+                                <p:column headerText="收费�?" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct"/>
                             </p:row>
                         </p:columnGroup>
 
-                        <p:column filterBy="#{item.buildingName}" headerText="大楼名" 
+                        <p:column filterBy="#{item.buildingName}" headerText="大楼�?" 
                                   sortBy="#{item.buildingName}"
                                   footerText="contains"  filterMatchMode="startsWith"
                                   styleClass="wd-p-10 tct">-->
@@ -138,7 +138,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="应收金额（元）" sortBy="#{item.yjk}" styleClass="wd-p-10 tct">
+                        <p:column headerText="应收金额（元�?" sortBy="#{item.yjk}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.yjk}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -148,7 +148,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="已收金额（元）" sortBy="#{item.jk}" styleClass="wd-p-10 tct">
+                        <p:column headerText="已收金额（元�?" sortBy="#{item.jk}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -178,7 +178,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="滞纳金应收"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
+                        <p:column headerText="滞纳金应�?"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.znj}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -188,7 +188,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="滞纳金已收"  sortBy="#{item.znjmoney}" styleClass="wd-p-10 tct">
+                        <p:column headerText="滞纳金已�?"  sortBy="#{item.znjmoney}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.znjmoney}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -198,7 +198,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="滞纳金减免"  sortBy="#{item.znj_jm}" styleClass="wd-p-10 tct">
+                        <p:column headerText="滞纳金减�?"  sortBy="#{item.znj_jm}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.znj_jm}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -208,7 +208,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="滞纳金欠费"  sortBy="#{item.znj_owe}" styleClass="wd-p-10 tct">
+                        <p:column headerText="滞纳金欠�?"  sortBy="#{item.znj_owe}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.znj_owe}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -218,7 +218,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="增收费"  sortBy="#{item.zsfy}" styleClass="wd-p-10 tct">
+                        <p:column headerText="增收�?"  sortBy="#{item.zsfy}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.zsfy}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -228,7 +228,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="收费率" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct">
+                        <p:column headerText="收费�?" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct">
                             <h:outputText  value="#{item.sfl}">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                             </h:outputText>
@@ -240,7 +240,7 @@
                                 %
                             </f:facet>
                         </p:column>
-                        <p:column headerText="欠费率" sortBy="#{item.qfl}"  styleClass="wd-p-10 tct">
+                        <p:column headerText="欠费�?" sortBy="#{item.qfl}"  styleClass="wd-p-10 tct">
                             <h:outputText  value="#{item.qfl}">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                             </h:outputText>

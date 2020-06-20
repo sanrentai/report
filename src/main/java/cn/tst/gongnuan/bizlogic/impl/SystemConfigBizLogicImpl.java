@@ -10,7 +10,7 @@ import cn.tst.gongnuan.viewmodel.SystemConfigViewModel;
 import java.util.List;
 
 /**
- * 系统配置实现类
+ * 系统配置实现�?
  *
  * @author 曹春
  */

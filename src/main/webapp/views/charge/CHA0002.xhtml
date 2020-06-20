@@ -17,7 +17,7 @@
                 <div class="SeparatorFull"></div>
 
 <!--                <p:tabView id="tabview" activeIndex="#{ctrlCHA0002.vm.tabIndex}">
-    <p:tab title="各分公司收费明细表" >-->
+    <p:tab title="各分公司收费明细�?" >-->
                 <p:panelGrid columns="8"
                              id="canShu"
                              layout="grid"
@@ -62,7 +62,7 @@
                                  emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
                                  styleClass="tct">
                         <f:facet name="header">
-                            <h:outputText value="公司年度收费统计表"  styleClass="Fs20"/>
+                            <h:outputText value="公司年度收费统计�?"  styleClass="Fs20"/>
                             <h:commandLink  styleClass="fr">
                                 <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
                                 <p:dataExporter type="xls" target="sfmx_table" fileName="soufeimingxibiao" />
@@ -71,10 +71,10 @@
                         <!--                    <p:columnGroup type="header">
                                                 <p:row>
                                                     <p:column headerText="公司名称" styleClass="wd-p-10"/>
-                                                    <p:column headerText="面  积" styleClass="wd-p-10"/>
-                                                    <p:column headerText="应收金额（元）" styleClass="wd-p-10"/>
-                                                    <p:column headerText="已收金额（元）" styleClass="wd-p-10"/>
-                                                    <p:column headerText="收费率%" styleClass="wd-p-10"/>
+                                                    <p:column headerText="�?  �?" styleClass="wd-p-10"/>
+                                                    <p:column headerText="应收金额（元�?" styleClass="wd-p-10"/>
+                                                    <p:column headerText="已收金额（元�?" styleClass="wd-p-10"/>
+                                                    <p:column headerText="收费�?%" styleClass="wd-p-10"/>
                                                 </p:row>
                                             </p:columnGroup>-->
                         <p:column headerText="公司名称" 
@@ -128,7 +128,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="应收金额（元）"/>
+                                <h:outputText value="应收金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.yjk}" styleClass="fr">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
@@ -141,7 +141,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="已收金额（元）"/>
+                                <h:outputText value="已收金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.jk}" styleClass="fr">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
@@ -154,7 +154,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="减免金额（元）"/>
+                                <h:outputText value="减免金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.jm}" styleClass="fr">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
@@ -167,7 +167,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="优惠金额（元）"/>
+                                <h:outputText value="优惠金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.yh}" styleClass="fr">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
@@ -193,14 +193,14 @@
                         </p:column>
                         <p:column  styleClass="trt">
                             <f:facet name="header">
-                                <h:outputText styleClass="fmid"  value="收费率%"/>
+                                <h:outputText styleClass="fmid"  value="收费�?%"/>
                             </f:facet>
                             <h:outputText  value="#{item.sfl}">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                             </h:outputText>
                             %
                         </p:column>
-                        <p:column headerText="违约金"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
+                        <p:column headerText="违约�?"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.znj}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -212,9 +212,9 @@
                         </p:column>
                     </p:dataTable>
 <!--                    <p:outputPanel id="bubiaoqu" rendered="#{not empty ctrlCHA0002.vm.shuJuList}">
-                        <p:outputLabel for="company1" value="选择公司，查看图表" />
+                        <p:outputLabel for="company1" value="选择公司，查看图�?" />
                         <p:selectOneMenu id="company1" autoWidth="false" styleClass="wd-f-40" value="#{ctrlCHA0002.vm.companyName1}">
-                            <f:selectItem itemLabel="请选择" itemValue=""/>
+                            <f:selectItem itemLabel="请�?�择" itemValue=""/>
                             <p:ajax listener="#{ctrlCHA0002.createBarModel()}" process="@this ,company1" update="bubiaoqu"/>
                             <f:selectItems value="#{ctrlCHA0002.vm.companyList}"  var="items" 
                                            itemLabel="#{items.name}" itemValue="#{items.name}"/>
@@ -240,7 +240,7 @@
                                 <p:chart type="bar" model="#{ctrlCHA0002.vm.qkModel}" style="height:300px"/>
                             </p:outputPanel>
                         </p:tab>
-                        <p:tab title='收费率'>
+                        <p:tab title='收费�?'>
                             <p:outputPanel id="tubiao5" rendered="#{not empty ctrlCHA0002.vm.ratioModel}">
                                 <p:chart type="bar" model="#{ctrlCHA0002.vm.ratioModel}" style="height:300px"/>
                             </p:outputPanel>

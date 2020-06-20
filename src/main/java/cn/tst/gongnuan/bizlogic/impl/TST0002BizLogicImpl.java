@@ -15,7 +15,7 @@ import cn.tst.gongnuan.service.impl.HYR0002Facade;
 import cn.tst.gongnuan.service.impl.TConfigFacade;
 
 /**
- * 出库入库统计实现类
+ * 出库入库统计实现�?
  *
  * @author CaoChun
  */

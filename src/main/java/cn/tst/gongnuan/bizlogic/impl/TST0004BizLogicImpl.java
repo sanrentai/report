@@ -28,7 +28,7 @@ import cn.tst.gongnuan.service.impl.XiaoQuProcFacade;
 import cn.tst.gongnuan.service.impl.YearNumProcFacade;
 
 /**
- * 出库入库统计实现类
+ * 出库入库统计实现�?
  *
  * @author CaoChun
  */
@@ -74,19 +74,19 @@ public class TST0004BizLogicImpl extends BaseBizLogic implements TST0004BizLogic
         List<HYR0004DTO> shuJuList;
         
         if (vm.getCompanyName().equals("全部")) {
-            //按分公司汇总
+            //按分公司汇�??
             shuJuList = suJuDao.query(vm.getYearnum(), "全部", "%");
         } else {
-            //按换热站汇总
+            //按换热站汇�??
             if (vm.getHuanRenZhanId().equals("全部")) {
                 shuJuList = suJuDao.query(vm.getYearnum(), vm.getCompanyName(), "%");
             } else {
                 if (vm.getXiaoQuId().equals("全部")) {
-                    //按小区汇总
+                    //按小区汇�?
                     shuJuList = suJuDao.query(vm.getYearnum(), vm.getCompanyName(), vm.getHuanRenZhanId());
                 } else {
                     if (vm.getBuildingId().equals("全部")) {
-                        //按大楼汇总
+                        //按大楼汇�?
                         shuJuList = suJuDao.query(vm.getYearnum(), vm.getCompanyName(), vm.getXiaoQuId());
                     } else {
                         //大楼明细

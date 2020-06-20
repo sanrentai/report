@@ -19,7 +19,7 @@ import javax.persistence.Id;
 public class SouFeiNianDuBiaoByGongSiDTO implements Serializable {
     @Id
     private String id;
-    //公司名
+    //公司�?
     private String name;
     //年度
     private String yearNum;  

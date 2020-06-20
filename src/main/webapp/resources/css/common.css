@@ -138,7 +138,7 @@ body {margin: 0px;height: 100%;width: 100%;background-color: #f5f5f5;}
 .td-vertical-m td{vertical-align: middle;}
 
 
-/*年月だけのカレンダー*/
+/*年月だけのカレン�?�?*/
 .only-year-month table {display: none;}
 .amout-minus{color: red!important;}
 .white-font{color:#ffffff!important;}
@@ -238,7 +238,7 @@ input.adjust-input{
     padding-bottom: 6px!important;
 }
 
-/* 预定义字体颜色 */
+/* 预定义字体颜�? */
 .White {color: #ffffff!important;}
 .WhiteBlue {color: #E1F5FE!important;}
 .SoftBlue {color: #03A9F4!important;}
@@ -258,7 +258,7 @@ input.adjust-input{
 .SoftPurple {color: #CE93D8!important;}
 .Purple {color: #8E24AA!important;}
 .Yellow {color: #F7D100!important;}
-/* 预定义背景颜色 */
+/* 预定义背景颜�? */
 .WhiteBlueBack {background-color: #E1F5FE!important;}
 .SoftBlueBack {background-color: #03A9F4!important;}
 .BlueBack {background-color: #0288D1!important;}
@@ -278,7 +278,7 @@ input.adjust-input{
 .SoftPurpleBack {background-color: #CE93D8!important;}
 .PurpleBack {background-color: #8E24AA!important;}
 .YellowBack {background-color: #F7D100!important;}
-/*预定义边框颜色*/
+/*预定义边框颜�?*/
 .BorderTop {border-top: solid 1px #E0E0E0!important;}
 .BorderRight {border-right: solid 1px #E0E0E0!important;}
 .BorderBottom {border-bottom: solid 1px #E0E0E0!important;}
@@ -331,7 +331,7 @@ div.ui-row-editor.ui-helper-clearfix{
     max-height: 50px;
 }
 
-/*覆盖默认皮肤中的SelectOneMenu的字体大小*/
+/*覆盖默认皮肤中的SelectOneMenu的字体大�?*/
 .ui-selectonemenu .ui-selectonemenu-label {
     width: 100% !important;
     border-bottom-right-radius: 0px !important;
