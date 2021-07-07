@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
  * @author Aaron
  */
 @Stateless
-public class HYR0002Facade extends AbstractFacade<Employee> {
+public class HYR0002Facade extends AbsFacade<Employee> {
     private static final Logger LOG = Logger.getLogger(Employee.class.getName());
 
     public HYR0002Facade() {
@@ -27,7 +27,7 @@ public class HYR0002Facade extends AbstractFacade<Employee> {
     
     public List<HYR0002DTO> query(Date payDate, Date startDate, Date endDate) {
         StringBuilder sb = new StringBuilder();
-        sb.append("EXEC	 [dbo].[p_HYR0002] ");
+        sb.append("EXEC	 [dbo].[p_HYR0002_n] ");
         sb.append(" @paydate = ?1, ");
         sb.append(" @ksdate = ?2, ");
         sb.append(" @jsdate = ?3 ");

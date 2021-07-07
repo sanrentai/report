@@ -16,7 +16,7 @@ import java.io.Writer;
 import java.util.Map;
 
 /**
- * 生成word文件工具类
+ * 生成word文件工具�?
  * 
  * @author ps_lbin@pscp.co.jp
  */
@@ -47,8 +47,8 @@ public class FreeMarkerUtils {
         configuration = new Configuration();
         //设置编码
         configuration.setDefaultEncoding("UTF-8");
-        //模板文件统一放至 jp.co.pscp.material.materialmg.common.template 包下面
-        FileTemplateLoader ftl1 = new FileTemplateLoader(new File("C:\\tmp\\material\\upload\\word\\shenqingdan"));
+        //模板文件统一放至 jp.co.pscp.material.materialmg.common.template 包下�?
+        FileTemplateLoader ftl1 = new FileTemplateLoader(new File("C:\\tmp\\callcenter\\upload\\ftl"));
         ClassTemplateLoader ctl1 = new ClassTemplateLoader(getClass(), "");
         ClassTemplateLoader ctl2 = new ClassTemplateLoader(getClass(), "/template");
         TemplateLoader[] loaders = new TemplateLoader[]{ftl1, ctl1, ctl2};
@@ -80,14 +80,14 @@ public class FreeMarkerUtils {
             //生成文件
             template.process(dataMap, out);
 
-            //关闭流
+            //关闭�?
             out.flush();
             out.close();
             return outFile;
         } catch (Exception e) {
             e.printStackTrace();
             if (out != null) {
-                //关闭流
+                //关闭�?
                 out.flush();
                 out.close();
             }

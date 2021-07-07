@@ -25,7 +25,7 @@ import java.util.List;
 public class TST0001ViewModel extends BaseViewModel {
 
     private Date payDate;
-    //公司名
+    //公司�?
     private String companyName;
     //换热站id
     private String huanRenZhanId;
@@ -55,6 +55,16 @@ public class TST0001ViewModel extends BaseViewModel {
     private BigDecimal totalZsfy;
     private BigDecimal totalSfl;
     private BigDecimal totalQfl;
+    
+    private String headerText;
+
+    public String getHeaderText() {
+        return headerText;
+    }
+
+    public void setHeaderText(String headerText) {
+        this.headerText = headerText;
+    }
 
     public TST0001ViewModel() {
         this.companyName = "全部";

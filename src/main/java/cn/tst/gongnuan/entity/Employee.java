@@ -31,7 +31,35 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
-    , @NamedQuery(name = "Employee.findByEmpIdAndEmpLoginpw", query = "SELECT e FROM Employee e WHERE e.empId = :empId AND e.empLoginpw = :empLoginpw")})
+    , @NamedQuery(name = "Employee.findByEmpIdAndEmpLoginpw", query = "SELECT e FROM Employee e WHERE e.empId = :empId AND e.empLoginpw = :empLoginpw")
+    , @NamedQuery(name = "Employee.findByNotInEmpidList", query = "SELECT e FROM Employee e WHERE e.empId NOT IN :empidList")
+    , @NamedQuery(name = "Employee.findByEmpId", query = "SELECT e FROM Employee e WHERE e.empId = :empId")
+    , @NamedQuery(name = "Employee.findByEmpName", query = "SELECT e FROM Employee e WHERE e.empName = :empName")
+    , @NamedQuery(name = "Employee.findByEmpLoginpw", query = "SELECT e FROM Employee e WHERE e.empLoginpw = :empLoginpw")
+    , @NamedQuery(name = "Employee.findByEmpDbname", query = "SELECT e FROM Employee e WHERE e.empDbname = :empDbname")
+    , @NamedQuery(name = "Employee.findByEmpDbpw", query = "SELECT e FROM Employee e WHERE e.empDbpw = :empDbpw")
+    , @NamedQuery(name = "Employee.findByEmpSuper", query = "SELECT e FROM Employee e WHERE e.empSuper = :empSuper")
+    , @NamedQuery(name = "Employee.findByEmpDataAccess", query = "SELECT e FROM Employee e WHERE e.empDataAccess = :empDataAccess")
+    , @NamedQuery(name = "Employee.findByEmpLevel", query = "SELECT e FROM Employee e WHERE e.empLevel = :empLevel")
+    , @NamedQuery(name = "Employee.findByEmpPosid", query = "SELECT e FROM Employee e WHERE e.empPosid = :empPosid")
+    , @NamedQuery(name = "Employee.findByEmpLogon", query = "SELECT e FROM Employee e WHERE e.empLogon = :empLogon")
+    , @NamedQuery(name = "Employee.findByEmpPrint", query = "SELECT e FROM Employee e WHERE e.empPrint = :empPrint")
+    , @NamedQuery(name = "Employee.findByEmpJobAgent", query = "SELECT e FROM Employee e WHERE e.empJobAgent = :empJobAgent")
+    , @NamedQuery(name = "Employee.findByEmpJobDate", query = "SELECT e FROM Employee e WHERE e.empJobDate = :empJobDate")
+    , @NamedQuery(name = "Employee.findByBm", query = "SELECT e FROM Employee e WHERE e.bm = :bm")
+    , @NamedQuery(name = "Employee.findByState", query = "SELECT e FROM Employee e WHERE e.state = :state")
+    , @NamedQuery(name = "Employee.findByArea", query = "SELECT e FROM Employee e WHERE e.area = :area")
+    , @NamedQuery(name = "Employee.findByPq", query = "SELECT e FROM Employee e WHERE e.pq = :pq")
+    , @NamedQuery(name = "Employee.findByBmid", query = "SELECT e FROM Employee e WHERE e.bmid = :bmid")
+    , @NamedQuery(name = "Employee.findBySgd", query = "SELECT e FROM Employee e WHERE e.sgd = :sgd")
+    , @NamedQuery(name = "Employee.findBySp", query = "SELECT e FROM Employee e WHERE e.sp = :sp")
+    , @NamedQuery(name = "Employee.findByIfsf", query = "SELECT e FROM Employee e WHERE e.ifsf = :ifsf")
+    , @NamedQuery(name = "Employee.findBySfOwexe", query = "SELECT e FROM Employee e WHERE e.sfOwexe = :sfOwexe")
+    , @NamedQuery(name = "Employee.findBySfYearB", query = "SELECT e FROM Employee e WHERE e.sfYearB = :sfYearB")
+    , @NamedQuery(name = "Employee.findBySfYearE", query = "SELECT e FROM Employee e WHERE e.sfYearE = :sfYearE")
+    , @NamedQuery(name = "Employee.findByLogDt", query = "SELECT e FROM Employee e WHERE e.logDt = :logDt")
+
+})
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -358,10 +386,9 @@ public class Employee implements Serializable {
     public String toString() {
         return "cn.tst.gongnuan.entity.Employee[ empId=" + empId + " ]";
     }
-    
-    @Transient
-    public boolean isIsLockUser(){
-        return  !this.state.equals('0');
+
+    public boolean isIsLockUser() {
+        return !this.state.equals('0');
     }
     
 }

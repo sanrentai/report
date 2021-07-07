@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <div class="Container100 Responsive100">
+            <div class="Card ui-fluid">
+                <!--标题-->
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('HYR', 'HYR0007')}"/>
+                </h1>
+                <div class="SeparatorFull"></div>
+                <p:panelGrid columns="8"
+                             id="canShu"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank"
+                             columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
+                    <p:outputLabel for="yearnum" value="年度"/>
+                    <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" 
+                                     value="#{ctrlHYR0007.vm.yearnum}">
+                        <f:selectItems value="#{ctrlHYR0007.vm.yearnumList}"  var="itemy" 
+                                       itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="tongjifangshi" value="统计方式"/>
+                    <p:selectOneMenu id="tongjifangshi" autoWidth="false" styleClass="wd-f-40" 
+                                     value="#{ctrlHYR0007.vm.type}">
+                        <f:selectItem itemLabel="房屋类型" itemValue="房屋类型"/>
+                        <f:selectItem itemLabel="减免类型" itemValue="减免类型"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:outputLabel  value=" "/>
+                    <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlHYR0007.chaXun()}" 
+                                     oncomplete="showErrorMsg();"
+                                     update="sfmx, canShu, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                </p:panelGrid>
+                <p:outputPanel id="sfmx">
+                    <p:dataTable value="#{ctrlHYR0007.vm.shuJuList}"
+                                 widgetVar="sfmxTable"
+                                 var="item"
+                                 style="word-break: keep-all!important"
+                                 sortBy="#{item.no}"
+                                 id="sfmx_table"
+                                 rendered="#{not empty ctrlHYR0007.vm.shuJuList}"
+                                 emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                 styleClass="tct">
+                        <f:facet name="header">
+                            <h:outputText value="各公司年度供热费减免费用汇总表"  styleClass="Fs20"/>
+                            <h:commandLink  styleClass="fr">
+                                <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
+                                <p:dataExporter type="xls" target="sfmx_table" fileName="baobiao" />
+                            </h:commandLink>
+                        </f:facet>
+                        <p:column sortBy="#{item.name}" headerText="公司名" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.name}" />
+                            <f:facet name="footer">
+                                <h:outputText value="合计:" styleClass="fr" />
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.type}" headerText="#{ctrlHYR0007.vm.type}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.type}" />
+                        </p:column>
+                        <p:column headerText="减免金额" sortBy="#{item.je}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.je}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0007.vm.totalJe}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>
+            </div>
+        </div>
+    </p:outputPanel>
+</ui:composition>

@@ -17,7 +17,7 @@
                 <div class="SeparatorFull"></div>
 
 <!--                <p:tabView id="tabview" activeIndex="#{ctrlCHA0002.vm.tabIndex}">
-    <p:tab title="各分公司收费明细表" >-->
+    <p:tab title="各分公司收费明细�?" >-->
                 <p:panelGrid columns="8"
                              id="canShu"
                              layout="grid"
@@ -34,6 +34,12 @@
                                 converterMessage="#{ctrlCHA0002.dateUnvalidMessage('日期')}"
                                 locale="#{bizConfig.locale}">
                     </p:calendar>
+                    <p:outputLabel for="yearnum" value="年度"/>
+                    <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" value="#{ctrlCHA0002.vm.yearnum}">
+                        <f:selectItem itemLabel="全部" itemValue="%"/>
+                        <f:selectItems value="#{ctrlCHA0002.vm.yearnumList}"  var="items" 
+                                       itemLabel="#{items.yearnum}" itemValue="#{items.yearnum}"/>
+                    </p:selectOneMenu>
                     <p:outputLabel for="company" value="公司"/>
                     <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" value="#{ctrlCHA0002.vm.companyName}">
                         <f:selectItem itemLabel="全部" itemValue="全部"/>
@@ -53,11 +59,10 @@
                                  widgetVar="sfmxTable"
                                  var="item"
                                  id="sfmx_table"
-                                 rendered="#{not empty ctrlCHA0002.vm.shuJuList}"
                                  emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
                                  styleClass="tct">
                         <f:facet name="header">
-                            <h:outputText value="各分公司收费明细表"  styleClass="Fs20"/>
+                            <h:outputText value="公司年度收费统计�?"  styleClass="Fs20"/>
                             <h:commandLink  styleClass="fr">
                                 <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
                                 <p:dataExporter type="xls" target="sfmx_table" fileName="soufeimingxibiao" />
@@ -66,10 +71,10 @@
                         <!--                    <p:columnGroup type="header">
                                                 <p:row>
                                                     <p:column headerText="公司名称" styleClass="wd-p-10"/>
-                                                    <p:column headerText="面  积" styleClass="wd-p-10"/>
-                                                    <p:column headerText="应收金额（元）" styleClass="wd-p-10"/>
-                                                    <p:column headerText="已收金额（元）" styleClass="wd-p-10"/>
-                                                    <p:column headerText="收费率%" styleClass="wd-p-10"/>
+                                                    <p:column headerText="�?  �?" styleClass="wd-p-10"/>
+                                                    <p:column headerText="应收金额（元�?" styleClass="wd-p-10"/>
+                                                    <p:column headerText="已收金额（元�?" styleClass="wd-p-10"/>
+                                                    <p:column headerText="收费�?%" styleClass="wd-p-10"/>
                                                 </p:row>
                                             </p:columnGroup>-->
                         <p:column headerText="公司名称" 
@@ -123,7 +128,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="应收金额（元）"/>
+                                <h:outputText value="应收金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.yjk}" styleClass="fr">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
@@ -136,13 +141,39 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="已收金额（元）"/>
+                                <h:outputText value="已收金额（元�?"/>
                             </f:facet>
                             <h:outputText value="#{item.jk}" styleClass="fr">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                             </h:outputText>
                             <f:facet name="footer">
                                 <h:outputText value="#{ctrlCHA0002.vm.totalJk}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="减免金额（元�?"/>
+                            </f:facet>
+                            <h:outputText value="#{item.jm}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlCHA0002.vm.totalJm}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="优惠金额（元�?"/>
+                            </f:facet>
+                            <h:outputText value="#{item.yh}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlCHA0002.vm.totalYh}" styleClass="fr">
                                     <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                                 </h:outputText>
                             </f:facet>
@@ -162,236 +193,62 @@
                         </p:column>
                         <p:column  styleClass="trt">
                             <f:facet name="header">
-                                <h:outputText styleClass="fmid"  value="收费率%"/>
+                                <h:outputText styleClass="fmid"  value="收费�?%"/>
                             </f:facet>
                             <h:outputText  value="#{item.sfl}">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                             </h:outputText>
                             %
                         </p:column>
+                        <p:column headerText="违约�?"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znj}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlCHA0002.vm.getTotal('znj')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
                     </p:dataTable>
+<!--                    <p:outputPanel id="bubiaoqu" rendered="#{not empty ctrlCHA0002.vm.shuJuList}">
+                        <p:outputLabel for="company1" value="选择公司，查看图�?" />
+                        <p:selectOneMenu id="company1" autoWidth="false" styleClass="wd-f-40" value="#{ctrlCHA0002.vm.companyName1}">
+                            <f:selectItem itemLabel="请�?�择" itemValue=""/>
+                            <p:ajax listener="#{ctrlCHA0002.createBarModel()}" process="@this ,company1" update="bubiaoqu"/>
+                            <f:selectItems value="#{ctrlCHA0002.vm.companyList}"  var="items" 
+                                           itemLabel="#{items.name}" itemValue="#{items.name}"/>
+                        </p:selectOneMenu>-->
+                    <p:tabView rendered="#{not empty ctrlCHA0002.vm.shuJuList}">
+                        <p:tab title='面积'>
+                            <p:outputPanel id="tubiao" rendered="#{not empty ctrlCHA0002.vm.areaModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.areaModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title='应收金额'>
+                            <p:outputPanel id="tubiao2" rendered="#{not empty ctrlCHA0002.vm.ysjeModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.ysjeModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title='已收金额'>
+                            <p:outputPanel id="tubiao3" rendered="#{not empty ctrlCHA0002.vm.yisjeModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.yisjeModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title='欠款'>
+                            <p:outputPanel id="tubiao4" rendered="#{not empty ctrlCHA0002.vm.qkModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.qkModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab title='收费�?'>
+                            <p:outputPanel id="tubiao5" rendered="#{not empty ctrlCHA0002.vm.ratioModel}">
+                                <p:chart type="bar" model="#{ctrlCHA0002.vm.ratioModel}" style="height:300px"/>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
+                    <!--</p:outputPanel>-->
                 </p:outputPanel>
 
-                <!--</p:tab>-->
-                <!--                    <p:tab title="入库明细">
-                                        <p:outputPanel id="rukumingxi" styleClass="rukumingxi">
-                                            <p:dataTable value="#{ctrlCHA0002.vm.ruKuMingXiList}"
-                                                         widgetVar="chukuTable"
-                                                         var="item"
-                                                         id="ruku_table"
-                                                         emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
-                                                         rows="15"
-                                                         paginatorAlwaysVisible="false"
-                                                         paginator="true"
-                                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                         rowsPerPageTemplate="15, 30, 50"
-                                                         styleClass="tct">
-                                                <p:columnGroup type="header">
-                                                    <p:row>
-                                                        <p:column headerText="入库单号" styleClass="wd-p-15" />
-                                                        <p:column headerText="#{msg.wu_zhi_miao_shu}" 
-                                                                  sortBy="#{item.shenqing.shiti.wuZiMiaoShu}"
-                                                                  filterMaxLength="50" 
-                                                                 filterBy="#{item.shenqing.shiti.wuZiMiaoShu}"
-                                                                  filterMatchMode="contains" 
-                                                                  styleClass="wd-p-20"/>
-                                                        <p:column headerText="入库数" styleClass="wd-p-15" sortBy="#{item.zhengPinShu}"/>
-                                                        <p:column headerText="单价" styleClass="wd-p-15" />
-                                                        <p:column headerText="入库人" styleClass="wd-p-15" />
-                                                        <p:column headerText="入库日期" styleClass="wd-p-15" />
-                
-                                                    </p:row>
-                                                </p:columnGroup>
-                
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.pk.ruKuBianHao}" />
-                
-                
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.shenqing.shiti.wuZiMiaoShu}"/>
-                                                </p:column>
-                                                正品数
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.zhengPinShu}">
-                                                        <f:convertNumber pattern="#{bizConfig.numberFormatPattern}" />
-                                                    </h:outputText>
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.danJia}">
-                                                        <f:convertNumber currencySymbol="" type="currency"  maxFractionDigits="2"/>
-                                                    </h:outputText>
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.insUserInfo.xing}#{item.insUserInfo.ming}"/>
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.insDate}">
-                                                        <f:convertDateTime pattern="#{bizConfig.dateFormat}" />
-                                                    </h:outputText>
-                                                </p:column>
-                                            </p:dataTable>
-                
-                
-                                        </p:outputPanel>
-                                    </p:tab>
-                
-                                    <p:tab title="出库明细">
-                                        <p:outputPanel id="chukumingxi" styleClass="chukumingxi">
-                                            <p:dataTable value="#{ctrlCHA0002.vm.chuKuMingXiList}"
-                                                         widgetVar="chukuTable"
-                                                         var="item"
-                                                         id="chuku_table"
-                                                         emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
-                                                         rows="15"
-                                                         paginatorAlwaysVisible="false"
-                                                         paginator="true"
-                                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                         rowsPerPageTemplate="15, 30, 50"
-                                                         styleClass="tct">
-                                                <p:columnGroup type="header">
-                                                    <p:row>
-                                                        <p:column headerText="出库单号" styleClass="wd-p-15" />
-                                                        <p:column headerText="#{msg.wu_zhi_miao_shu}" 
-                                                                  sortBy="#{item.shenqing.shiti.wuZiMiaoShu}"
-                                                                  filterMaxLength="50" 
-                                                                  filterBy="#{item.shenqing.shiti.wuZiMiaoShu}"
-                                                                  filterMatchMode="contains" 
-                                                                  styleClass="wd-p-20"/>
-                                                        <p:column headerText="出库数" styleClass="wd-p-15" sortBy="#{item.chuKuShu}"/>
-                                                        <p:column headerText="单价" styleClass="wd-p-15" />
-                                                        <p:column headerText="领用人" styleClass="wd-p-15" />
-                                                        <p:column headerText="出库日期" styleClass="wd-p-15" />
-                
-                                                    </p:row>
-                                                </p:columnGroup>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.pk.chuKuBianHao}" />
-                
-                
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.shenqing.shiti.wuZiMiaoShu}"/>
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.chuKuShu}">
-                                                        <f:convertNumber pattern="#{bizConfig.numberFormatPattern}" />
-                                                    </h:outputText>
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.danJia}">
-                                                        <f:convertNumber currencySymbol="" type="currency"  maxFractionDigits="2"/>
-                                                    </h:outputText>
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.lingYongRen.xing}#{item.lingYongRen.ming}"/>
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.insDate}">
-                                                        <f:convertDateTime pattern="#{bizConfig.dateFormat}" />
-                                                    </h:outputText>
-                                                </p:column>
-                                            </p:dataTable>
-                
-                
-                                        </p:outputPanel>
-                                    </p:tab>
-                                    <p:tab title="供应商入库统计">
-                                        <h:panelGrid columns="9" cellpadding="5" id="gongyingshangcanShu">
-                                            <p:outputLabel value="时间范围 从"/>
-                                            <p:calendar id="gtxtStartDate" value="#{ctrlCHA0002.vm.startDate}"
-                                                        placeholder="开始日期"
-                                                        disabled="#{ctrlCHA0002.vm.riQiFanWei!='custom'}"
-                                                        mask="true" styleClass="tct"
-                                                        pattern="#{bizConfig.dateFormat}"
-                                                        required="true"
-                                                        requiredMessage="#{ctrlCHA0002.isRequiredMessage('开始日期')}"
-                                                        size="12"
-                                                        converterMessage="#{ctrlCHA0002.dateUnvalidMessage('开始日期')}"
-                                                        locale="#{bizConfig.locale}">
-                
-                                            </p:calendar>
-                                            <p:outputLabel value="到"/>
-                                            <p:calendar id="gtxtEndDate" value="#{ctrlCHA0002.vm.endDate}"
-                                                        placeholder="结束日期"
-                                                        disabled="#{ctrlCHA0002.vm.riQiFanWei!='custom'}"
-                                                        mask="true" styleClass="tct"
-                                                        pattern="#{bizConfig.dateFormat}"
-                                                        required="true"
-                                                        requiredMessage="#{ctrlCHA0002.isRequiredMessage('结束日期')}"
-                                                        size="12"
-                                                        converterMessage="#{ctrlCHA0002.dateUnvalidMessage('结束日期')}"
-                                                        locale="#{bizConfig.locale}">
-                                            </p:calendar>
-                                            <p:selectOneMenu id="griQiFanWei" 
-                                                             value="#{ctrlCHA0002.vm.riQiFanWei}" 
-                                                             style="width:125px">
-                                                <p:ajax listener="#{ctrlCHA0002.changeRiQi}" process="@this" update="@this gtxtStartDate gtxtEndDate"/>
-                                                <f:selectItem itemLabel="今天" itemValue="today" />
-                                                <f:selectItem itemLabel="本周" itemValue="thisWeek" />
-                                                <f:selectItem itemLabel="本月" itemValue="thisMonth" />
-                                                <f:selectItem itemLabel="本季度" itemValue="thisSeason" />
-                                                <f:selectItem itemLabel="自定义" itemValue="custom" />
-                                            </p:selectOneMenu>
-                                            <p:commandButton value="查询" process="@this gongyingshangcanShu" actionListener="#{ctrlCHA0002.showGongYingShangTongJi}" 
-                                                             resetValues="true"
-                                                             oncomplete="PAGE_COM.buttonShortCutKeyInvoke('frmMain:btnValidationPanel');"
-                                                             update="gongyingshangtongji,  frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
-                                        </h:panelGrid>
-                
-                                        <p:outputPanel id="gongyingshangtongji" styleClass="gongyingshangtongji">
-                                            <p:dataTable value="#{ctrlCHA0002.vm.gongYingShangRuKuTongJiList}"
-                                                         widgetVar="chukuTable"
-                                                         var="item"
-                                                         id="gongyingshangtongji_table"
-                                                         emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
-                                                         rows="15"
-                                                         paginatorAlwaysVisible="false"
-                                                         paginator="true"
-                                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                         rowsPerPageTemplate="15, 30, 50"
-                                                         styleClass="tct">
-                                                <p:columnGroup type="header">
-                                                    <p:row>
-                                                        <p:column headerText="供应商名" 
-                                                                  sortBy="#{item.gongSiMing}"
-                                                                  filterMaxLength="50" 
-                                                                  filterBy="#{item.gongSiMing}"
-                                                                  filterMatchMode="contains" 
-                                                                  styleClass="wd-p-25" 
-                                                                  />
-                                                        <p:column headerText="#{msg.wu_zhi_miao_shu}" 
-                                                                  sortBy="#{item.wuZiMiaoShu}"
-                                                                  filterMaxLength="50" 
-                                                                  filterBy="#{item.wuZiMiaoShu}"
-                                                                  filterMatchMode="contains" 
-                                                                  styleClass="wd-p-25"/>
-                                                        <p:column headerText="入库数" styleClass="wd-p-25" sortBy="#{item.zhengPinShu}"/>
-                                                        <p:column headerText="总金额" styleClass="wd-p-25" />
-                                                    </p:row>
-                                                </p:columnGroup>
-                
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.gongSiMing}" />
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.wuZiMiaoShu}"/>
-                                                </p:column>
-                                                正品数
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.zhengPinShu}">
-                                                        <f:convertNumber pattern="#{bizConfig.numberFormatPattern}" />
-                                                    </h:outputText>
-                                                </p:column>
-                                                <p:column styleClass="tct">
-                                                    <h:outputText value="#{item.zongJinE}">
-                                                        <f:convertNumber currencySymbol="" type="currency"  maxFractionDigits="2"/>
-                                                    </h:outputText>
-                                                </p:column>                             
-                                            </p:dataTable>
-                                        </p:outputPanel>
-                                    </p:tab>-->
-                <!--                </p:tabView>-->
             </div>
         </div>
     </p:outputPanel>

@@ -17,7 +17,7 @@
                 <div class="SeparatorFull"></div>
 
 <!--                <p:tabView id="tabview" activeIndex="#{ctrlCHA0003.vm.tabIndex}">
-    <p:tab title="各分公司收费明细表" >-->
+    <p:tab title="各分公司收费明细�?" >-->
                 <p:panelGrid columns="8"
                              id="canShu"
                              layout="grid"
@@ -37,8 +37,8 @@
                     <p:outputLabel for="company" value="公司"/>
                     <p:selectOneMenu id="company" autoWidth="false" styleClass="wd-f-40" 
                                      value="#{ctrlCHA0003.vm.companyName}" required="true"
-                                requiredMessage="#{ctrlCHA0003.isRequiredMessage('公司')}">
-                        <f:selectItem itemLabel="请选择公司" itemValue=""/>
+                                     requiredMessage="#{ctrlCHA0003.isRequiredMessage('公司')}">
+                        <f:selectItem itemLabel="请�?�择公司" itemValue=""/>
                         <p:ajax process="@this, company" update="building" listener="#{ctrlCHA0003.changeCompany()}"></p:ajax>
                         <f:selectItems value="#{ctrlCHA0003.vm.companyList}"  var="items" 
                                        itemLabel="#{items.name}" itemValue="#{items.name}"/>
@@ -64,7 +64,7 @@
                                  emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
                                  styleClass="tct">
                         <f:facet name="header">
-                            <h:outputText value="大楼收费明细表"  styleClass="Fs20"/>
+                            <h:outputText value="大楼收费明细�?"  styleClass="Fs20"/>
                             <h:commandLink  styleClass="fr">
                                 <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
                                 <p:dataExporter type="xls" target="sfmx_table" fileName="soufeimingxibiao" />
@@ -72,7 +72,7 @@
                         </f:facet>
                         <!--                        <p:columnGroup type="header">
                                                     <p:row>
-                                                        <p:column filterBy="#{item.buildingName}" headerText="大楼名" 
+                                                        <p:column filterBy="#{item.buildingName}" headerText="大楼�?" 
                                                                   sortBy="#{item.buildingName}"
                                                                   footerText="contains"  filterMatchMode="startsWith"
                                                                   styleClass="wd-p-10 tct"/>
@@ -87,18 +87,18 @@
                                                                            itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
                                                         </p:selectOneMenu>
                                                     </f:facet>
-                                                        <p:column headerText="应收金额（元）" sortBy="#{item.yjk}" styleClass="wd-p-10 tct"/>
-                                                        <p:column headerText="已收金额（元）" sortBy="#{item.jk}" styleClass="wd-p-10 tct"/>
+                                                        <p:column headerText="应收金额（元�?" sortBy="#{item.yjk}" styleClass="wd-p-10 tct"/>
+                                                        <p:column headerText="已收金额（元�?" sortBy="#{item.jk}" styleClass="wd-p-10 tct"/>
                                                         <p:column headerText="欠款"  sortBy="#{item.owe}" styleClass="wd-p-10 tct"/>
-                                                        <p:column headerText="收费率" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct"/>
+                                                        <p:column headerText="收费�?" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct"/>
                                                     </p:row>
                                                 </p:columnGroup>-->
 
-<!--                        <p:column filterBy="#{item.buildingName}" headerText="大楼名" 
+<!--                        <p:column filterBy="#{item.buildingName}" headerText="大楼�?" 
                                   sortBy="#{item.buildingName}"
                                   footerText="contains"  filterMatchMode="startsWith"
                                   styleClass="wd-p-10 tct">-->
-                        <p:column sortBy="#{item.buildingName}" headerText="大楼名" styleClass="wd-p-10 tct">
+                        <p:column sortBy="#{item.buildingName}" headerText="大楼�?" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.buildingName}" />
                         </p:column>
 
@@ -129,7 +129,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="应收金额（元）" sortBy="#{item.yjk}" styleClass="wd-p-10 tct">
+                        <p:column headerText="应收金额（元�?" sortBy="#{item.yjk}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.yjk}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -139,7 +139,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="已收金额（元）" sortBy="#{item.jk}" styleClass="wd-p-10 tct">
+                        <p:column headerText="已收金额（元�?" sortBy="#{item.jk}" styleClass="wd-p-10 tct">
                             <h:outputText value="#{item.jk}" styleClass="fr">
                                 <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
                             </h:outputText>
@@ -159,7 +159,7 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                        <p:column headerText="收费率" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct">
+                        <p:column headerText="收费�?" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct">
                             <h:outputText  value="#{item.sfl}">
                                 <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
                             </h:outputText>
@@ -171,10 +171,31 @@
                                 %
                             </f:facet>
                         </p:column>
-                        <p:column headerText="收费员" sortBy="#{item.sfy}"  styleClass="wd-p-10 tct">
+                        <p:column headerText="违约�?"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znj}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlCHA0003.vm.getTotal('znj')}" styleClass="fr">
+                                    <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="收费�?" sortBy="#{item.sfy}"  styleClass="wd-p-10 tct">
                             <h:outputText  value="#{item.sfy}" />
                         </p:column>
                     </p:dataTable>
+                    <p:tabView id="tabView" 
+                               value="#{ctrlCHA0003.vm.tabNameList}" var="tabName" 
+                               rendered="#{not empty ctrlCHA0003.vm.shuJuList}">
+                        <p:tab title="#{tabName}">
+                            <p:outputPanel>
+                                <p:chart type="pie" model="#{ctrlCHA0003.vm.modelMap.get(tabName)}" style="width:400px;height:300px">
+
+                                </p:chart>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
                 </p:outputPanel>
             </div>
         </div>

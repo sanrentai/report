@@ -2,11 +2,7 @@ package cn.tst.gongnuan.controller;
 
 import cn.tst.gongnuan.bizlogic.MasterPageBizLogic;
 import java.text.MessageFormat;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -14,15 +10,12 @@ import javax.inject.Named;
 import cn.tst.gongnuan.common.SepC;
 import cn.tst.gongnuan.entity.GroupMenu;
 import cn.tst.gongnuan.entity.GroupMenuItem;
-import cn.tst.gongnuan.service.impl.GroupMenuFacade;
-import cn.tst.gongnuan.service.impl.GroupMenuItemFacade;
+import cn.tst.gongnuan.entity.RepBiao;
 import cn.tst.gongnuan.viewmodel.MasterPageViewModel;
-import java.util.ArrayList;
 import java.util.HashMap;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
-import org.primefaces.model.menu.MenuElement;
 import org.primefaces.model.menu.MenuModel;
 
 /**
@@ -47,7 +40,7 @@ public class MasterPageController extends BusinessBaseController {
     private MasterPageBizLogic bizLogic;
 
     /**
-     * 页面初始化
+     * 页面初始�?
      */
     @PostConstruct
     public void init() {
@@ -58,7 +51,7 @@ public class MasterPageController extends BusinessBaseController {
     }
 
     //***********************************************************************************************
-    //                                  私有方法全部放在类的最下方
+    //                                  私有方法全部放在类的�?下方
     //***********************************************************************************************
     private void createMenu() {
 
@@ -82,6 +75,40 @@ public class MasterPageController extends BusinessBaseController {
                     break;
                 case "TST":
                     pageFunctionPath = "test/";
+                    for (RepBiao biao : vm.getBiaoList()) {
+                        DefaultMenuItem menuItem = new DefaultMenuItem();
+                        String commandName = MessageFormat.format("#'{' {0}.transfer2Page(''{1}'',''{2}'') '}'",
+                                SepC.ControllerID.MASTER,
+                                biao.getBiaoMing(),
+                                pageFunctionPath);
+
+                        ///子菜单项目名
+                        menuItem.setValue(biao.getCnBiaoMing());
+                        ///Ajax请求
+                        menuItem.setAjax(true);
+                        ///设置为异步的
+                        menuItem.setAsync(false);
+                        ///设置Ajax请求命令
+                        menuItem.setCommand(commandName);
+                        ///不做任何验证
+                        menuItem.setImmediate(true);
+                        ///重置�?有�??
+                        menuItem.setResetValues(true);
+                        ///直提交自�?
+                        menuItem.setProcess("@this");
+                        ///PageLoad 动画效果
+                        menuItem.setOnstart("restartPace();");
+                        ///更新页面内容
+                        menuItem.setUpdate("frmMain:sub_content");
+                        ///添加子菜�?
+                        titleItem.addElement(menuItem);
+                    }
+                    break;
+                case "HYR":
+                    pageFunctionPath = "hongyu/";
+                    break;
+                case "HYC":
+                    pageFunctionPath = "hycharge/";
                     break;
                 default:
                     return;
@@ -105,15 +132,15 @@ public class MasterPageController extends BusinessBaseController {
                 menuItem.setCommand(commandName);
                 ///不做任何验证
                 menuItem.setImmediate(true);
-                ///重置所有值
+                ///重置�?有�??
                 menuItem.setResetValues(true);
-                ///直提交自己
+                ///直提交自�?
                 menuItem.setProcess("@this");
                 ///PageLoad 动画效果
                 menuItem.setOnstart("restartPace();");
                 ///更新页面内容
                 menuItem.setUpdate("frmMain:sub_content");
-                ///添加子菜单
+                ///添加子菜�?
                 titleItem.addElement(menuItem);
             });
             titleItem.setLabel(gm.getMenuName());
@@ -138,6 +165,35 @@ public class MasterPageController extends BusinessBaseController {
     public void transfer2Page(String menuItemId, String pageFunctionPath) {
         ///设置嵌入页面的URL
         this.contentURL = "/views/" + pageFunctionPath + "/" + menuItemId + ".xhtml";
+        ///从视图种删除不相关的控制�?
+        this.removeUnsedControllerFromViewMap("ctrl" + menuItemId);
+    }
+
+    /**
+     * 删除未使用的控制器ID
+     *
+     * @param currentControllerId 当前控制器ID
+     */
+    private void removeUnsedControllerFromViewMap(String currentControllerId) {
+
+        ///删除不需要加载的对象控制�?
+        this.getViewMap().entrySet().removeIf(entry -> {
+            ///要规避的ID 这些控制器不能删�? !!!
+            //                    
+            return !SepC.ControllerID.LOGIN.equals(entry.getKey())
+                    && !SepC.ControllerID.MASTER.equals(entry.getKey())
+                    && !SepC.ControllerID.SYSTEM_CONFIG.equals(entry.getKey())
+                    && !SepC.ControllerID.GONG_ZUO_TAI.equals(entry.getKey())
+                    && !currentControllerId.equals(entry.getKey());
+        });
+
+        //测试LOG
+//        this.getViewMap().forEach((k, v) -> {
+//            System.out.println(k + ":" + v);
+//        });
+
+        ///强制回收内存
+        System.gc();
     }
 
     /**
@@ -148,15 +204,16 @@ public class MasterPageController extends BusinessBaseController {
      * @return 页面Title内容
      */
     public String createPageTitle(String menuId, String menuItemId) {
-//        String mode="test";
-//        
-//        if("test".equals(mode)){
-//            return "测试 > 各分公司收费明细表(TST0001)";
-//        }
+
         ///获取当前是使用的项目ID
         GroupMenuItem current = bizLogic.getCurrentGroupMenuItem(menuId, menuItemId);
-
-        return current.getMenu().getMenuName() + " > " + current.getItemName() + "(" + menuItemId + ")";
+        if (current != null) {
+            return current.getMenu().getMenuName() + " > " + current.getItemName() + "(" + menuItemId + ")";
+        } else {
+            RepBiao biao = bizLogic.getCurrentRepBiao(menuItemId);
+            GroupMenu currentCcCaiDan = bizLogic.getCurrentCcCaiDan(menuId);
+            return currentCcCaiDan.getMenuName() + " > " + biao.getCnBiaoMing() + "(" + menuItemId + ")";
+        }
     }
 
     private Map caiDanMap = new HashMap();

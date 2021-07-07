@@ -6,8 +6,10 @@ import javax.ejb.Stateless;
 import cn.tst.gongnuan.bizlogic.MasterPageBizLogic;
 import cn.tst.gongnuan.entity.GroupMenu;
 import cn.tst.gongnuan.entity.GroupMenuItem;
+import cn.tst.gongnuan.entity.RepBiao;
 import cn.tst.gongnuan.service.impl.GroupMenuFacade;
 import cn.tst.gongnuan.service.impl.GroupMenuItemFacade;
+import cn.tst.gongnuan.service.impl.RepBiaoFacade;
 import cn.tst.gongnuan.viewmodel.MasterPageViewModel;
 import java.util.ArrayList;
 
@@ -24,55 +26,35 @@ public class MasterPageBizLogicImpl implements MasterPageBizLogic {
     @EJB
     private GroupMenuFacade groupMenuDao;
 
+    @EJB
+    private RepBiaoFacade biaoDao;
+
     @Override
     public void loadMasterPageBizLogic(MasterPageViewModel vm) {
         String mode;
         mode = "test";
-//        ///获取用户可以使用的菜单
+//        ///获取用户可以使用的菜�?
 //        List<GroupMenuItem> caiDanXiangMuList = this.groupMenuItemDao.findAll();
         List<GroupMenu> groupMenuList = this.groupMenuDao.findAll();///设置数据模型
-//        if (mode.equals("test")) {
-//            GroupMenu test = new GroupMenu();
-//            test.setMenuId("TST");
-//            test.setMenuName("测试");
-//            test.setMenuItems(new ArrayList<>());
-//            
-//            GroupMenuItem testItem = new GroupMenuItem();
-//            testItem.setItemId("TST0001");
-//            testItem.setItemName("测试项目001");
-//            testItem.setMenuId("TST");
-//            testItem.setMenu(test);
-//            test.getMenuItems().add(testItem);
-//            
-//            testItem = new GroupMenuItem();
-//            testItem.setItemId("TST0002");
-//            testItem.setItemName("测试项目002");
-//            testItem.setMenuId("TST");
-//            testItem.setMenu(test);
-//            test.getMenuItems().add(testItem);
-//            
-//            testItem = new GroupMenuItem();
-//            testItem.setItemId("TST0003");
-//            testItem.setItemName("测试项目003");
-//            testItem.setMenuId("TST");
-//            testItem.setMenu(test);
-//            test.getMenuItems().add(testItem);
-//            
-//            testItem = new GroupMenuItem();
-//            testItem.setItemId("TST0004");
-//            testItem.setItemName("测试项目004");
-//            testItem.setMenuId("TST");
-//            testItem.setMenu(test);
-//            test.getMenuItems().add(testItem);
-//            
-//            groupMenuList.add(test);
-//        }
         vm.setGroupMenuList(groupMenuList);
+        List<RepBiao> biaoList = biaoDao.findAll();
+        vm.setBiaoList(biaoList);
+
     }
 
     @Override
     public GroupMenuItem getCurrentGroupMenuItem(String menuId, String menuItemId) {
         return groupMenuItemDao.findByItemIdAndMenuId(menuItemId, menuId);
+    }
+
+    @Override
+    public RepBiao getCurrentRepBiao(String menuItemId) {
+        return biaoDao.findByBiaoMing(menuItemId);
+    }
+
+    @Override
+    public GroupMenu getCurrentCcCaiDan(String menuId) {
+        return groupMenuDao.findById(menuId);
     }
 
 }

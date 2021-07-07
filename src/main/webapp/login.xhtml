@@ -38,51 +38,51 @@
                                 <div class="Wid100 FontLatoRegular Navy Fs30">报表系统</div>
                                 <div class="EmptyBox30"></div>
                                 <p:panelGrid layout="grid" columns="1" styleClass="ui-panelgrid-blank">
-<!--                                    <p:selectOneMenu id="gong_si"
-                                                     value="#{ctrlLogin.selectedSysId}"
-                                                     required="true"
-                                                     requiredMessage="#{ctrlLogin.isRequiredMessage('公司')}">
-                                        <p:ajax listener="#{ctrlLogin.changeGongSiEvent}" process="@this" update="username"/>
-                                        <f:selectItem itemLabel="请选择" itemValue=""/>
-                                        <f:selectItems value="#{ctrlLogin.gongSiList}"
-                                                       var="gongsi"
-                                                       itemLabel="#{gongsi.companyName}"
-                                                       itemValue="#{gongsi.sysId}"/>
-                                    </p:selectOneMenu>-->
-<!--                                    <p:outputPanel id="username">
-                                        <p:selectOneMenu id="bu_men" style="width: 50%"
-                                                         value="#{ctrlLogin.selectedBuMenId}"
-                                                         required="true"
-                                                         requiredMessage="#{ctrlLogin.isRequiredMessage('部门')}">
-                                            <p:ajax listener="#{ctrlLogin.changeBuMenEvent}" process="@this" update="username"/>
-                                            <f:selectItem itemLabel="请选择" itemValue=""/>
-                                            <f:selectItems value="#{ctrlLogin.buMenList}"
-                                                           var="bumen"
-                                                           itemLabel="#{bumen.buMenMing}"
-                                                           itemValue="#{bumen.buMenId}"/>
-                                        </p:selectOneMenu>
-                                        <p:selectOneMenu id="login_id" style="width: 50%"
-                                                         value="#{ctrlLogin.loginId}"
-                                                         required="true"
-                                                         requiredMessage="#{ctrlLogin.isRequiredMessage(msg.login_id)}">
-                                            <f:selectItems value="#{ctrlLogin.loginInfoList}"
-                                                           var="user"
-                                                           itemLabel="#{user.yuanGong.nameZ}"
-                                                           itemValue="#{user.loginId}"/>
-                                        </p:selectOneMenu>
-                                    </p:outputPanel>-->
+                                    <!--                                    <p:selectOneMenu id="gong_si"
+                                                                                         value="#{ctrlLogin.selectedSysId}"
+                                                                                         required="true"
+                                                                                         requiredMessage="#{ctrlLogin.isRequiredMessage('公司')}">
+                                                                            <p:ajax listener="#{ctrlLogin.changeGongSiEvent}" process="@this" update="username"/>
+                                                                            <f:selectItem itemLabel="请选择" itemValue=""/>
+                                                                            <f:selectItems value="#{ctrlLogin.gongSiList}"
+                                                                                           var="gongsi"
+                                                                                           itemLabel="#{gongsi.companyName}"
+                                                                                           itemValue="#{gongsi.sysId}"/>
+                                                                        </p:selectOneMenu>-->
+                                    <!--                                    <p:outputPanel id="username">
+                                                                            <p:selectOneMenu id="bu_men" style="width: 50%"
+                                                                                             value="#{ctrlLogin.selectedBuMenId}"
+                                                                                             required="true"
+                                                                                             requiredMessage="#{ctrlLogin.isRequiredMessage('部门')}">
+                                                                                <p:ajax listener="#{ctrlLogin.changeBuMenEvent}" process="@this" update="username"/>
+                                                                                <f:selectItem itemLabel="请选择" itemValue=""/>
+                                                                                <f:selectItems value="#{ctrlLogin.buMenList}"
+                                                                                               var="bumen"
+                                                                                               itemLabel="#{bumen.buMenMing}"
+                                                                                               itemValue="#{bumen.buMenId}"/>
+                                                                            </p:selectOneMenu>
+                                                                            <p:selectOneMenu id="login_id" style="width: 50%"
+                                                                                             value="#{ctrlLogin.loginId}"
+                                                                                             required="true"
+                                                                                             requiredMessage="#{ctrlLogin.isRequiredMessage(msg.login_id)}">
+                                                                                <f:selectItems value="#{ctrlLogin.loginInfoList}"
+                                                                                               var="user"
+                                                                                               itemLabel="#{user.yuanGong.nameZ}"
+                                                                                               itemValue="#{user.loginId}"/>
+                                                                            </p:selectOneMenu>
+                                                                        </p:outputPanel>-->
                                     <!--用户ID-->
                                     <p:selectOneMenu id="login_id" 
-                                                         value="#{ctrlLogin.loginId}"
-                                                         required="true"
-                                                         requiredMessage="#{ctrlLogin.isRequiredMessage(msg.login_id)}">
+                                                     value="#{ctrlLogin.loginId}"
+                                                     required="true"
+                                                     requiredMessage="#{ctrlLogin.isRequiredMessage(msg.login_id)}">
                                         <f:selectItems value="#{ctrlLogin.employeeList}"
-                                                           var="user"
-                                                           itemLabel="#{user.empName}"
-                                                           itemValue="#{user.empId}"/>
-                                        </p:selectOneMenu>
+                                                       var="user"
+                                                       itemLabel="#{user.empName}"
+                                                       itemValue="#{user.empId}"/>
+                                    </p:selectOneMenu>
 <!--                                    <p:inputText id="txtLoginId" placeholder="#{msg.login_id}" value="#{ctrlLogin.loginId}"
-                                                 required="true" requiredMessage="#{ctrlLogin.isRequiredMessage(msg.login_id)}" style="padding:15px !important;"/>-->
+                                             required="true" requiredMessage="#{ctrlLogin.isRequiredMessage(msg.login_id)}" style="padding:15px !important;"/>-->
                                     <!--密码-->
                                     <p:password id="txtPassword" placeholder="密码" value="#{ctrlLogin.password}" 
                                                 required="true" requiredMessage="#{ctrlLogin.isRequiredMessage(msg.password)}" style="padding:15px !important;"/>

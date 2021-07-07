@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class GroupMenuItemFacade extends AbstractFacade<GroupMenuItem> {
+public class GroupMenuItemFacade extends AbsFacade<GroupMenuItem> {
 
     private static final Logger LOG = Logger.getLogger(GroupMenuItem.class.getName());
 

@@ -5,16 +5,17 @@
  */
 package cn.tst.gongnuan.viewmodel;
 
-import cn.tst.gongnuan.entity.VBuilding;
 import cn.tst.gongnuan.entity.VCompany;
-import cn.tst.gongnuan.entity.VYearnum;
 import cn.tst.gongnuan.service.dto.BuildingDTO;
 import cn.tst.gongnuan.service.dto.SouFeiNianDuBiaoByBuildingDTO;
 import cn.tst.gongnuan.service.dto.YearNumDTO;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import org.primefaces.model.chart.PieChartModel;
 
 /**
  *
@@ -34,6 +35,16 @@ public class CHA0003ViewModel extends BaseViewModel {
     private List<BuildingDTO> buildingList;
     ///年度list
     private List<YearNumDTO> yearnumList;
+    
+    private PieChartModel model;
+
+    public PieChartModel getModel() {
+        return model;
+    }
+
+    public void setModel(PieChartModel model) {
+        this.model = model;
+    }
     ///大楼号码
     private String buildingNo;
     private BigDecimal totalOwe;
@@ -41,6 +52,26 @@ public class CHA0003ViewModel extends BaseViewModel {
     private BigDecimal totalYjk;
     private BigDecimal totalSfl;
     private BigDecimal totalArea;
+    
+    private List<String> tabNameList;
+    
+    private Map<String, PieChartModel> modelMap;
+
+    public Map<String, PieChartModel> getModelMap() {
+        return modelMap;
+    }
+
+    public void setModelMap(Map<String, PieChartModel> modelMap) {
+        this.modelMap = modelMap;
+    }
+
+    public List<String> getTabNameList() {
+        return tabNameList;
+    }
+
+    public void setTabNameList(List<String> tabNameList) {
+        this.tabNameList = tabNameList;
+    }
 
     public BigDecimal getTotalArea() {
         return totalArea;
@@ -144,6 +175,23 @@ public class CHA0003ViewModel extends BaseViewModel {
 
     public void setYearnumList(List<YearNumDTO> yearnumList) {
         this.yearnumList = yearnumList;
+    }
+    
+    public BigDecimal getTotal(String t)
+            throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
+        BigDecimal total = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return total;
+        }
+
+        for (SouFeiNianDuBiaoByBuildingDTO item : shuJuList) {
+            Method method = item.getClass().getMethod("get" + t.substring(0, 1).toUpperCase() + t.substring(1));
+            total = total.add((BigDecimal) method.invoke(item));
+        }
+
+        return total;
+
     }
     
 }

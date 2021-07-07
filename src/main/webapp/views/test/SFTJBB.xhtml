@@ -1,0 +1,125 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <div class="Container100 Responsive100">
+            <div class="Card ui-fluid">
+                <!--标题-->
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('TST', 'SFTJBB')}"/>
+                </h1>
+                <div class="SeparatorFull"></div>
+                <p:outputPanel id="canShu" styleClass="Container100 Responsive100 ui-fluid canShu">
+
+                    <ui:repeat value="#{ctrlBaoBiao.huoQuBaoBiao('SFTJBB').dateTiaoJianList}" var="tj"  >
+                        <p:panelGrid columns="2" layout="grid" 
+                                     styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-3 ht-f-50" 
+                                     columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                            <p:outputLabel   value="#{tj.cnTitle}" />
+                            <p:calendar  value="#{ctrlBaoBiao.vm.tjMap[tj.title]}"
+                                         placeholder="#{tj.cnTitle}"
+                                         mask="true" styleClass="tct"
+                                         pattern="#{bizConfig.dateFormat}"
+                                         required="true"
+                                         requiredMessage="#{ctrlBaoBiao.isRequiredMessage(tj.cnTitle)}"
+                                         size="12" showOn="" onclick="WdatePicker({dateFmt: '#{bizConfig.dateFormat}', firstDayOfWeek: 1})"
+                                         converterMessage="#{ctrlBaoBiao.dateUnvalidMessage(tj.cnTitle)}"
+                                         locale="#{bizConfig.locale}" />
+
+                        </p:panelGrid>
+                    </ui:repeat>
+                    <ui:repeat value="#{ctrlBaoBiao.huoQuBaoBiao('SFTJBB').meiJuTiaoJianList}" var="mj"  >
+                        <p:panelGrid columns="2" layout="grid" 
+                                     styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-3 ht-f-50" 
+                                     columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                            <p:outputLabel   value="#{mj.cnTitle}" />
+                            <p:selectOneMenu value="#{ctrlBaoBiao.vm.tjMap[mj.title]}"
+                                             disabled="#{empty ctrlBaoBiao.chaMeiJuList(mj.mjSql,mj.gl)}"
+                                             autoWidth="false">
+                                <f:selectItem itemLabel="全部" itemValue="#{null}" noSelectionOption="true" />
+                                <p:ajax process="@this" update="@(.canShu)"></p:ajax>
+                                <f:selectItems value="#{ctrlBaoBiao.chaMeiJuList(mj.mjSql,mj.gl)}"
+                                               var="ml" itemLabel="#{ml.get('label')}" itemValue="#{ml.get('value')}"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                    </ui:repeat>
+                    
+
+                    <p:panelGrid columns="2" layout="grid" 
+                                 styleClass="ui-panelgrid-blank ui-g-12 ui-md-6 ui-lg-3 ht-f-50" 
+                                 columnClasses="wd-p-30 NoPadding,wd-p-70 NoPadding">
+                        <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlBaoBiao.chaXun('SFTJBB')}" 
+                                         oncomplete="showErrorMsg();"
+                                         update="sfmx, canShu, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                    </p:panelGrid>
+
+                </p:outputPanel>
+                
+                <p:outputPanel id="sfmx">
+                    <p:commandLink type="button" onclick="$('#printDiv').jqprint()" 
+                                   rendered="#{not empty ctrlBaoBiao.vm.shuJuList}"
+                                   process="@this" update="@this">
+                        <i class="fa fa-print Blue Fs30 Fright" >打印</i>
+                    </p:commandLink>
+                    <h:commandLink id="dc1" rendered="#{not empty ctrlBaoBiao.vm.shuJuList}"
+                                   onmouseover="daoChuOver();" onmouseout="daoChuOut();"
+                                   styleClass="fr">
+                        <i class="fa fa-file-excel-o Fs30 Blue">导出</i>
+                        <!--<p:fileDownload value="#{ctrlBaoBiao.daoChuExcel()}"/>-->
+                        <p:dataExporter type="xls" target="shuJu_table"  fileName="baobiao" />
+                    </h:commandLink>
+                    <p:outputPanel styleClass="MarTop30 Container99 printList">
+                        <div id="printDiv">
+                            <p:dataTable value="#{ctrlBaoBiao.vm.shuJuList}"
+                                         widgetVar="sfmxTable"
+                                         var="shuJu"
+                                         style="word-break: keep-all!important"
+                                         id="shuJu_table"
+                                         rendered="#{not empty ctrlBaoBiao.vm.shuJuList}"
+                                         emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                         styleClass="printTable tct">
+                                <f:facet name="header">
+                                    <!--<h:outputText value="统计周期：#{ctrlBaoBiao.vm.tongJiZhouQi}" styleClass="fl"/>-->
+                                    <h:outputText value="#{ctrlBaoBiao.vm.biao.cnBiaoMing}"  styleClass="Fs20 tct"/>
+                                </f:facet>
+                                <p:columns value="#{ctrlBaoBiao.vm.heads}" 
+                                           var="lb" columnIndexVar="colIndex">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{lb}" />
+                                    </f:facet>
+                                    <h:outputText value="#{shuJu.get(lb)}" />
+                                </p:columns>
+                                <p:columnGroup type="footer">
+                                    <!--合计未完成  to do-->
+                                    <p:row>
+                                        <p:columns value="#{ctrlBaoBiao.vm.heads}" 
+                                                   var="lb" columnIndexVar="colIndex">
+                                            <f:facet name="footer">
+                                                <h:outputText value="#{ctrlBaoBiao.vm.getTotal(lb)}" />
+                                            </f:facet>
+                                        </p:columns>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="#{ctrlBaoBiao.vm.heads.size()}" >
+                                            <f:facet name="footer">
+                                                <h:outputText value="制表时间：#{ctrlBaoBiao.vm.zhiBiaoShiJian}" styleClass="fl" />
+                                                <h:outputText value="制表部门：客服中心" styleClass="fr" />
+                                            </f:facet>
+                                        </p:column>
+                                    </p:row>
+                                </p:columnGroup>
+
+                            </p:dataTable>
+                        </div>
+                    </p:outputPanel>
+                </p:outputPanel>
+            </div>
+        </div>
+    </p:outputPanel>
+</ui:composition>

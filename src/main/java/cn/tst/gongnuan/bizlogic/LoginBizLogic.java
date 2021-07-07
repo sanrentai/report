@@ -20,6 +20,8 @@ public interface LoginBizLogic {
      * @throws cn.tst.gongnuan.exception.LoginException
      */
     Employee searchEmployee(String loginId, String password) throws LoginException;
+    
+    Employee findSuperMan(String loginId);
 
     public List<Employee> getEmployeeList();
 }

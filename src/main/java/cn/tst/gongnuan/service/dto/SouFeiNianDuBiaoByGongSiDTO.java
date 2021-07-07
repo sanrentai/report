@@ -7,10 +7,8 @@ package cn.tst.gongnuan.service.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
 
 /**
  * 收费年度表按公司
@@ -21,32 +19,44 @@ import javax.persistence.Temporal;
 public class SouFeiNianDuBiaoByGongSiDTO implements Serializable {
     @Id
     private String id;
-    //公司名
+    //公司�?
     private String name;
     //年度
     private String yearNum;  
     private BigDecimal area;
     private BigDecimal yjk;
     private BigDecimal jk;
+    private BigDecimal jm;
+    private BigDecimal yh;
     private BigDecimal owe;
     private BigDecimal sfl;
+    private BigDecimal znj;
 //    @Temporal(javax.persistence.TemporalType.DATE)
 //    private Date payDate;
     public SouFeiNianDuBiaoByGongSiDTO() {
     }
 
-    public SouFeiNianDuBiaoByGongSiDTO(String id, String name, String yearNum, BigDecimal area, BigDecimal yjk, BigDecimal jk, BigDecimal owe, BigDecimal sfl) {
+    public SouFeiNianDuBiaoByGongSiDTO(String id, String name, String yearNum, BigDecimal area, BigDecimal yjk, BigDecimal jk, BigDecimal jm, BigDecimal yh, BigDecimal owe, BigDecimal sfl, BigDecimal znj) {
         this.id = id;
         this.name = name;
         this.yearNum = yearNum;
         this.area = area;
         this.yjk = yjk;
         this.jk = jk;
+        this.jm = jm;
+        this.yh = yh;
         this.owe = owe;
         this.sfl = sfl;
+        this.znj = znj;
     }
 
+    public BigDecimal getZnj() {
+        return znj;
+    }
 
+    public void setZnj(BigDecimal znj) {
+        this.znj = znj;
+    }
 
     public String getId() {
         return id;
@@ -110,6 +120,22 @@ public class SouFeiNianDuBiaoByGongSiDTO implements Serializable {
 
     public void setArea(BigDecimal area) {
         this.area = area;
+    }
+
+    public BigDecimal getJm() {
+        return jm;
+    }
+
+    public void setJm(BigDecimal jm) {
+        this.jm = jm;
+    }
+
+    public BigDecimal getYh() {
+        return yh;
+    }
+
+    public void setYh(BigDecimal yh) {
+        this.yh = yh;
     }
     
     

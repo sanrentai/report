@@ -20,7 +20,7 @@ public final class SepC {
     public static final String INIT_PARAM_UPLOAD_DIRECTORY = "uploadDirectory";
 
     /**
-     * 图片上传默认文件名
+     * 图片上传默认文件�?
      */
     public static final class UploadFileDefaultName {
 
@@ -48,11 +48,11 @@ public final class SepC {
          */
         public static final String ORIGIN = "origin";
         /**
-         * 压缩后照片路径
+         * 压缩后照片路�?
          */
         public static final String COMPRESSION = "compression";
         /**
-         * 预览用照片路径
+         * 预览用照片路�?
          */
         public static final String PREVIEW = "preview";
     }
@@ -82,11 +82,11 @@ public final class SepC {
     public static final class Sex {
 
         /**
-         * 男
+         * �?
          */
         public static final String MALE = "1";
         /**
-         * 女
+         * �?
          */
         public static final String FEMALE = "0";
     }
@@ -97,12 +97,12 @@ public final class SepC {
     public static final String DEFAULT_CREATOR_ID = "EMP0000000";
 
     /**
-     * 持久化单元名称,参考: persistence.xml
+     * 持久化单元名�?,参�??: persistence.xml
      */
     public static final String PERSISTENCE_UNIT = "PSUT_heating";
 
     /**
-     * 持久化单元名称,参考: persistence.xml
+     * 持久化单元名�?,参�??: persistence.xml
      */
     public static final String PERSISTENCE_UNIT2 = "subdb1";
 
@@ -142,7 +142,7 @@ public final class SepC {
     public static final String FORMAT_TIME_TYPE24HM = "HH:mm";
 
     /**
-     * 数量等显示格式
+     * 数量等显示格�?
      */
     public static final String FORMAT_NUMBER = "#,##0.##";
 
@@ -229,12 +229,12 @@ public final class SepC {
         public static final String LOGIN = "ctrlLogin";
 
         /**
-         * 模板页
+         * 模板�?
          */
         public static final String MASTER = "ctrlMaster";
 
         /**
-         * 菜单状态
+         * 菜单状�??
          */
         public static final String MENU = "ctrlMenu";
 
@@ -244,7 +244,7 @@ public final class SepC {
         public static final String CHANGE_PASSWORD = "ctrlPassChange";
 
         /**
-         * 工作台信息
+         * 工作台信�?
          */
         public static final String GONG_ZUO_TAI = "ctrlGongZuoTai";
 
@@ -254,11 +254,11 @@ public final class SepC {
         public static final String CHA_KAN = "ctrlChaKan";
 
         /**
-         * 各分公司收费明细表
+         * 各分公司收费明细�?
          */
         public static final String CHA0001 = "ctrlCHA0001";
         /**
-         * 公司年度统计表
+         * 公司年度统计�?
          */
         public static final String CHA0002 = "ctrlCHA0002";
         /**
@@ -267,35 +267,112 @@ public final class SepC {
         public static final String CHA0003 = "ctrlCHA0003";
 
         /**
+         * 宏宇各分公司收费明细�?
+         */
+        public static final String HYC0001 = "ctrlHYC0001";
+        /**
+         * 宏宇公司年度统计�?
+         */
+        public static final String HYC0002 = "ctrlHYC0002";
+        /**
+         * 宏宇楼年度统计表
+         */
+        public static final String HYC0003 = "ctrlHYC0003";
+
+        /**
          * 依云首付物业费汇总表
          */
         public static final String WYB0001 = "ctrlWYB0001";
-        
+
         /**
-         * 测试项目1
+         * 收费情况统计�?
          */
         public static final String TST0001 = "ctrlTST0001";
-        
+
         /**
-         * 测试项目2
+         * 收费年度查看�?
+         */
+        public static final String SHOU_FEI_NIAN_DU_CHA_KAN_BIAO = "ctrlSFNDCKB";
+
+        /**
+         * 收费统计报表
          */
         public static final String TST0002 = "ctrlTST0002";
-        
+
         /**
-         * 测试项目3
+         * 面积统计�?
          */
         public static final String TST0003 = "ctrlTST0003";
-        
+
         /**
-         * 测试项目4
+         * 稽查�?
          */
         public static final String TST0004 = "ctrlTST0004";
+
+        /**
+         * 采暖费年度报�?
+         */
+        public static final String TST0005 = "ctrlTST0005";
+
+        /**
+         * 各公司年度报停汇总表
+         */
+        public static final String TST0006 = "ctrlTST0006";
+
+        /**
+         * 各公司年度供热费减免费用汇�?�表
+         */
+        public static final String TST0007 = "ctrlTST0007";
 
         /**
          * 员工管理
          */
         public static final String MST0001 = "ctrlMST0001";
 
+        /**
+         * 收费情况统计�?
+         */
+        public static final String HYR0001 = "ctrlHYR0001";
+
+        /**
+         * 收费统计报表
+         */
+        public static final String HYR0002 = "ctrlHYR0002";
+
+        /**
+         * 面积统计�?
+         */
+        public static final String HYR0003 = "ctrlHYR0003";
+
+        /**
+         * 稽查�?
+         */
+        public static final String HYR0004 = "ctrlHYR0004";
+
+        /**
+         * 采暖费年度报�?
+         */
+        public static final String HYR0005 = "ctrlHYR0005";
+
+        /**
+         * 各公司年度报停汇总表
+         */
+        public static final String HYR0006 = "ctrlHYR0006";
+
+        /**
+         * 各公司年度供热费减免费用汇�?�表
+         */
+        public static final String HYR0007 = "ctrlHYR0007";
+
+        /**
+         * 报表管理
+         */
+        public static final String BAO_BIAO_GUAN_LI = "ctrlBBGL";
+
+        /**
+         * 报表
+         */
+        public static final String BAO_BIAO = "ctrlBaoBiao";
     }
 
     /**
@@ -314,7 +391,7 @@ public final class SepC {
     public static final String FEN_LEI_MEI_ID = "PL00000002";
 
     /**
-     * 油卡所在仓库
+     * 油卡�?在仓�?
      */
     public static final String YOU_KA_CANG_KU = "CK000001";
 
@@ -329,26 +406,26 @@ public final class SepC {
     public static final String ZONG_HE_CANG_KU_ID = "CK000001";
 
     /**
-     * 物资调配状态：等待入库 (购买完成，等待入库)
+     * 物资调配状�?�：等待入库 (购买完成，等待入�?)
      */
     public static final int STATUS_WUZISHENQING_DENGDAIRUKU = 14;
 
     /**
-     * 物资调配状态：调拨申请中 (物资已申请调拨，等待出库)
+     * 物资调配状�?�：调拨申请�? (物资已申请调拨，等待出库)
      */
     public static final int STATUS_WUZIDIAOBO_SHENGQINGZHONG = 0;
 
     /**
-     * 物资调配状态：调拨申请出库 (物资调拨申请，已出库，等待入库)
+     * 物资调配状�?�：调拨申请出库 (物资调拨申请，已出库，等待入�?)
      */
     public static final int STATUS_WUZIDIAOBO_CHUKUZHONG = 1;
 
     /**
-     * 物资调配状态：调拨申请入库 (物资调拨申请，已入库)
+     * 物资调配状�?�：调拨申请入库 (物资调拨申请，已入库)
      */
     public static final int STATUS_WUZIDIAOBO_RUKU = 2;
 
-    //すべて倉庫を選択するときLISTのIDに関するVALUE
+    //すべて�?�庫を選択するときLISTのIDに関するVALUE
     public static final String SUO_YOU_CANG_KU = "suoyoucangku";
 
     // 登录错误次数限制
@@ -369,22 +446,22 @@ public final class SepC {
     public static final String KONG_XIANG = "empty";
 
     /**
-     * 默认供应商
+     * 默认供应�?
      */
     public static final String MO_REN_GONGYINGSHANG = "GYS00000";
 
     /**
-     * 列挙特性は列挙です
+     * 列挙特�?�は列挙です
      */
     public static final String LIE_JU_XING = "1";
 
     /**
-     * 基層、底層、0から
+     * 基層、底層�??0から
      */
     public static final int JI_CENG = 0;
 
     /**
-     * 第一層
+     * 第一�?
      */
     public static final int DI_YI_CENG = 1;
 
@@ -404,7 +481,7 @@ public final class SepC {
     public static final int SHAN_CHU = 3;
 
     /**
-     * 常量:属性列举类型
+     * 常量:属�?�列举类�?
      */
     public static final class ShuXingLieJuLeiXing {
 
@@ -417,7 +494,7 @@ public final class SepC {
          */
         public final static String LIEJU = "1";
         /**
-         * 描述性
+         * 描述�?
          */
         public final static String MIAOSHU = "2";
     }
@@ -442,12 +519,12 @@ public final class SepC {
     }
 
     /**
-     * 默认采购周期（天）
+     * 默认采购周期（天�?
      */
     public static final int CAI_GOU_ZHOU_QI = 15;
 
     /**
-     * 默认最小单位
+     * 默认�?小单�?
      */
     public static final BigDecimal WU_ZI_ZUI_XIAO_DAN_WEI = BigDecimal.ONE;
 
@@ -502,7 +579,7 @@ public final class SepC {
     public static final class ErrorPagePathConst {
 
         /**
-         * 404（页面不存在）
+         * 404（页面不存在�?
          */
         public static final String CODE_404 = "views/error/404.xhtml";
 
@@ -512,7 +589,7 @@ public final class SepC {
         public static final String CODE_403 = "views/error/403.xhtml";
 
         /**
-         * 500（服务器内部错误）
+         * 500（服务器内部错误�?
          */
         public static final String CODE_500 = "views/error/500.xhtml";
     }
@@ -542,20 +619,20 @@ public final class SepC {
     public static final class yuanGongRole {
 
         /**
-         * 采购员
+         * 采购�?
          */
         public static final String CAI_GOU_YUAN = "RL000007";
     }
 
     /**
-     * 默认供应商
+     * 默认供应�?
      */
     public static final class DEFAULT_GONG_YING_SHANG {
 
         /// 默认供应商ID
         public static final String ID = "GYS00000";
         /// 默认供应商名
-        public static final String GONG_SI_MING = "默认供应商";
+        public static final String GONG_SI_MING = "默认供应�?";
     }
 
     public static final int AUTO_COMPLETE_MAX_RESULTS = 10;

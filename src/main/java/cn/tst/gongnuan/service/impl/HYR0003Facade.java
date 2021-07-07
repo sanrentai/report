@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class HYR0003Facade extends AbstractFacade<Employee> {
+public class HYR0003Facade extends AbsFacade<Employee> {
 
     private static final Logger LOG = Logger.getLogger(Employee.class.getName());
 
@@ -91,4 +91,79 @@ public class HYR0003Facade extends AbstractFacade<Employee> {
         List<HYR0003DTO> result = query.getResultList();
         return result;
     }
+
+    public List<HYR0003DTO> getShuJuListByRoomType(String yearnum, String roomTypeId) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("EXEC	 [dbo].[p_HYR0003_1_n] ");
+        sb.append(" @yearnum = ?1 ");
+        sb.append(",@roomtypeid  = ?4 ");
+        Query query = getEntityManager().createNativeQuery(sb.toString(), HYR0003DTO.class);
+        query.setParameter(1, yearnum);
+        query.setParameter(4, roomTypeId);
+        List<HYR0003DTO> result = query.getResultList();
+        return result;
+    }
+
+    public List<HYR0003DTO> getShuJuListByCompanyAndRoomType(String yearnum, String company, String roomTypeId) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("EXEC	 [dbo].[p_HYR0003_2_n] ");
+        sb.append(" @yearnum = ?1, ");
+        sb.append(" @company = ?2 ");
+        sb.append(",@roomtypeid  = ?4 ");
+        Query query = getEntityManager().createNativeQuery(sb.toString(), HYR0003DTO.class);
+        query.setParameter(1, yearnum);
+        query.setParameter(2, company);
+        query.setParameter(4, roomTypeId);
+        List<HYR0003DTO> result = query.getResultList();
+        return result;
+    }
+
+    public List<HYR0003DTO> getShuJuListByHuanReZhanAndRoomType(String yearnum, String company, String id, String roomTypeId) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("EXEC	 [dbo].[p_HYR0003_3_n] ");
+        sb.append(" @yearnum = ?1, ");
+        sb.append(" @company = ?2, ");
+        sb.append("@id = ?3 ");
+        sb.append(",@roomtypeid  = ?4 ");
+        Query query = getEntityManager().createNativeQuery(sb.toString(), HYR0003DTO.class);
+        query.setParameter(1, yearnum);
+        query.setParameter(2, company);
+        query.setParameter(3, id);
+        query.setParameter(4, roomTypeId);
+        List<HYR0003DTO> result = query.getResultList();
+        return result;
+    }
+
+    public List<HYR0003DTO> getShuJuListByXiaoQuAndRoomType(String yearnum, String company, String id, String roomTypeId) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("EXEC	 [dbo].[p_HYR0003_4_n] ");
+        sb.append(" @yearnum = ?1, ");
+        sb.append(" @company = ?2, ");
+        sb.append("@id = ?3 ");
+        sb.append(",@roomtypeid  = ?4 ");
+        Query query = getEntityManager().createNativeQuery(sb.toString(), HYR0003DTO.class);
+        query.setParameter(1, yearnum);
+        query.setParameter(2, company);
+        query.setParameter(3, id);
+        query.setParameter(4, roomTypeId);
+        List<HYR0003DTO> result = query.getResultList();
+        return result;
+    }
+
+    public List<HYR0003DTO> getShuJuListByBuildingAndRoomType(String yearnum, String company, String id, String roomTypeId) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("EXEC	 [dbo].[p_HYR0003_5_n] ");
+        sb.append(" @yearnum = ?1, ");
+        sb.append(" @company = ?2, ");
+        sb.append("@id = ?3 ");
+        sb.append(",@roomtypeid  = ?4 ");
+        Query query = getEntityManager().createNativeQuery(sb.toString(), HYR0003DTO.class);
+        query.setParameter(1, yearnum);
+        query.setParameter(2, company);
+        query.setParameter(3, id);
+        query.setParameter(4, roomTypeId);
+        List<HYR0003DTO> result = query.getResultList();
+        return result;
+    }
+
 }

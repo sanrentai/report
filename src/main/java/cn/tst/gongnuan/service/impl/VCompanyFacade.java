@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  * @author 曹春
  */
 @Stateless
-public class VCompanyFacade extends AbstractFacade<VCompany> {
+public class VCompanyFacade extends AbsFacade<VCompany> {
 
     private static final Logger LOG = Logger.getLogger(VCompany.class.getName());
 

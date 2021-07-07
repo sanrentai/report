@@ -1,0 +1,172 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <div class="Container100 Responsive100">
+            <div class="Card ui-fluid">
+                <!--标题-->
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('HYR', 'HYR0002')}"/>
+                    <!--<h:outputText value="测试 > 收费统计报表(HYR0002)" />-->
+                </h1>
+                <div class="SeparatorFull"></div>
+                <p:panelGrid columns="8"
+                                 id="canShu"
+                                 layout="grid"
+                                 styleClass="ui-panelgrid-blank"
+                                 columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
+                    <p:outputLabel for="payDate" value="交费截止日期"/>
+                    <p:calendar id="payDate" value="#{ctrlHYR0002.vm.payDate}" pattern="#{bizConfig.dateFormat}" required="true"
+                                requiredMessage="#{ctrlCHA0001.isRequiredMessage('日期')}"
+                                size="12"
+                                converterMessage="#{ctrlCHA0001.dateUnvalidMessage('日期')}"></p:calendar>
+                    <p:outputLabel for="startDate" value="累计开始日期"/>
+                    <p:calendar id="startDate" value="#{ctrlHYR0002.vm.startDate}" pattern="#{bizConfig.dateFormat}" required="true"
+                                requiredMessage="#{ctrlCHA0001.isRequiredMessage('日期')}"
+                                size="12"
+                                converterMessage="#{ctrlCHA0001.dateUnvalidMessage('日期')}"></p:calendar>
+                    <p:outputLabel for="endDate" value="累计结束日期"/>
+                    <p:calendar id="endDate" value="#{ctrlHYR0002.vm.endDate}" pattern="#{bizConfig.dateFormat}" required="true"
+                                requiredMessage="#{ctrlCHA0001.isRequiredMessage('日期')}"
+                                size="12"
+                                converterMessage="#{ctrlCHA0001.dateUnvalidMessage('日期')}"></p:calendar>
+                    <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlHYR0002.query()}" 
+                                     oncomplete="showErrorMsg();"
+                                     update="table, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                </p:panelGrid>
+                <p:outputPanel id="table">
+                    <p:dataTable value="#{ctrlHYR0002.vm.queryResultList}"
+                                 var="item"
+                                rendered="#{not empty ctrlHYR0002.vm.queryResultList}">
+                        <f:facet name="header">
+                            <h:outputText value="收费统计报表"  styleClass="Fs20"/>
+                            <h:commandLink  styleClass="fr">
+                                <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
+                                <p:dataExporter type="xls" target="sfmx_table" fileName="baobiao" />
+                            </h:commandLink>
+                        </f:facet>
+                        <p:columnGroup type="header">
+                            <p:row>
+                                <p:column headerText="分公司" rowspan="2" />
+                                <p:column headerText="当日收费金额" colspan="3" />
+                                <p:column headerText="当月收费金额" colspan="3" />
+                                <p:column headerText="累计收费金额" colspan="3" />
+                            </p:row>
+                            <p:row>
+                                <p:column headerText="本年度" />
+                                <p:column headerText="陈欠/预收" />
+                                <p:column headerText="小计" />
+                                <p:column headerText="本年度" />
+                                <p:column headerText="陈欠/预收" />
+                                <p:column headerText="小计" />
+                                <p:column headerText="本年度" />
+                                <p:column headerText="陈欠/预收" />
+                                <p:column headerText="小计" />
+                            </p:row>
+                        </p:columnGroup>
+                        <p:column sortBy="#{item.name}" headerText="分公司" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.name}" />
+                            <f:facet name="footer">
+                                <h:outputText value="合计:" styleClass="fr" />
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.jk_dn_r}" headerText="本年度" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_dn_r}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0002.vm.totalJk_dn_r}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.jk_fdn_r}" headerText="陈欠/预收" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_fdn_r}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0002.vm.totalJk_fdn_r}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.thisDayTotal}" headerText="小计" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.thisDayTotal}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0002.vm.thisDayTotal}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.jk_dn_y}" headerText="本年度" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_dn_y}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0002.vm.totalJk_dn_y}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.jk_fdn_y}" headerText="陈欠/预收" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_fdn_y}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0002.vm.totalJk_fdn_y}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.thisMonthTotal}" headerText="小计" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.thisMonthTotal}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0002.vm.thisMonthTotal}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.jk_dn_lj}" headerText="本年度" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_dn_lj}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0002.vm.totalJk_dn_lj}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.jk_fdn_lj}" headerText="陈欠/预收" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_fdn_lj}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0002.vm.totalJk_fdn_lj}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column sortBy="#{item.thisDayTotal}" headerText="小计" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.total}">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlHYR0002.vm.total}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>
+            </div>
+        </div>
+    </p:outputPanel>
+</ui:composition>

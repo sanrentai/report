@@ -6,13 +6,16 @@
 package cn.tst.gongnuan.viewmodel;
 
 import cn.tst.gongnuan.entity.VCompany;
-import cn.tst.gongnuan.entity.VYearnum;
+import cn.tst.gongnuan.service.dto.SouFeiNianDuBiaoByBuildingDTO;
 import cn.tst.gongnuan.service.dto.SouFeiNianDuBiaoByGongSiDTO;
 import cn.tst.gongnuan.service.dto.YearNumDTO;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.LineChartModel;
 
 /**
  *
@@ -26,9 +29,66 @@ public class CHA0002ViewModel extends BaseViewModel {
 
     private String companyName;
 
+    private String companyName1;
+
+    private String yearnum;
+
     private List<VCompany> companyList;
 
     private List<YearNumDTO> yearnumList;
+
+    private BarChartModel areaModel;
+
+    private BarChartModel ysjeModel;
+
+    private BarChartModel yisjeModel;
+
+    private BarChartModel qkModel;
+
+    public BarChartModel getQkModel() {
+        return qkModel;
+    }
+
+    public void setQkModel(BarChartModel qkModel) {
+        this.qkModel = qkModel;
+    }
+
+    public BarChartModel getYisjeModel() {
+        return yisjeModel;
+    }
+
+    public void setYisjeModel(BarChartModel yisjeModel) {
+        this.yisjeModel = yisjeModel;
+    }
+
+    public BarChartModel getYsjeModel() {
+        return ysjeModel;
+    }
+
+    public void setYsjeModel(BarChartModel ysjeModel) {
+        this.ysjeModel = ysjeModel;
+    }
+
+    private BarChartModel ratioModel;
+
+    public BarChartModel getAreaModel() {
+        return areaModel;
+    }
+
+    public void setAreaModel(BarChartModel areaModel) {
+        this.areaModel = areaModel;
+    }
+
+    public BarChartModel getRatioModel() {
+        return ratioModel;
+    }
+
+    public void setRatioModel(BarChartModel ratioModel) {
+        this.ratioModel = ratioModel;
+    }
+
+    public CHA0002ViewModel() {
+    }
 
     public Date getPayDate() {
         return payDate;
@@ -37,35 +97,57 @@ public class CHA0002ViewModel extends BaseViewModel {
     public void setPayDate(Date payDate) {
         this.payDate = payDate;
     }
-    
+
     public BigDecimal getTotalYjk() {
         BigDecimal result = BigDecimal.ZERO;
-        if(shuJuList == null) {
+        if (shuJuList == null) {
             return result;
         }
-        for(SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
             result = result.add(item.getYjk());
         }
         return result;
     }
-    
+
     public BigDecimal getTotalJk() {
         BigDecimal result = BigDecimal.ZERO;
-        if(shuJuList == null) {
+        if (shuJuList == null) {
             return result;
         }
-        for(SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
             result = result.add(item.getJk());
         }
         return result;
     }
-    
-    public BigDecimal getTotalOwe() {
+
+    public BigDecimal getTotalJm() {
         BigDecimal result = BigDecimal.ZERO;
-        if(shuJuList == null) {
+        if (shuJuList == null) {
             return result;
         }
-        for(SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+            result = result.add(item.getJm());
+        }
+        return result;
+    }
+
+    public BigDecimal getTotalYh() {
+        BigDecimal result = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return result;
+        }
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+            result = result.add(item.getYh());
+        }
+        return result;
+    }
+
+    public BigDecimal getTotalOwe() {
+        BigDecimal result = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return result;
+        }
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
             result = result.add(item.getOwe());
         }
         return result;
@@ -73,11 +155,11 @@ public class CHA0002ViewModel extends BaseViewModel {
 
     public BigDecimal getTotalArea() {
         BigDecimal total = BigDecimal.ZERO;
-        if(shuJuList==null){
+        if (shuJuList == null) {
             return total;
         }
         for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
-            total=total.add(item.getArea());
+            total = total.add(item.getArea());
         }
         return total;
     }
@@ -114,4 +196,36 @@ public class CHA0002ViewModel extends BaseViewModel {
         this.companyName = companyName;
     }
 
+    public String getCompanyName1() {
+        return companyName1;
+    }
+
+    public void setCompanyName1(String companyName1) {
+        this.companyName1 = companyName1;
+    }
+
+    public BigDecimal getTotal(String t)
+            throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
+        BigDecimal total = BigDecimal.ZERO;
+        if (shuJuList == null) {
+            return total;
+        }
+
+        for (SouFeiNianDuBiaoByGongSiDTO item : shuJuList) {
+            Method method = item.getClass().getMethod("get" + t.substring(0, 1).toUpperCase() + t.substring(1));
+            total = total.add((BigDecimal) method.invoke(item));
+        }
+
+        return total;
+
+    }
+
+    public String getYearnum() {
+        return yearnum;
+    }
+
+    public void setYearnum(String yearnum) {
+        this.yearnum = yearnum;
+    }
 }

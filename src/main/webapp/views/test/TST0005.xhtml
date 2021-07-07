@@ -1,0 +1,260 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <p:outputPanel styleClass="Container100 NoIndent">
+        <div class="Container100 Responsive100">
+            <div class="Card ui-fluid">
+                <!--标题-->
+                <h1 class="CardBigTopic Purple">
+                    <h:outputText value="#{ctrlMaster.createPageTitle('TST', 'TST0005')}"/>
+                    <!--<h:outputText value="测试 > 收费情况统计表(TST0005)" />-->
+                </h1>
+                <div class="SeparatorFull"></div>
+                <p:panelGrid columns="8"
+                             id="canShu"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank"
+                             columnClasses="wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30,wd-p-10,wd-p-30">
+                    <p:outputLabel for="yearnum" value="年度"/>
+                    <p:selectOneMenu id="yearnum" autoWidth="false" styleClass="wd-f-40" 
+                                     value="#{ctrlTST0005.vm.yearnum}">
+                        <f:selectItems value="#{ctrlTST0005.vm.yearnumList}"  var="itemy" 
+                                       itemLabel="#{itemy.yearnum}" itemValue="#{itemy.yearnum}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="txtStartDate" value="开始日期"/>
+                    <p:calendar id="txtStartDate" value="#{ctrlTST0005.vm.ksDate}"
+                                placeholder="开始日期"
+                                mask="true" styleClass="tct"
+                                pattern="#{bizConfig.dateFormat}"
+                                required="true"
+                                requiredMessage="#{ctrlTST0005.isRequiredMessage('开始日期')}"
+                                size="12"
+                                converterMessage="#{ctrlTST0005.dateUnvalidMessage('开始日期')}"
+                                locale="#{bizConfig.locale}">
+                    </p:calendar>
+                    <p:outputLabel for="txtEndDate" value="结束日期"/>
+                    <p:calendar id="txtEndDate" value="#{ctrlTST0005.vm.jsDate}"
+                                placeholder="结束日期"
+                                mask="true" styleClass="tct"
+                                pattern="#{bizConfig.dateFormat}"
+                                required="true"
+                                requiredMessage="#{ctrlTST0005.isRequiredMessage('结束日期')}"
+                                size="12"
+                                converterMessage="#{ctrlTST0005.dateUnvalidMessage('结束日期')}"
+                                locale="#{bizConfig.locale}">
+                    </p:calendar>
+                    <p:outputLabel  value=" "/>
+                    <p:commandButton value="查询" process="canShu" styleClass="fr" actionListener="#{ctrlTST0005.chaXun()}" 
+                                     oncomplete="showErrorMsg();"
+                                     update="sfmx, canShu, frmMain:ovPnlValidation, frmMain:msgValidation, frmMain:growlMessage, frmMain:btnValidationPanel"/>
+                </p:panelGrid>
+                <p:outputPanel id="sfmx">
+                    <p:dataTable value="#{ctrlTST0005.vm.shuJuList}"
+                                 widgetVar="sfmxTable"
+                                 var="item"
+                                 style="word-break: keep-all!important"
+                                 sortBy="#{item.id}"
+                                 id="sfmx_table"
+                                 rendered="#{not empty ctrlTST0005.vm.shuJuList}"
+                                 emptyMessage="#{msg.mei_you_zhao_dao_ren_he_ji_lu}"
+                                 styleClass="tct">
+                        <f:facet name="header">
+                            <h:outputText value="#{ctrlTST0005.kaiShiAndJieShuRiQi}各分公司收费情况表"  styleClass="Fs20"/>
+                            <h:commandLink  styleClass="fr">
+                                <i class="fa fa-file-excel-o Fs20 Blue">导出</i>
+                                <p:dataExporter type="xls" target="sfmx_table" fileName="baobiao" />
+                            </h:commandLink>
+                        </f:facet>
+                        <p:columnGroup type="header">
+                            <p:row>
+                                <p:column headerText="序号" rowspan="2" />
+                                <p:column headerText="公司名称" rowspan="2" />
+                                <p:column headerText="栋数" rowspan="2" />
+                                <p:column headerText="户数" colspan="2" />
+                                <p:column headerText="面积" colspan="2" />
+                                <p:column headerText="标准" colspan="2" />
+                                <p:column headerText="当年应交款" colspan="2" />
+                                <p:column headerText="交款" colspan="2" />
+                                <p:column headerText="欠款" colspan="2" />
+                                <p:column headerText="收费率%" rowspan="2" />
+                                <p:column headerText="违约金" rowspan="2" />
+                            </p:row>
+                            <p:row>
+                                <p:column headerText="居民" />
+                                <p:column headerText="非居民" />
+                                <p:column headerText="居民" />
+                                <p:column headerText="非居民" />
+                                <p:column headerText="居民" />
+                                <p:column headerText="非居民" />
+                                <p:column headerText="居民" />
+                                <p:column headerText="非居民" />
+                                <p:column headerText="居民" />
+                                <p:column headerText="非居民" />
+                                <p:column headerText="居民" />
+                                <p:column headerText="非居民" />
+                            </p:row>
+                        </p:columnGroup>
+                        <p:column headerText="序号" styleClass="wd-p-5 tct">
+                            <h:outputText value="#{item.id}" />
+                        </p:column>
+                        <p:column headerText="公司名称" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.name}" />
+                            <f:facet name="footer">
+                                <h:outputText value="合计:" styleClass="fr" />
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="栋数" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.ds}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('ds')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="居民户数" sortBy="#{item.hs}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.hs}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('hs')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="非居民户数" sortBy="#{item.hs_f}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.hs_f}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('hs_f')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="居民面积" sortBy="#{item.area}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.area}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('area')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="非居民面积" sortBy="#{item.area_f}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.area_f}" styleClass="fr">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('area_f')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="居民标准" sortBy="#{item.count}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.count}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="非居民标准" sortBy="#{item.count_f}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.count_f}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="居民当年应交款" sortBy="#{item.yjk}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.yjk}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('yjk')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="非居民当年应交款" sortBy="#{item.yjk_f}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.yjk_f}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('yjk_f')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="居民交款" sortBy="#{item.jk}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('jk')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="非居民交款" sortBy="#{item.jk_f}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.jk_f}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('jk_f')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="居民欠款"  sortBy="#{item.owe}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.owe}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('owe')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="非居民欠款"  sortBy="#{item.owe_f}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.owe_f}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('owe_f')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="收费率" sortBy="#{item.sfl}"  styleClass="wd-p-10 tct">
+                            <h:outputText  value="#{item.sfl}">
+                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                            </h:outputText>
+                            %
+                            <!--                            <f:facet name="footer">
+                                                            <h:outputText value="#{ctrlTST0005.vm.totalSfl}">
+                                                                <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                                            </h:outputText>
+                                                            %
+                                                        </f:facet>-->
+                        </p:column>
+                        <p:column headerText="违约金"  sortBy="#{item.znj}" styleClass="wd-p-10 tct">
+                            <h:outputText value="#{item.znj}" styleClass="fr">
+                                <f:convertNumber currencySymbol="" type="currency" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{ctrlTST0005.vm.getTotal('znj')}" styleClass="fr">
+                                    <f:convertNumber pattern="#{bizConfig.numberFormatPattern}"/>
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:outputPanel>
+            </div>
+        </div>
+    </p:outputPanel>
+</ui:composition>
